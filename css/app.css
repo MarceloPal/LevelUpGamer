@@ -1,0 +1,133 @@
+/* Espaciado horizontal entre nav-items */
+.navbar-nav > .nav-item:not(:last-child) {
+  margin-right: 2.2rem;
+}
+
+/* Separación entre logo y barra de búsqueda */
+.navbar .container {
+  gap: 2.5rem;
+}
+/* Línea divisoria superior gris */
+.border-top {
+    border-top: 1px solid #444 !important;
+}
+/* H1 blanco personalizado */
+.titulo-blanco {
+    color: #fff !important;
+}
+/* Fondo negro para toda la página */
+body.bg-dark {
+    background-color: #000 !important;
+}
+
+:root {
+    --bs-blue: #1E90FF;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    font-size: 1.6rem;
+    line-height: 2;
+}
+
+h1,h2,h3 {
+     font-family: "Pixelify Sans", sans-serif;
+}
+
+h1 {
+    font-size: 3.8rem;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 5rem;
+    }
+}
+
+/** Reescribir los colores -- Depende uso**/
+.text-primary {
+    color: var(--bs-blue)!important;
+}
+
+.logo-h1 {
+    height: 48px;
+    vertical-align: middle;
+}
+
+/* ======== NAV ========== */
+/* Espaciado horizontal entre nav-items */
+.navbar-nav > .nav-item:not(:last-child) {
+  margin-right: 3rem;
+}
+
+/* Separación entre logo y barra de búsqueda */
+.navbar .container {
+  gap: 2.5rem;
+}
+
+.logo-h5 {
+    height: 45px;
+    vertical-align: middle;
+}
+
+.jersey-20-regular {
+  font-family: "Jersey 20", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2.2rem;
+}
+
+
+.dropdown-item {
+  color: #fff;
+}
+.dropdown .dropdown-menu {
+  display: none;
+  background: #212529;
+}
+.dropdown:hover>.dropdown-menu, 
+.dropend:hover>.dropdown-menu {
+  display: block;
+  margin-top: .1em;
+  margin-left: .1em;
+}
+@media screen and (min-width:769px) {
+  .dropend:hover>.dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+  .dropend .dropdown-toggle {
+    margin-left: .5em;
+  }
+}
+
+
+
+#destacados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+#carouselDestacados {
+  width: 100%;
+  max-width: 500px;
+}
+
+.carousel-item article {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  background: rgba(96, 103, 185, 0.2);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+
+
