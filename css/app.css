@@ -14,14 +14,19 @@
 /* H1 blanco personalizado */
 .titulo-blanco {
     color: #fff !important;
+    white-space: nowrap; /* Evita el salto de línea */
 }
 /* Fondo negro para toda la página */
 body.bg-dark {
     background-color: #000 !important;
 }
 
+.text-center {
+ color: #fff !important;
+
+}
 :root {
-    --bs-blue: #1E90FF;
+    --bs-blue: #d746fb;
 }
 
 html {
@@ -51,6 +56,7 @@ h1 {
 /** Reescribir los colores -- Depende uso**/
 .text-primary {
     color: var(--bs-blue)!important;
+    white-space: nowrap;
 }
 
 .logo-h1 {
@@ -112,22 +118,26 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 0;
 }
 
 #carouselDestacados {
   width: 100%;
-  max-width: 500px;
+  max-width: 1200px;
+  max-height: 700px;
+  object-fit: cover;
 }
 
-.carousel-item article {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 2rem 1rem;
-  background: rgba(96, 103, 185, 0.2);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+.carousel-item article img {
+  max-width: 100%;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
 }
 
-
-
+footer.border-top {
+  border-top: none !important;
+}

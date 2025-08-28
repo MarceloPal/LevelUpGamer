@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer-Up : Prototipo HTML</title>
+    <meta name="description" content="Prototipo HTML de pantallas para Level-Up: Tu página de compras de juegos." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+20&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body class="bg-dark">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <h1 class="text-center titulo-blanco">
+        <img src="img\coin-cropped.png" alt="Logo" class="logo-h1">
+        Level-Up <span class="text-primary"></span>
+    </h1>
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent"> 
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link jersey-20-regular" href="index.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle jersey-20-regular" href="#catalogo.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
+              <li><a class="dropdown-item" href="#">Accesorios</a></li>                  
+              <li><a class="dropdown-item" href="#">Consolas</a></li>                  
+              <li><a class="dropdown-item" href="#">Computadores Gamers</a></li>
+              <li><a class="dropdown-item" href="#">Sillas Gamers</a></li>
+              <li><a class="dropdown-item" href="#">Mouse</a></li>
+              <li><a class="dropdown-item" href="#">Mousepad</a></li>
+              <li><a class="dropdown-item" href="#">Poleras Personalizadas</a></li>
+              <li><a class="dropdown-item" href="#">Polerones Gamers Personalizados</a></li>
+            </ul>
+          </li>
+          <li class="nav-item jersey-20-regular">
+            <a class="nav-link" href="fidelizacion.html">Fidelización</a>
+          </li>
+          <li class="nav-item jersey-20-regular">
+            <a class="nav-link" href="ingresar.html">Ingresar</a>
+          </li>
+          <li class="nav-item jersey-20-regular">
+            <a class="nav-link" href="perfil.html">Perfil</a>
+          </li>
+        </ul>
+        <form class="d-flex ms-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+</nav>
+
+<main class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-5 text-center mb-4 mb-md-0">
+      <h2 class="mb-4">Bienvenido a Level-Up</h2>
+      <p>Aquí encontrarás juegos, accesorios y mucho más para gamers como tú.</p>
+      <a href="catalogo.html" class="btn btn-primary mt-3">Explorar catálogo</a>
+    </div>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container text-center">
+        <span class="d-block mb-2">Contáctanos:</span>
+        <a href="mailto:contacto@levelupgamer.com" class="text-primary mx-2">Email</a>
+        <a href="https://instagram.com/levelupgamer" target="_blank" class="text-primary mx-2">Instagram</a>
+        <a href="https://facebook.com/levelupgamer" target="_blank" class="text-primary mx-2">Facebook</a>
+        <a href="https://twitter.com/levelupgamer" target="_blank" class="text-primary mx-2">Twitter</a>
+        <a href="#" class="text-primary mx-2">Mesa de ayuda</a>
+      </div>
+    </footer>
+
+</body>
+</html>
