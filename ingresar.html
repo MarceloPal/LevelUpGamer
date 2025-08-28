@@ -3,226 +3,88 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DreamSwap : Prototipo HTML</title>
-    <meta name="description" content="Prototipo HTML de pantallas para DreamSwap: el mercado de sueños." />
-    <!-- Nota: solo HTML. CSS/JS se agregará en etapas siguientes. -->
+    <title>Gamer-Up : Prototipo HTML</title>
+    <meta name="description" content="Prototipo HTML de pantallas para Level-Up: Tu página de compras de juegos." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+20&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
-<body>
-    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+<body class="bg-dark">
 
-    <!-- HEADER / NAV -->
-    <header role="banner">
-        <div class="brand">
-            <h1 aria-label="DreamSwap">🌙 DreamSwap</h1>
-            <p class="tagline">Mercado de sueños personalizados</p>
-        </div>
-
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="#home" data-nav>Inicio</a></li>
-                <li><a href="#catalogo.html" data-nav>Catálogo</a></li>
-                <li><a href="#carrito" data-nav>Carrito</a></li>
-                <li><a href="perfil.html" data-nav>Perfil</a></li>
-                <li><a href="#fidelizacion" data-nav>Créditos REM</a></li>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <h1 class="text-center titulo-blanco">
+        <img src="img\coin-cropped.png" alt="Logo" class="logo-h1">
+        Level-Up <span class="text-primary"></span>
+    </h1>
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent"> 
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link jersey-20-regular" href="index.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle jersey-20-regular" href="#catalogo.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
+              <li><a class="dropdown-item" href="#">Accesorios</a></li>                  
+              <li><a class="dropdown-item" href="#">Consolas</a></li>                  
+              <li><a class="dropdown-item" href="#">Computadores Gamers</a></li>
+              <li><a class="dropdown-item" href="#">Sillas Gamers</a></li>
+              <li><a class="dropdown-item" href="#">Mouse</a></li>
+              <li><a class="dropdown-item" href="#">Mousepad</a></li>
+              <li><a class="dropdown-item" href="#">Poleras Personalizadas</a></li>
+              <li><a class="dropdown-item" href="#">Polerones Gamers Personalizados</a></li>
             </ul>
-        </nav>
-    </header>
+          </li>
+          <li class="nav-item jersey-20-regular">
+            <a class="nav-link" href="fidelizacion.html">Fidelización</a>
+          </li>
+          <li class="nav-item jersey-20-regular">
+            <a class="nav-link" href="ingresar.html">Ingresar</a>
+          </li>
+          <li class="nav-item jersey-20-regular">
+            <a class="nav-link" href="perfil.html">Perfil</a>
+          </li>
+        </ul>
+        <form class="d-flex ms-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+</nav>
 
-    <main id="contenido" tabindex="-1">
-        <!-- Pantalla 1: HOME / LANDING -->
-        <section id="home" class="screen" aria-labelledby="home-title">
-            <h2 id="home-title">Bienvenido a DreamSwap</h2>
-            <p>Convierte tus noches en experiencias memorables. Explora, personaliza y programa tu próximo sueño.</p>
+<main class="container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-5 text-center mb-4 mb-md-0">
+      <h2 class="mb-4">Bienvenido a Level-Up</h2>
+      <p>Aquí encontrarás juegos, accesorios y mucho más para gamers como tú.</p>
+      <a href="catalogo.html" class="btn btn-primary mt-3">Explorar catálogo</a>
+    </div>
+</main>
 
-            <form aria-label="Buscador de sueños" data-screen="home">
-                <label for="q">¿Que te gustaría soñar esta noche?</label>
-                <input id="q" name="q" type="search" placeholder="Aventura, romance, misterio">
-                <button type="submit">Buscar</button>
-            </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 
-            <section aria-labelledby="home-destacados-title">
-                <h3 id="home-destacados-title">Destacados de hoy</h3>
-                <ul class="cards" data-test-id="home-destacados">
-                    <li>
-                        <article>
-                            <h4>Safari en nubes</h4>
-                            <p>Una travesía aérea entre jirafas de vapor y ríos de algodón</p>
-                            <a href="#detalle-sueno" data-action="ver-detalle" data-id="DS001">Ver detalle</a>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <h4>Concierto con tu banda favorita</h4>
-                            <p>Backstage, duetos imposibles y un final épico al amanecer.</p>
-                            <a href="#detalle-sueno" data-action="ver-detalle" data-id="DS002">Ver detalle</a>
-                        </article>
-                    </li>
-                    <li>
-                        <article>
-                            <h4>Tiempo con un ser querido</h4>
-                            <p>Un reencuentro cálido para cerrar ciclos y sanar.</p>
-                            <a href="#detalle-sueno" data-action="ver-detalle" data-id="DS003">Ver detalle</a>
-                        </article>
-                    </li>
-                </ul>
-            </section>
-        </section>
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container text-center">
+        <span class="d-block mb-2">Contáctanos:</span>
+        <a href="mailto:contacto@levelupgamer.com" class="text-primary mx-2">Email</a>
+        <a href="https://instagram.com/levelupgamer" target="_blank" class="text-primary mx-2">Instagram</a>
+        <a href="https://facebook.com/levelupgamer" target="_blank" class="text-primary mx-2">Facebook</a>
+        <a href="https://twitter.com/levelupgamer" target="_blank" class="text-primary mx-2">Twitter</a>
+        <a href="#" class="text-primary mx-2">Mesa de ayuda</a>
+      </div>
+    </footer>
 
-        <!-- Pantalla 2: Catalogo -->
-        <section id="catalogo" class="screen" aria-labelledby="catalogo-title">
-            <h2 id="catalogo-title">Catálogo de Sueños</h2>
-
-            <aside aria-label="Filtros">
-                <form data-screen="catalogo-filtros">
-                    <fieldset>
-                        <legend>Categorías</legend>
-                        <label><input type="checkbox" name="cat" id="aventura" /> Aventura</label>
-                        <label><input type="checkbox" name="cat" id="romance" /> Romance</label>
-                        <label><input type="checkbox" name="cat" id="misterio" /> Misterio</label>
-                        <label><input type="checkbox" name="cat" id="ficcion" /> Ficción</label>
-                        <label><input type="checkbox" name="cat" id="comedia" /> Comedia</label>
-                        <label><input type="checkbox" name="cat" id="pesadillas" /> Pesadillas</label>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Duración</legend>
-                        <label for="duracion">Minutos</label>
-                        <input name="duracion" id="duracion" type="number" min="3" step="5" placeholder="30">
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Intensidad emocional</legend>
-                        <label for="intensidad">Nivel</label>
-                        <select name="intensidad" id="intensidad">
-                            <option value="suave">Suave</option>
-                            <option value="media">Media</option>
-                            <option value="alta">Alta</option>
-                        </select>
-                    </fieldset>
-
-                    <button type="submit">Aplicar filtros</button>
-                </form>
-            </aside>
-
-            <section aria-labelledby="catalogo-listado-title">
-                <h3 id="catalogo-listado-title">Resultados</h3>
-                <ul class="grid" data-test-id="catalogo-listado">
-                    <li>
-                        <article>
-                            <header>
-                                <h4>Explorador de ciudades perdidas</h4>
-                                <p class="meta">Duración: 45 min • Intensidad: Media • Rareza: ★★☆</p>
-                            </header>
-                            <p>Persigue pistas y descubre secretos ocultos con banda sonora inmersiva 8D.</p>
-                            <footer>
-                                <a href="#detalle-sueno" data-action="ver-detalle" data-id="DS101">Ver detalle</a>
-                                <a href="#carrito" data-action="agregar" data-id="DS101">Agregar al carrito</a>
-                            </footer>
-                        </article>
-                    </li>
-
-                    <li>
-                        <article>
-                            <header>
-                                <h4>Comedia improvisada con tus amigos</h4>
-                                <p class="meta">Duración: 30 min • Intensidad: Suave • Rareza: ★☆☆</p>
-                            </header>
-                            <p>Risas espontáneas, escenas absurdas y final feliz garantizado.</p>
-                            <footer>
-                                <a href="#detalle-sueno" data-action="ver-detalle" data-id="DS102">Ver detalle</a>
-                                <a href="#carrito" data-action="agregar" data-id="DS102">Agregar al carrito</a>
-                            </footer>
-                        </article>
-                    </li>
-                </ul>
-            </section>
-        </section>
-
-        <!-- Pantalla 3: Detalle de Sueño -->
-        <section id="detalle-sueno" class="screen" aria-labelledby="detalle-title">
-            <h2 id="detalle-title">Detalle del Sueño</h2>
-            <article data-id="DS101">
-                <header>
-                    <h3>Explorador de ciudades perdidas</h3>
-                    <p class="meta">Duración: 45 min • Intensidad: Media • Rareza: ★★☆</p>
-                </header>
-                <p>Vive una aventura inolvidable entre ruinas antiguas y mapas que cambian en tiempo real.</p>
-
-                <form aria-label="Personalización del sueño" data-screen="detalle-config">
-                    <fieldset>
-                        <legend>Personaliza tu experiencia</legend>
-                        <label for="duracion-detalle">Duración (min)</label>
-                        <input type="number" name="duracion-detalle" id="duracion-detalle" min="15" step="5" placeholder="45">
-                    
-                        <label for="intensidad-detalle">Nivel</label>
-                        <select name="intensidad-detalle" id="intensidad-detalle">
-                            <option value="suave">Suave</option>
-                            <option value="media" selected>Media</option>
-                            <option value="alta">Alta</option>
-                        </select>
-
-                        <label for="extras">Extras</label>
-                        <select name="extras" id="extras" multiple aria-describedby="extra-help">
-                            <option value="8d">Audio 8D</option>
-                            <option value="lucido">Control lúcido</option>
-                            <option value="cameos">Cameos Sorpresa</option>
-                        </select>
-                        <small id="extra-help">Mantén presionado Ctrl o (Cmd) para seleccionar varios.</small>
-                    </fieldset>
-                    <button type="submit" data-action="agregar">Agregar al carrito</button>
-                </form>
-
-                <section aria-labelledby="resenas-title">
-                    <h4 id="resenas-title">Reseñas</h4>
-                    <ul>
-                        <li><strong>Ana</strong> ★★★★★ - "La mejor aventura sin salir de la cama".</li>
-                        <li><strong>Marco</strong> ★★★★☆ - "Gran ambientación, hubiese querido más minutos".</li>
-                    </ul>
-                </section>
-            </article>
-        </section>
-
-        <!-- Pantalla 4: Carrito -->
-        <section id="carrito" class="screen" aria-labelledby="carrito-title">
-            <h2 id="carrito-title">Tu Carrito</h2>
-
-            <table aria-describedby="carrito-resumen">
-                <caption id="carrito-resumen">Resumen de tus sueños seleccionados</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Sueño</th>
-                        <th scope="col">Duración</th>
-                        <th scope="col">Intensidad</th>
-                        <th scope="col">Extras</th>
-                        <th scope="col">Subtotal</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Explorador de ciudades perdidas</td>
-                        <td>45 min</td>
-                        <td>Media</td>
-                        <td>Audio 8D, Control lúcido</td>
-                        <td>24 CR (Créditos REM)</td>
-                        <td>
-                            <a href="#" data-action="editar">Editar</a>
-                            <a href="#" data-action="eliminar">Eliminar</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">Total</td>
-                        <td>24 CR</td>
-                        <td><a href="#checkout" data-action="pagar">Ir a Pagar</a></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-    </main>
 </body>
-
 </html>
