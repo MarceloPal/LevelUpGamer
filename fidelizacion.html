@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamer-Up : Prototipo HTML</title>
-    <meta name="description" content="Prototipo HTML de pantallas para Level-Up: Tu página de compras de juegos." />
+    <title>Level-Up: Compra online</title>
+    <meta name="description" content="Tu página de compras de juegos." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+20&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
@@ -16,12 +16,13 @@
 
 <body class="bg-dark">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <h1 class="text-center titulo-blanco">
+<nav class="navbar navbar-expand-lg navbar-dark">
+  
+    <div class="container">
+          <h1 class="text-center">
         <img src="img\coin-cropped.png" alt="Logo" class="logo-h1">
         Level-Up <span class="text-primary"></span>
     </h1>
-    <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,15 +35,15 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle jersey-20-regular" href="#catalogo.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
-              <li><a class="dropdown-item" href="#">Accesorios</a></li>                  
-              <li><a class="dropdown-item" href="#">Consolas</a></li>                  
-              <li><a class="dropdown-item" href="#">Computadores Gamers</a></li>
-              <li><a class="dropdown-item" href="#">Sillas Gamers</a></li>
-              <li><a class="dropdown-item" href="#">Mouse</a></li>
-              <li><a class="dropdown-item" href="#">Mousepad</a></li>
-              <li><a class="dropdown-item" href="#">Poleras Personalizadas</a></li>
-              <li><a class="dropdown-item" href="#">Polerones Gamers Personalizados</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Juegos de Mesa</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Accesorios</a></li>                  
+              <li><a class="dropdown-item jersey-20-regular" href="#">Consolas</a></li>                  
+              <li><a class="dropdown-item jersey-20-regular" href="#">Computadores Gamers</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Sillas Gamers</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Mouse</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Mousepad</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Poleras Personalizadas</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#">Polerones Gamers Personalizados</a></li>
             </ul>
           </li>
           <li class="nav-item jersey-20-regular">
@@ -50,11 +51,20 @@
           </li>
           <li class="nav-item jersey-20-regular">
             <a class="nav-link" href="ingresar.html">Ingresar</a>
-          </li>
-          <li class="nav-item jersey-20-regular">
-            <a class="nav-link" href="perfil.html">Perfil</a>
+
+          <li class="nav-item nav-link jersey-20-regular dropdown">
+            <img src="img\bits-8bits.gif" class="perfil dropdown-toggle jersey-20-regular" href="#perfil.html" role="button" data-bs-toggle="dropdown" aria-expanded="True">
+             <ul class="dropdown-menu">
+              <li><a class="dropdown-item jersey-20-regular" href="#perfil.html">Editar Perfil</a></li>          
+              <li><a class="dropdown-item jersey-20-regular" href="#perfil.html">Mis compras</a></li>                  
+              <li><a class="dropdown-item jersey-20-regular" href="#perfil.html">Trackear Pedido</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#perfil.html">Idioma</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#perfil.html">Soporte</a></li>
+              <li><a class="dropdown-item jersey-20-regular" href="#perfil.html">Cerrar Sesión</a></li>
+            </ul>
           </li>
         </ul>
+
         <form class="d-flex ms-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
           <button class="btn btn-outline-light" type="submit">Buscar</button>
@@ -63,16 +73,57 @@
     </div>
 </nav>
 
-<main class="container py-5">
+
+<main class="container py-5 ">
   <div class="row align-items-center">
     <div class="col-md-5 text-center mb-4 mb-md-0">
       <h2 class="mb-4">Bienvenido a Level-Up</h2>
       <p>Aquí encontrarás juegos, accesorios y mucho más para gamers como tú.</p>
-      <a href="catalogo.html" class="btn btn-primary mt-3">Explorar catálogo</a>
+  <a href="catalogo.html" type="button" class="btn2 text-decoration-none" >Explorar catálogo</a>
     </div>
+    <div class="col-md-7">
+      <section id="destacados" aria-labelledby="destacados-title" >
+        <div id="carouselDestacados" class="carousel slide max-width" data-bs-ride="carousel" style="max-width: 100%;">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <article class="text-center">
+                <img src="img/pixel_art_large (1).png" alt="Producto destacado">
+              </article>
+            </div>
+            <div class="carousel-item">
+              <article class="text-center">
+                <h4>Xbox Series S</h4>
+                <p>La consola de última generación para los verdaderos gamers.</p>
+                <a href="catologo.html?id=ps5" class="btn2 btn-primary" type="button">Ver detalle</a>
+              </article>
+            </div>
+            <div class="carousel-item">
+              <article class="text-center">
+                <h4>Teclado mecánico RGB</h4>
+                <p>Precisión y estilo para tus partidas competitivas.</p>
+                <a href="catalogo.html?id=teclado-rgb" class="btn2 btn-primary" type="button">Ver detalle</a>
+              </article>
+            </div>
+            <div class="carousel-item">
+              <article class="text-center">
+                <h4>God of War: Ragnarok</h4>
+                <p>Vive la aventura épica de Kratos en la nueva entrega.</p>
+                <a href="catologo.html?id=gow-ragnarok" class="btn2 btn-primary" type="button">Ver detalle</a>
+              </article>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselDestacados" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselDestacados" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
 </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
     <footer class="bg-dark text-white py-4 mt-5">

@@ -1,20 +1,12 @@
-/* Espaciado horizontal entre nav-items */
-.navbar-nav > .nav-item:not(:last-child) {
-  margin-right: 2.2rem;
-}
-
-/* Separación entre logo y barra de búsqueda */
-.navbar .container {
-  gap: 2.5rem;
-}
-/* Línea divisoria superior gris */
-.border-top {
-    border-top: 1px solid #444 !important;
-}
-/* H1 blanco personalizado */
-.titulo-blanco {
-    color: #fff !important;
-    white-space: nowrap; /* Evita el salto de línea */
+/* Imagen de perfil circular con borde blanco */
+.perfil-circular {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
 }
 /* Fondo negro para toda la página */
 body.bg-dark {
@@ -37,6 +29,7 @@ body {
     font-family: "Raleway", sans-serif;
     font-size: 1.6rem;
     line-height: 2;
+    background-color: #000 !important;
 }
 
 h1,h2,h3 {
@@ -45,6 +38,9 @@ h1,h2,h3 {
 
 h1 {
     font-size: 3.8rem;
+    color: #fff !important;
+    white-space: nowrap; /* Evita el salto de línea */
+    padding-left: 4rem;
 }
 
 @media (min-width: 768px) {
@@ -62,22 +58,14 @@ h1 {
 .logo-h1 {
     height: 48px;
     vertical-align: middle;
+    font-family: "Pixelify Sans", sans-serif;
 }
 
 /* ======== NAV ========== */
-/* Espaciado horizontal entre nav-items */
-.navbar-nav > .nav-item:not(:last-child) {
-  margin-right: 3rem;
-}
-
 /* Separación entre logo y barra de búsqueda */
 .navbar .container {
   gap: 2.5rem;
-}
 
-.logo-h5 {
-    height: 45px;
-    vertical-align: middle;
 }
 
 .jersey-20-regular {
@@ -85,34 +73,104 @@ h1 {
   font-weight: 400;
   font-style: normal;
   font-size: 2.2rem;
+  margin-right: 3rem;
+}
+
+/* Botón brillantito */
+.btn2 {
+  text-decoration: none;
+  font-family: "Jersey 20", sans-serif;
+  width: 250px;
+  font-size: 23px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.btn2:before {
+ content: "";
+ background: linear-gradient(
+  124deg,
+  #ff2400,
+  #e81d1d,
+  #e8b71d,
+  #e3e81d,
+  #1de840,
+  #1ddde8,
+  #2b1de8,
+  #dd00f3,
+  #ff00f3
+ );
+
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.btn2:hover:before {
+  opacity: 1;
+}
+
+.btn2:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }
 
 
+/* =========MENU DESPLEGABLE=========== */
 .dropdown-item {
   color: #fff;
+
 }
 .dropdown .dropdown-menu {
   display: none;
   background: #212529;
+  
 }
 .dropdown:hover>.dropdown-menu, 
 .dropend:hover>.dropdown-menu {
   display: block;
   margin-top: .1em;
   margin-left: .1em;
-}
-@media screen and (min-width:769px) {
-  .dropend:hover>.dropdown-menu {
-    position: absolute;
-    top: 0;
-    left: 100%;
-  }
-  .dropend .dropdown-toggle {
-    margin-left: .5em;
-  }
+  
 }
 
+/*============PERFIL===============*/
 
+.perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
 #destacados {
   display: flex;
@@ -139,5 +197,5 @@ h1 {
 }
 
 footer.border-top {
-  border-top: none !important;
+  border-top: none;
 }
