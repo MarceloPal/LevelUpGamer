@@ -10,8 +10,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+20&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
+
+  <!-- Estilos migrados a app.css -->
 </head>
 
 <body class="bg-dark">
@@ -73,8 +79,30 @@
     </div>
 </nav>
 
+  <!-- Swiper *SE DEBEn BUSCAR MAS IMAGENES*-->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img_slide\razer.webp" alt="Slide 5"></div>
+      <div class="swiper-slide"><img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img_slide\BANNER-COUGAR1.webp" alt="Slide 2"></div>
+      <div class="swiper-slide"><img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img_slide\Banner-1.webp" alt="Slide 3"></div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
 
-<main class="container py-5 ">
+<main class="container py-7 ">
+
+  <!-- Imagen divisoria *SE DEBE MODIFICAR*-->
+  <div class="divider-img-wrapper">
+  </div>
+
+  <!-- Imagen divisoria *SE DEBE MODIFICAR*-->
+  <div class="divider-img-wrapper">
+    <img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img\Desktop_MainCampaignCountdown_Liquidacion_Abril_2025_4662806b.webp" alt="Divisor" class="divider-img d-none d-md-block">
+    <img src="img/led.jpg" alt="Divisor móvil" class="divider-img-mobile d-block d-md-none">
+  </div>
+
   <div class="row align-items-center">
     <div class="col-md-5 text-center mb-4 mb-md-0">
       <h2 class="mb-4">Bienvenido a Level-Up</h2>
@@ -87,28 +115,22 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <article class="text-center">
-                <img src="img/pixel_art_large (1).png" alt="Producto destacado">
+                <img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img\Desktop_QuadBannerSectionBotton_106a1e9b.webp" alt="Producto destacado">
               </article>
             </div>
             <div class="carousel-item">
               <article class="text-center">
-                <h4>Xbox Series S</h4>
-                <p>La consola de última generación para los verdaderos gamers.</p>
-                <a href="catologo.html?id=ps5" class="btn2 btn-primary" type="button">Ver detalle</a>
+                <img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img\Desktop_QuadBannerSectionTop_e3cf4d67.webp" alt="Producto destacado">
               </article>
             </div>
             <div class="carousel-item">
               <article class="text-center">
-                <h4>Teclado mecánico RGB</h4>
-                <p>Precisión y estilo para tus partidas competitivas.</p>
-                <a href="catalogo.html?id=teclado-rgb" class="btn2 btn-primary" type="button">Ver detalle</a>
+                <img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img\Desktop_QuadBannerSectionBotton_106a1e9b.webp" alt="Producto destacado">
               </article>
             </div>
             <div class="carousel-item">
               <article class="text-center">
-                <h4>God of War: Ragnarok</h4>
-                <p>Vive la aventura épica de Kratos en la nueva entrega.</p>
-                <a href="catologo.html?id=gow-ragnarok" class="btn2 btn-primary" type="button">Ver detalle</a>
+                <img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img\Desktop_QuadBannerSectionTop_e3cf4d67.webp" alt="Producto destacado">
               </article>
             </div>
           </div>
@@ -122,20 +144,55 @@
       </section>
     </div>
   </div>
+
+  <div class="divider-img-wrapper"></div>
+
+  <!-- Imagen divisoria *SE DEBE MODIFICAR*-->
+  <div class="divider-img-wrapper">
+    <img src="C:\Workspace\GAMERPAGE\LevelUpGamer\img\Desktop_CountdownContainer_Nvidia_Borderlands-4_Ago_2025_027a9524.webp" alt="Divisor" class="divider-img d-none d-md-block">
+    <img src="img/led.jpg" alt="Divisor móvil" class="divider-img-mobile d-block d-md-none">
+  </div>
+
+    <!-- Imagen divisoria *SE DEBE MODIFICAR*-->
+  <div class="divider-img-wrapper">
+    <a class="nav-link h2 text-center">Descubre Nuevas Categorías</a>
+  </div>
+
+<!-- Contenedor de imágenes en H con imágenes específicas -->
+<div class="container col-md-11">
+  <div class="row h-img-container align-items-stretch gx-0" style="min-height: 320px;">
+    <div class="col-3 d-flex justify-content-center align-items-stretch px-0">
+      <img src="img/Desktop_QuadBannerSectionLeft_0dd197a7.webp" class="img-fluid h-img-side h-100" alt="Izquierda" style="height: 100%; object-fit: cover;">
+    </div>
+    <div class="col-6 d-flex flex-column justify-content-between align-items-center px-0">
+      <img src="img/Desktop_QuadBannerSectionTop_e3cf4d67.webp" class="img-fluid h-img-center mb-1" alt="Centro Arriba" style="height: 55%; object-fit: cover; width: 100%;">
+      <img src="img/Desktop_QuadBannerSectionBotton_106a1e9b.webp" class="img-fluid h-img-center mt-1" alt="Centro Abajo" style="height: 55%; object-fit: cover; width: 100%;">
+    </div>
+    <div class="col-3 d-flex justify-content-center align-items-stretch px-0">
+      <img src="img/Desktop_QuadBannerSectionRight_b24d4dd5.webp" class="img-fluid h-img-side h-100" alt="Derecha" style="height: 100%; object-fit: cover;">
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
 
-    <footer class="bg-dark text-white py-4 mt-5">
-      <div class="container text-center">
-        <span class="d-block mb-2">Contáctanos:</span>
-        <a href="mailto:contacto@levelupgamer.com" class="text-primary mx-2">Email</a>
-        <a href="https://instagram.com/levelupgamer" target="_blank" class="text-primary mx-2">Instagram</a>
-        <a href="https://facebook.com/levelupgamer" target="_blank" class="text-primary mx-2">Facebook</a>
-        <a href="https://twitter.com/levelupgamer" target="_blank" class="text-primary mx-2">Twitter</a>
-        <a href="#" class="text-primary mx-2">Mesa de ayuda</a>
-      </div>
-    </footer>
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <span class="d-block mb-2">Contáctanos:</span>
+      <a href="mailto:contacto@levelupgamer.com" class="text-primary mx-2">Email</a>
+      <a href="https://instagram.com/levelupgamer" target="_blank" class="text-primary mx-2">Instagram</a>
+      <a href="https://facebook.com/levelupgamer" target="_blank" class="text-primary mx-2">Facebook</a>
+      <a href="https://twitter.com/levelupgamer" target="_blank" class="text-primary mx-2">Twitter</a>
+      <a href="#" class="text-primary mx-2">Mesa de ayuda</a>
+    </div>
+  </footer>
 
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>
