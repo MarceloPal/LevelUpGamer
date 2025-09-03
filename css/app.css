@@ -292,3 +292,46 @@ h1 {
 footer.border-top {
   border-top: none;
 }
+
+/* Estilo gamer para filtros y formularios */
+ .filtros {
+    border: 2px solid #00ffcc;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+  .filtros:hover {
+    border-color: #ff00ff;
+    box-shadow: 0 0 15px #ff00ff;
+  }
+  .form-check-input:checked {
+    background-color: #00ffcc;
+    border-color: #00ffcc;
+  }
+  .form-select:focus, .form-range:focus {
+    border-color: #ff00ff;
+    box-shadow: 0 0 8px #ff00ff;
+  }
+
+/*Seccion para ingresar a la cuente*/
+ /* Input estilo gamer */
+  .custom-input {
+    background-color: #111;
+    color: #fff;
+    border: 2px solid #444;
+    transition: all 0.3s ease;
+  }
+  .custom-input:hover {
+    border-color: #00ffcc; /* Turquesa en hover */
+    box-shadow: 0 0 10px #00ffcc;
+  }
+  .custom-input:focus {
+    border-color: #ff00ff; /* Fucsia en foco */
+    box-shadow: 0 0 12px #ff00ff;
+    outline: none;
+  }
+
+  /* Card borde animado */
+  .card:hover {
+    border-color: #00ffcc;
+    box-shadow: 0 0 20px #00ffcc;
+  }
