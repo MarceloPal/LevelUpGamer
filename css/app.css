@@ -312,6 +312,8 @@ footer.border-top {
     box-shadow: 0 0 8px #ff00ff;
   }
 
+
+
 /*Seccion para ingresar a la cuente*/
  /* Input estilo gamer */
   .custom-input {
@@ -330,8 +332,20 @@ footer.border-top {
     outline: none;
   }
 
-  /* Card borde animado */
+  /* borde */
   .card:hover {
     border-color: #00ffcc;
     box-shadow: 0 0 20px #00ffcc;
   }
+
+/* ==========================
+FOOTER
+========================== */
+
+footer[role="contentinfo"] {
+    width: min(1100px, 100%); margin: 2rem auto; padding: 1.25rem; color: var(--text-2);
+}
+
+footer nav ul { list-style:none; padding: 0; display: flex; gap: .75rem; flex-wrap: wrap; }
+footer nav a { color: var(--text-2); text-decoration: none; }
+footer nav a:hover { color: #fff; }
