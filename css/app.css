@@ -1,5 +1,20 @@
+/*===========divisor 2==========*/
+/* Imagen divisoria entre swiper y main */
 
+.divider-img-wrapper-2 {
+  width: 100%;
+  display: flex;              /* flex para centrar */
+  justify-content: center;    /* centra horizontalmente */
+  align-items: center;        /* centra verticalmente si hubiera altura */
+  margin: 2rem auto;
+}
 
+.divider-img-wrapper-2 a {
+  display: inline-block;           /* para que el borde se ajuste al ancho del texto */
+  border-bottom: 3px solid #fdf040f8; /* línea dorado oscuro */
+  padding-bottom: 5px;            /* espacio entre texto y línea */
+  text-align: center;             /* por si acaso */
+}
 
 /* Imagen divisoria entre swiper y main */
 .divider-img-wrapper {
