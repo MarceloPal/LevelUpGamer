@@ -261,6 +261,12 @@ h1 {
   
 }
 
+.container1 {
+  max-width: 1140px;
+  padding: 0 15px;
+  margin: 0 auto;
+  text-align: center;
+}
 /*============PERFIL===============*/
 .perfil {
   width: 45px;
@@ -495,10 +501,12 @@ Ingresar
 FOOTER
 ========================== */
 
-footer[role="contentinfo"] {
-    width: min(1100px, 100%); margin: 2rem auto; padding: 1.25rem; color: var(--text-2);
+.border-top {
+  background: #4f0462;
+  border-top: 2px solid #ffffff44 !important;
+
 }
 
-footer nav ul { list-style:none; padding: 0; display: flex; gap: .75rem; flex-wrap: wrap; }
-footer nav a { color: var(--text-2); text-decoration: none; }
-footer nav a:hover { color: #fff; }
+.text-muted {
+  color: #ffffff !important;
+} 
