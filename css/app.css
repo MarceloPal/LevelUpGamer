@@ -442,7 +442,7 @@ footer.border-top {
 
 /* Estilo gamer para filtros y formularios */
  .filtros {
-    border: 2px solid #00ffcc;
+    border: 2px solid #fdf040;
     border-radius: 15px;
     transition: all 0.3s ease;
   }
@@ -452,7 +452,7 @@ footer.border-top {
   }
   .form-check-input:checked {
     background-color: #00ffcc;
-    border-color: #00ffcc;
+    border-color: #fdf04044;
   }
   .form-select:focus, .form-range:focus {
     border-color: #ff00ff;
@@ -460,18 +460,18 @@ footer.border-top {
   }
 
 
-
-/*Seccion para ingresar a la cuente*/
- /* Input estilo gamer */
+/* ==========================
+Ingresar
+========================== */
   .custom-input {
-    background-color: #111;
+    background-color: #0007;
     color: #fff;
     border: 2px solid #444;
     transition: all 0.3s ease;
   }
   .custom-input:hover {
-    border-color: #00ffcc; /* Turquesa en hover */
-    box-shadow: 0 0 10px #00ffcc;
+    border-color: #fdf040; /* Turquesa en hover */
+    box-shadow: 0 0 10px #fdf04044;
   }
   .custom-input:focus {
     border-color: #ff00ff; /* Fucsia en foco */
@@ -485,6 +485,28 @@ footer.border-top {
     box-shadow: 0 0 20px #00ffcc;
   }
 
+  .btn-primary {
+    background: linear-gradient(90deg, #d746fb 0%, #fdf040 100%);
+    color: #222;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: box-shadow 0.2s;
+  }
+
+  .text-info {
+    color: #ffffff44;  
+    
+  }
+
+  .btn-success {
+    background: linear-gradient(90deg, #d746fb 0%, #fdf040 100%);
+    color: #222;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: box-shadow 0.2s;
+  }
 /* ==========================
 FOOTER
 ========================== */
