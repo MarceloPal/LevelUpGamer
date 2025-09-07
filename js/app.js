@@ -184,6 +184,29 @@ document.addEventListener('DOMContentLoaded', function () {
   setupCerrarSesion();
 });
 
+// Activar sección de perfil según parámetro en la URL
+function activarSeccionPorURL() {
+  const params = new URLSearchParams(window.location.search);
+  const section = params.get('section');
+  if (section) {
+    const sidebarLinks = document.querySelectorAll('.profile-sidebar .nav-link');
+    const profileSections = document.querySelectorAll('.profile-content .section');
+    sidebarLinks.forEach(link => link.classList.remove('active'));
+    profileSections.forEach(sec => sec.classList.add('d-none'));
+    const targetLink = document.querySelector(`.profile-sidebar .nav-link[data-section="${section}"]`);
+    const targetSection = document.getElementById(section);
+    if (targetLink && targetSection) {
+      targetLink.classList.add('active');
+      targetSection.classList.remove('d-none');
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  activarSeccionPorURL();
+});
+
+
 // ---------------------------------------------------------
 
 // script SLIDES
@@ -207,4 +230,5 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 });
+
 
