@@ -118,25 +118,26 @@
 <div class="profile-content flex-grow-1">
   <div class="section" id="editar">
     <h3>Editar Perfil</h3>
-    <form>
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" value="Juan Gamer">
-      </div>
-      <div class="mb-3">
-        <label for="celular" class="form-label">Celular</label>
-        <input type="text" class="form-control" id="celular" value="+56 9 1234 5678">
-      </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="email" value="juan@gamer.com">
-      </div>
-      <div class="mb-3">
-        <label for="direccion" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="direccion" value="Calle Santiago 123, Santiago Centro">
-      </div>
-      <button type="submit" class="btn btn-primary">Guardar cambios</button>
-    </form>
+      <form id="perfilForm">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" value="Juan Gamer">
+        </div>
+        <div class="mb-3">
+          <label for="celular" class="form-label">Celular</label>
+          <input type="text" class="form-control" id="celular" value="+56 9 1234 5678">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" value="juan@gamer.com">
+        </div>
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" value="Calle Santiago 123, Santiago Centro">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </form>
+      <div id="perfilGuardado" class="mt-3 text-success d-none">¡Cambios guardados!</div>
   </div>
   <div class="section d-none" id="compras">
     <h3>Mis Compras</h3>
@@ -162,17 +163,18 @@
   </div>
   <div class="section d-none" id="idioma">
     <h3>Idioma</h3>
-    <form>
+    <form id="idiomaForm">
       <div class="mb-3">
         <label for="idioma-select" class="form-label">Selecciona idioma</label>
         <select class="form-select" id="idioma-select">
-          <option selected>Español</option>
-          <option>English</option>
-          <option>Português</option>
+          <option value="Español">Español</option>
+          <option value="English">English</option>
+          <option value="Português">Português</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+    <div id="idiomaGuardado" class="mt-3 text-success d-none">¡Idioma guardado!</div>
   </div>
   <div class="section d-none" id="soporte">
     <h3>Soporte</h3>
