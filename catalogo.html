@@ -76,260 +76,118 @@
 </nav>
 
 <main class="container my-5">
-  <main class="container my-5">
-  <div class="row">
+
+
+
+    <!-- Catálogo -->
+<div class="catalogo-container">
+
+  <!-- Botones de categorías -->
+  <div class="catalogo-buttons d-flex flex-wrap justify-content-center gap-3 my-4">
+    <button class="btn2 active" data-section="juegos">Juegos de Mesa</button>
+    <button class="btn2" data-section="accesorios">Accesorios</button>
+    <button class="btn2" data-section="consolas">Consolas</button>
+    <button class="btn2" data-section="computadores">Computadores Gamers</button>
+    <button class="btn2" data-section="sillas">Sillas Gamers</button>
+    <button class="btn2" data-section="mouse">Mouse</button>
+    <button class="btn2" data-section="mousepad">Mousepad</button>
+    <button class="btn2" data-section="poleras">Poleras Personalizadas</button>
+    <button class="btn2" data-section="polerones">Polerones Personalizados</button>
+    <button class="btn2" data-section="todo">Ver Todo</button>
+  </div>
+
+
+  
+  <!-- Secciones de productos -->
+  <div class="catalogo-content">
+
+
     
-    <!-- FILTROS (Sidebar) -->
-    <aside class="col-md-3 mb-4">
-      <div class="card bg-dark text-white p-3 filtros">
-        <h4 class="mb-3 text-center">🎮 Filtrar</h4>
-
-        <!-- Precio -->
-        <div class="mb-3">
-          <label class="form-label">Rango de Precio</label>
-          <input type="range" class="form-range" min="5000" max="2000000" step="5000">
-          <div class="d-flex justify-content-between">
-            <span>$5.000</span>
-            <span>$2.000.000</span>
-          </div>
-        </div>
-
-        <!-- Categorías -->
-        <div class="mb-3">
-          <label class="form-label">Categorías</label>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="catJuegos">
-            <label class="form-check-label" for="catJuegos">Juegos de Mesa</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="catAccesorios">
-            <label class="form-check-label" for="catAccesorios">Accesorios</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="catConsolas">
-            <label class="form-check-label" for="catConsolas">Consolas</label>
-          </div>
-        </div>
-
-        <!-- Ordenar -->
-        <div class="mb-3">
-          <label class="form-label">Ordenar por</label>
-          <select class="form-select">
-            <option value="precio-asc">Precio: Menor a Mayor</option>
-            <option value="precio-desc">Precio: Mayor a Menor</option>
-            <option value="descuento">Mayor Descuento</option>
-            <option value="popularidad">Más Popular</option>
-          </select>
-        </div>
-
-        <!-- Botón -->
-        <button class="btn btn-primary w-100 mt-2">Aplicar filtros</button>
-      </div>
-    </aside>
-<div class="col-md-9">
-    <section class="mb-5">
-    <h2 class="text-white mb-4 jersey-20-regular">Juegos de Mesa</h2>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
-  <div class="card h-100 bg-secondary text-white rounded-4">
-          <img src="https://via.placeholder.com/200x200?text=Juego+1" class="card-img-top" alt="Juego 1">
-          <div class="card-body">
-            <h5 class="card-title">Catan</h5>
-            <p class="card-text">Juego de estrategia y comercio. ¡Conquista la isla!</p>
-            <span class="badge bg-danger mb-2">-20%</span>
-            <p class="card-text fw-bold">$32.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-  <div class="card h-100 bg-secondary text-white rounded-4">
-          <img src="https://via.placeholder.com/200x200?text=Juego+2" class="card-img-top" alt="Juego 2">
-          <div class="card-body">
-            <h5 class="card-title">Dixit</h5>
-            <p class="card-text">Juego de cartas ilustradas para imaginar y contar historias.</p>
-            <span class="badge bg-danger mb-2">-15%</span>
-            <p class="card-text fw-bold">$21.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-  <div class="card h-100 bg-secondary text-white rounded-4">
-          <img src="https://via.placeholder.com/200x200?text=Juego+3" class="card-img-top" alt="Juego 3">
-          <div class="card-body">
-            <h5 class="card-title">Carcassonne</h5>
-            <p class="card-text">Construye ciudades y caminos en este clásico de losetas.</p>
-            <span class="badge bg-danger mb-2">-10%</span>
-            <p class="card-text fw-bold">$18.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-  <div class="card h-100 bg-secondary text-white rounded-4">
-          <img src="https://via.placeholder.com/200x200?text=Juego+4" class="card-img-top" alt="Juego 4">
-          <div class="card-body">
-            <h5 class="card-title">Uno</h5>
-            <p class="card-text">El clásico juego de cartas para toda la familia.</p>
-            <span class="badge bg-danger mb-2">-25%</span>
-            <p class="card-text fw-bold">$7.500</p>
-          </div>
-        </div>
+    <!-- Juegos de mesa -->
+    <div class="section" id="juegos">
+      <h3>Juegos de Mesa</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Catan</div></div>
+        <div class="col-md-3"><div class="card p-3">Dixit</div></div>
+        <div class="col-md-3"><div class="card p-3">Carcassonne</div></div>
       </div>
     </div>
-  </section>
 
-  <!-- Accesorios -->
-  <section class="mb-5">
-    <h2 class="text-white mb-4 jersey-20-regular">Accesorios</h2>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Accesorio+1" class="card-img-top" alt="Accesorio 1">
-          <div class="card-body">
-            <h5 class="card-title">Auriculares Pro</h5>
-            <p class="card-text">Sonido envolvente para gamers exigentes.</p>
-            <span class="badge bg-danger mb-2">-30%</span>
-            <p class="card-text fw-bold">$25.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Accesorio+2" class="card-img-top" alt="Accesorio 2">
-          <div class="card-body">
-            <h5 class="card-title">Teclado RGB</h5>
-            <p class="card-text">Iluminación personalizable y respuesta rápida.</p>
-            <span class="badge bg-danger mb-2">-18%</span>
-            <p class="card-text fw-bold">$19.900</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Accesorio+3" class="card-img-top" alt="Accesorio 3">
-          <div class="card-body">
-            <h5 class="card-title">Mouse Gamer</h5>
-            <p class="card-text">Precisión y velocidad para tus partidas.</p>
-            <span class="badge bg-danger mb-2">-22%</span>
-            <p class="card-text fw-bold">$13.500</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Accesorio+4" class="card-img-top" alt="Accesorio 4">
-          <div class="card-body">
-            <h5 class="card-title">Mousepad XL</h5>
-            <p class="card-text">Superficie amplia y antideslizante.</p>
-            <span class="badge bg-danger mb-2">-12%</span>
-            <p class="card-text fw-bold">$6.900</p>
-          </div>
-        </div>
+    <!-- Accesorios -->
+    <div class="section d-none" id="accesorios">
+      <h3>Accesorios</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Audífonos Gaming</div></div>
+        <div class="col-md-3"><div class="card p-3">Soporte de Celular</div></div>
       </div>
     </div>
-  </section>
 
-  <!-- Consolas -->
-  <section class="mb-5">
-    <h2 class="text-white mb-4 jersey-20-regular">Consolas</h2>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Consola+1" class="card-img-top" alt="Consola 1">
-          <div class="card-body">
-            <h5 class="card-title">PlayStation 5</h5>
-            <p class="card-text">La nueva generación de consolas Sony.</p>
-            <span class="badge bg-danger mb-2">-8%</span>
-            <p class="card-text fw-bold">$650.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Consola+2" class="card-img-top" alt="Consola 2">
-          <div class="card-body">
-            <h5 class="card-title">Xbox Series X</h5>
-            <p class="card-text">Potencia y velocidad para gamers de élite.</p>
-            <span class="badge bg-danger mb-2">-10%</span>
-            <p class="card-text fw-bold">$630.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Consola+3" class="card-img-top" alt="Consola 3">
-          <div class="card-body">
-            <h5 class="card-title">Nintendo Switch</h5>
-            <p class="card-text">Versatilidad para jugar donde quieras.</p>
-            <span class="badge bg-danger mb-2">-14%</span>
-            <p class="card-text fw-bold">$320.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=Consola+4" class="card-img-top" alt="Consola 4">
-          <div class="card-body">
-            <h5 class="card-title">Steam Deck</h5>
-            <p class="card-text">La consola portátil para juegos de PC.</p>
-            <span class="badge bg-danger mb-2">-5%</span>
-            <p class="card-text fw-bold">$450.000</p>
-          </div>
-        </div>
+    <!-- Consolas -->
+    <div class="section d-none" id="consolas">
+      <h3>Consolas</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">PlayStation 5</div></div>
+        <div class="col-md-3"><div class="card p-3">Nintendo Switch</div></div>
       </div>
     </div>
-  </section>
 
-  <!-- Computadores Gamers -->
-  <section class="mb-5">
-    <h2 class="text-white mb-4 jersey-20-regular">Computadores Gamers</h2>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=PC+1" class="card-img-top" alt="PC 1">
-          <div class="card-body">
-            <h5 class="card-title">PC Gamer Alpha</h5>
-            <p class="card-text">Procesador Ryzen 7, RTX 4060, 16GB RAM.</p>
-            <span class="badge bg-danger mb-2">-17%</span>
-            <p class="card-text fw-bold">$850.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=PC+2" class="card-img-top" alt="PC 2">
-          <div class="card-body">
-            <h5 class="card-title">PC Gamer Beta</h5>
-            <p class="card-text">Intel i5, GTX 1660, 8GB RAM.</p>
-            <span class="badge bg-danger mb-2">-20%</span>
-            <p class="card-text fw-bold">$650.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=PC+3" class="card-img-top" alt="PC 3">
-          <div class="card-body">
-            <h5 class="card-title">PC Gamer Omega</h5>
-            <p class="card-text">Intel i9, RTX 4080, 32GB RAM.</p>
-            <span class="badge bg-danger mb-2">-12%</span>
-            <p class="card-text fw-bold">$1.500.000</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 bg-secondary text-white">
-          <img src="https://via.placeholder.com/200x200?text=PC+4" class="card-img-top" alt="PC 4">
-          <div class="card-body">
-            <h5 class="card-title">PC Gamer Mini</h5>
-            <p class="card-text">Compacto, Ryzen 5, RX 6600, 16GB RAM.</p>
-            <span class="badge bg-danger mb-2">-15%</span>
-            <p class="card-text fw-bold">$720.000</p>
-          </div>
-        </div>
+    <!-- Computadores -->
+    <div class="section d-none" id="computadores">
+      <h3>Computadores Gamers</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">PC Gamer RTX 4070</div></div>
+        <div class="col-md-3"><div class="card p-3">Notebook Gamer</div></div>
       </div>
     </div>
-  </section>
+
+    <!-- Sillas -->
+    <div class="section d-none" id="sillas">
+      <h3>Sillas Gamers</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Silla DXRacer</div></div>
+        <div class="col-md-3"><div class="card p-3">Silla Cougar</div></div>
+      </div>
+    </div>
+
+    <!-- Mouse -->
+    <div class="section d-none" id="mouse">
+      <h3>Mouse</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Logitech G502</div></div>
+        <div class="col-md-3"><div class="card p-3">Razer DeathAdder</div></div>
+      </div>
+    </div>
+
+    <!-- Mousepad -->
+    <div class="section d-none" id="mousepad">
+      <h3>Mousepads</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Mousepad XL</div></div>
+        <div class="col-md-3"><div class="card p-3">RGB Mousepad</div></div>
+      </div>
+    </div>
+
+    <!-- Poleras -->
+    <div class="section d-none" id="poleras">
+      <h3>Poleras Personalizadas</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Polera Gamer</div></div>
+        <div class="col-md-3"><div class="card p-3">Polera Friki</div></div>
+      </div>
+    </div>
+
+    <!-- Polerones -->
+    <div class="section d-none" id="polerones">
+      <h3>Polerones Personalizados</h3>
+      <div class="row">
+        <div class="col-md-3"><div class="card p-3">Polerón Hoodie</div></div>
+        <div class="col-md-3"><div class="card p-3">Polerón Estampado</div></div>
+      </div>
+    </div>
+
+  </div>
 </div>
+
 
 </main>
           <footer class="border-top border-secondary py-4 mt-5">
@@ -343,6 +201,7 @@
         </div>
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
 
 
 </body>
