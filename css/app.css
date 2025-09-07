@@ -406,28 +406,28 @@ PRODUCTOSSS
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #fff;                /* 🔑 Fondo blanco */
+  background: #fff;
   border-radius: 16px;
   padding: 1.2rem;
   text-align: center;
-  color: #333;                     /* Texto oscuro para contraste */
+  color: #333;
   box-shadow: 0 6px 12px rgba(0,0,0,0.1);
   border: 1px solid #e0e0e0;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   width: 100%;
-  min-height: 420px;               /* 🔑 misma altura */
+  min-height: 420px;
 }
 
 .product-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  border-color: #80d4ff;           /* borde celeste suave en hover */
+  border-color: #80d4ff;
 }
 
 .product-card .brand {
   font-size: 0.8rem;
   font-weight: bold;
-  color: #0077b6;                  /* Azul corporativo */
+  color: #0077b6; 
   margin-bottom: 0.5rem;
   text-transform: uppercase;
 }
@@ -438,7 +438,7 @@ PRODUCTOSSS
   object-fit: contain;
   margin: 0.5rem 0 1rem;
   border-radius: 12px;
-  background: #f9f9f9;             /* leve gris de fondo */
+  background: #f9f9f9; 
   padding: 8px;
   flex-shrink: 0;
 }
@@ -453,7 +453,7 @@ PRODUCTOSSS
 .product-card .price {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #28a745;                  /* verde para resaltar precio */
+  color: #28a745;
   margin-bottom: 0.3rem;
 }
 
@@ -474,7 +474,7 @@ PRODUCTOSSS
 }
 
 .product-card .btn-add {
-  background: #00aaff;             /* 🔑 Celeste */
+  background: #00aaff;
   border: none;
   color: #fff;
   font-weight: bold;
@@ -485,7 +485,7 @@ PRODUCTOSSS
 }
 
 .product-card .btn-add:hover {
-  background: #0095dd;             /* Celeste más oscuro en hover */
+  background: #0095dd; 
 }
 
 /* ==========================*/
