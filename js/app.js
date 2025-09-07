@@ -22,6 +22,35 @@ buttons.forEach(btn => {
   });
 });
 
+// Activar sección del catálogo según parámetro en la URL
+function activarCatalogoPorURL() {
+  const params = new URLSearchParams(window.location.search);
+  const section = params.get('section');
+  if (section) {
+    const catalogButtons = document.querySelectorAll('.catalogo-buttons .btn2');
+    const catalogSections = document.querySelectorAll('.catalogo-content .section');
+    catalogButtons.forEach(btn => btn.classList.remove('active'));
+    catalogSections.forEach(sec => sec.classList.add('d-none'));
+    const targetBtn = document.querySelector(`.catalogo-buttons .btn2[data-section="${section}"]`);
+    if (section === 'todo') {
+      catalogSections.forEach(sec => sec.classList.remove('d-none'));
+      if (targetBtn) targetBtn.classList.add('active');
+    } else {
+      const targetSection = document.getElementById(section);
+      if (targetBtn && targetSection) {
+        targetBtn.classList.add('active');
+        targetSection.classList.remove('d-none');
+      }
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  activarCatalogoPorURL();
+});
+
+
+
 /* ==========================
   Formulario de Login y Registro
 ========================== */
@@ -205,6 +234,7 @@ function activarSeccionPorURL() {
 document.addEventListener('DOMContentLoaded', function () {
   activarSeccionPorURL();
 });
+
 
 
 // ---------------------------------------------------------
