@@ -15,65 +15,75 @@
 </head>
 
 <body class="bg-dark">
-
-<nav class="navbar navbar-expand-lg navbar-dark">
-  
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-          <h1 class="text-center">
-        <img src="img\coin-cropped.png" alt="Logo" class="logo-h1">
-        Level-Up <span class="text-primary"></span>
-    </h1>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent"> 
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link jersey-20-regular" href="index.html">Home</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle jersey-20-regular" href="#catalogo.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catálogo</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item jersey-20-regular" href="#">Juegos de Mesa</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="#">Accesorios</a></li>                  
-              <li><a class="dropdown-item jersey-20-regular" href="#">Consolas</a></li>                  
-              <li><a class="dropdown-item jersey-20-regular" href="#">Computadores Gamers</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="#">Sillas Gamers</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="#">Mouse</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="#">Mousepad</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="#">Poleras Personalizadas</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="#">Polerones Gamers Personalizados</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="catalogo.html">Ver todo</a></li>
-            </ul>
-          </li>
-          <li class="nav-item jersey-20-regular">
-            <a class="nav-link" href="fidelizacion.html">Fidelización</a>
-          </li>
-          <li class="nav-item jersey-20-regular">
-            <a class="nav-link" href="ingresar.html">Ingresar</a>
+          <h1 class="logo-title">
+              <a href="index.html" class="text-decoration-none text-white ">
+                <img src="img\coin-cropped.png" alt="Logo" class="logo-h1">
+                Level-Up
+              </a>
+          </h1>
 
-          <li class="nav-item nav-link jersey-20-regular dropdown">
-            <img src="img\bits-8bits.gif" class="perfil dropdown-toggle jersey-20-regular" href="#perfil.html" role="button" data-bs-toggle="dropdown" aria-expanded="True">
-             <ul class="dropdown-menu">
-              <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Editar Perfil</a></li>          
-              <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Mis compras</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="carrito.html">Carrito</a></li>                  
-              <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Trackear Pedido</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Idioma</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Soporte</a></li>
-              <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Cerrar Sesión</a></li>
-            </ul>
-          </li>
-        </ul>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <form class="d-flex ms-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit">Buscar</button>
-        </form>
-      </div>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center gap-3">
+              <li class="nav-item">
+                <a class="nav-link jersey-20-regular" href="index.html">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle jersey-20-regular" href="#catalogo.html" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Juegos de Mesa</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Accesorios</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Consolas</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Computadores Gamers</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Sillas Gamers</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Mouse</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Mousepad</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Poleras Personalizadas</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Polerones Gamers Personalizados</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html">Ver todo</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <form class="d-flex align-items-center" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
+                </form>
+              </li>
+                  <li class="nav-item jersey-20-regular">
+                    <a class="nav-link" href="ingresar.html">Hola, ingresa!</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <img src="img\bits-8bits.gif" class="perfil dropdown-toggle jersey-20-regular" href="#perfil.html"
+                      role="button" data-bs-toggle="dropdown" aria-expanded="True">
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Editar Perfil</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Mis compras</a></li>
+
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Trackear Pedido</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Idioma</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Soporte</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="fidelizacion.html">Fidelización</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Cerrar Sesión</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item ms-lg-3">
+                  <a class="nav-link" href="#" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar">
+                  🛒
+                  <span id="cart-count" class="badge bg-warning text-dark rounded-pill">0</span>
+                   </a>
+                  </li>
+            </ul>
+              </div>
+          </div>
     </div>
-</nav>
+  </nav>
 
 
 <main class="container py-5 ">
@@ -188,16 +198,51 @@
 
 
 </main>
-        <footer class="border-top border-secondary py-4 mt-5">
-        <div class="container d-flex flex-wrap gap-3 justify-content-between align-items-center">
-            <ul class="nav">
-                <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Términos</a></li>
-                <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Privacidad</a></li>
-                <li class="nav-item"><a class="nav-link px-2 text-white" href="#">Contactanos</a></li>
-            </ul>
-            <small class="text-muted">© 2025 Level-Up Gamer</small>
+
+<div class="footer-dark">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Informaciones y Políticas</h3>
+                            <ul>
+                                <li><a href="#">Términos y Condiciones</a></li>
+                                <li><a href="#"></a>Bases Legales</li>
+                                <li><a href="#">Canal de Denuncias</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3 item">
+                            <h3>Sobre Nosotros</h3>
+                            <ul>
+                                <li><a href="#">Compañia</a></li>
+                                <li><a href="#">Team</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 item text">
+                            <h3>Level-Up Gamer</h3>
+                            <p> Level-Up Gamer es una tienda online dedicada a la comunidad gamer. Ofrecemos juegos, accesorios y equipos de la mejor calidad para que vivas al máximo tu experiencia de juego. ¡Sube de nivel con nosotros!</p>
+                        </div>
+                        <div class="col item social">
+                          <a href="https://facebook.com" target="_blank"> <!-- Abre en una nueva pestaña -->
+                            <img src="img/Logo-Social-Media-Facebook-Circle--Streamline-Pixel.svg" alt="Facebook" width="30" height="30">
+                          </a>
+                          <a href="https://twitter.com" target="_blank">
+                            <img src="img/Logo-Social-Media-Twitter-Circle--Streamline-Pixel.svg" alt="Twitter" width="30" height="30">
+                          </a>
+                          <a href="https://snapchat.com" target="_blank">
+                            <img src="img/Logo-Whatapp--Streamline-Pixel.svg" alt="Snapchat" width="30" height="30">
+                          </a>
+                          <a href="https://instagram.com" target="_blank">
+                            <img src="img/Logo-Social-Media-Instagram--Streamline-Pixel.svg" alt="Instagram" width="30" height="30">
+                          </a>
+
+                        </div>
+                    </div>
+                    <img src="img/commerceAward.webp" alt="Winners Commerce Awards" class="footer-award mx-auto d-block mb-3" style=" max-width: 160px; width: 100%; height: auto;">
+                    <p class="copyright">Level-Up Gamer © 2025</p>
+                </div>
+            </footer>
         </div>
-    </footer>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
