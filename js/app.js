@@ -1,4 +1,14 @@
-const buttons = document.querySelectorAll('.catalogo-buttons .btn2');
+
+  function mostrarRegistro() {
+    document.getElementById("loginForm").classList.add("d-none");
+    document.getElementById("registerForm").classList.remove("d-none");
+  }
+
+  function mostrarLogin() {
+    document.getElementById("registerForm").classList.add("d-none");
+    document.getElementById("loginForm").classList.remove("d-none");
+  }
+  const buttons = document.querySelectorAll('.catalogo-buttons .btn2');
 const sections = document.querySelectorAll('.catalogo-content .section');
 
 buttons.forEach(btn => {
