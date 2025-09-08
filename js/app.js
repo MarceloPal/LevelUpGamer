@@ -266,3 +266,232 @@ document.addEventListener('DOMContentLoaded', function () {
 CARRITO DE COMPRAS
 -------------------------------- */
 
+/*
+  Level-Up – app.js (Vanilla JS)
+  Funcionalidades básicas sin dependencias:
+  - Manejo de carrito (localStorage)
+  - Render en sidebar (index.html)
+  - Render en carrito.html
+  - Agregar, sumar/restar, eliminar productos
+*/
+
+(() => {
+  const STORAGE_KEY = "levelup_cart_v1"; //guarda el carrito en el localStorage
+
+  // ==========================
+  // Estado inicial
+  // ==========================
+  const initialState = {
+    cart: [] // { id, nombre, precio, imagen, cantidad }
+  };  // Estado inicial del carrito, si no hay nada en localStorage se inicia vacío.
+
+  const loadState = () => {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { ...initialState };
+    } catch {
+      return { ...initialState };
+    }
+  }; // Carga el estado del carrito desde localStorage, si no existe usa el estado inicial.
+
+
+
+  // Guarda el estado del carrito en localStorage en formato JSON.
+  const saveState = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  let state = loadState(); // Estado actual del carrito cargado desde localStorage.
+
+  // ==========================
+  // Helpers DOM y formateo (para selecionar elementos y formatear precios)
+  // ==========================
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  const formatPrice = (num) => "$" + num.toLocaleString("es-CL"); // Formatea números como precios en pesos chilenos.
+
+  // ==========================
+  // Carrito: lógica
+  // ==========================
+
+  // Agrega un producto al carrito o incrementa su cantidad si ya existe.
+  const addToCart = (product) => {
+    let existing = state.cart.find((p) => p.id === product.id);
+    if (existing) {
+      existing.cantidad++; // Si el producto ya está en el carrito, incrementa su cantidad.
+    } else {
+      state.cart.push({ ...product, cantidad: 1 }); // Si no está, lo agrega con cantidad 1.
+    }
+    saveState(); // Guarda el estado actualizado en localStorage.
+    renderCart(); // Actualiza la visualización del carrito.
+    toast("Producto añadido al carrito"); // Muestra un mensaje de confirmación.
+  };
+
+  // Actualiza la cantidad de un producto en el carrito. Si la cantidad llega a 0, lo elimina.
+  const updateQuantity = (id, delta) => {
+    let item = state.cart.find((p) => p.id === id);
+    if (item) {
+      item.cantidad += delta;
+      if (item.cantidad <= 0) {
+        state.cart = state.cart.filter((p) => p.id !== id);
+      }
+      saveState();
+      renderCart();
+    }
+  };
+
+  // Elimina un producto del carrito por su ID.
+  const removeFromCart = (id) => {
+    state.cart = state.cart.filter((p) => p.id !== id);
+    saveState();
+    renderCart();
+  };
+
+  // Calcula el total del carrito sumando precio * cantidad de cada producto.
+  const getTotal = () =>
+    state.cart.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+
+  // ==========================
+  // Render: sidebar y carrito.html
+  // ==========================
+
+  // Renderiza el carrito en el sidebar y en la página carrito.html
+  // Actualiza el contador, la lista de productos y el total.
+  // Usa delegación de eventos para manejar los botones de sumar/restar/eliminar.
+  // Llama a renderCart() después de cualquier cambio en el carrito.
+  const renderCart = () => {
+    const cartCount = $("#cart-count");
+    if (cartCount) {
+      cartCount.textContent = state.cart.reduce((a, b) => a + b.cantidad, 0);
+    }
+// ===== Resumen de compra (carrito.html - lado derecho)
+        const cartSummary = $("#cart-summary");
+      if (cartSummary) {
+        cartSummary.innerHTML = "";
+        state.cart.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "d-flex justify-content-between align-items-center mb-2";
+          div.innerHTML = `
+            <span>${item.nombre} (x${item.cantidad})</span>
+            <span>${formatPrice(item.precio * item.cantidad)}</span>
+          `;
+          cartSummary.appendChild(div);
+        });
+      }
+
+
+
+
+    // Sidebar (index.html)
+    const sidebarList = $("#cart-items");
+    const sidebarTotal = $("#cart-total");
+    if (sidebarList) {
+      sidebarList.innerHTML = "";
+      state.cart.forEach((item) => {
+        const li = document.createElement("li");
+        li.className =
+          "list-group-item d-flex justify-content-between align-items-center bg-dark text-white";
+        li.innerHTML = `
+          <div>
+            <img src="${item.imagen}" alt="${item.nombre}" width="40" class="me-2">
+            ${item.nombre} (x${item.cantidad})
+          </div>
+          <div>
+            <button class="btn btn-sm btn-light me-1" data-action="minus" data-id="${item.id}">-</button>
+            <button class="btn btn-sm btn-light me-1" data-action="plus" data-id="${item.id}">+</button>
+            <button class="btn btn-sm btn-danger" data-action="remove" data-id="${item.id}">🗑️</button>
+          </div>
+        `;
+        sidebarList.appendChild(li);
+      });
+      if (sidebarTotal) sidebarTotal.textContent = formatPrice(getTotal());
+    }
+
+    // Página carrito.html
+    const cartPageList = $("#cart-page-items");
+    const cartPageTotal = $("#cart-page-total");
+    if (cartPageList) {
+      cartPageList.innerHTML = "";
+      state.cart.forEach((item) => {
+        const row = document.createElement("li");
+        row.className =
+          "list-group-item d-flex justify-content-between align-items-center";
+        row.innerHTML = `
+          <div>
+            <img src="${item.imagen}" alt="${item.nombre}" width="50" class="me-2">
+            ${item.nombre} (x${item.cantidad})
+          </div>
+          <div>
+            <span>${formatPrice(item.precio * item.cantidad)}</span>
+            <button class="btn btn-sm btn-light ms-2" data-action="minus" data-id="${item.id}">-</button>
+            <button class="btn btn-sm btn-light ms-2" data-action="plus" data-id="${item.id}">+</button>
+            <button class="btn btn-sm btn-danger ms-2" data-action="remove" data-id="${item.id}">🗑️</button>
+          </div>
+        `;
+        cartPageList.appendChild(row);
+      });
+      if (cartPageTotal) cartPageTotal.textContent = formatPrice(getTotal());
+    }
+  };
+
+  
+  // ==========================
+  // Delegación de eventos
+  // ==========================
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-action]");
+    if (!btn) return;
+
+    const id = btn.dataset.id;
+    const action = btn.dataset.action;
+
+    if (action === "plus") updateQuantity(id, +1);
+    if (action === "minus") updateQuantity(id, -1);
+    if (action === "remove") removeFromCart(id);
+  });
+
+  document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-add")) {
+    const btn = e.target;
+    const nombre = btn.dataset.nombre;
+    const precio = btn.dataset.precio;
+    const imagen = btn.dataset.imagen;
+    if (!nombre || !precio || !imagen) {
+      toast("Error: producto incompleto");
+      return;
+    }
+    const product = {
+      id: btn.dataset.id,
+      nombre,
+      precio: parseInt(precio),
+      imagen,
+    };
+    addToCart(product);
+  }
+});
+  // ==========================
+  // Toast simple
+  // ==========================
+  const toast = (msg) => {
+    const el = document.createElement("div");
+    el.textContent = msg;
+    Object.assign(el.style, {
+      position: "fixed",
+      right: "1rem",
+      bottom: "1rem",
+      background: "#121823",
+      color: "#fff",
+      border: "1px solid #243042",
+      padding: ".6rem .8rem",
+      borderRadius: "10px",
+      zIndex: 9999,
+    });
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2000);
+  };
+
+  // ==========================
+  // Init
+  // ==========================
+  document.addEventListener("DOMContentLoaded", renderCart);
+})();
+
+
