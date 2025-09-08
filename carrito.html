@@ -91,20 +91,21 @@
   <div class="row">
     <!-- Columna izquierda: listado del carrito -->
     <div class="col-md-8">
-      <h2 class="text-white mb-4">🛒 Tu Carrito</h2>
+      <h2 class="text-black mb-4">🛒 Tu Carrito</h2>
       <ul id="cart-page-items" class="list-group list-group-flush mb-3"></ul>
     </div>
 
     <!-- Columna derecha: resumen -->
-    <div class="col-md-4">
-      <div class="card">
+    <div class="card p-4 shadow-lg bg-dark text-white" 
+       style="max-width: 400px; width: 100%; border: 3px solid #444; border-radius: 20px;">
+      <div class="card-body text-center">
         <div class="card-body">
-          <h4 class="card-title">Resumen de Compra</h4>
+          <h4 class="card-title text-white">Resumen de Compra</h4>
           <div id="cart-summary"></div>
           <hr>
-          <div class="d-flex justify-content-between fw-bold mb-3">
+          <div class="d-flex justify-content-between fw-bold mb-3 text-white">
             <span>Total:</span>
-            <span id="cart-page-total">$0</span>
+            <span id="cart-page-total text-white">$0</span>
           </div>
           <button id="btn-empty-cart" class="btn btn-outline-danger w-100 mb-2">Vaciar carrito</button>
           <button class="btn btn-success w-100">Proceder al Pago</button>
