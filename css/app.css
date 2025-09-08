@@ -606,8 +606,8 @@ Ingresar
 
   /* borde */
   .card:hover {
-    border-color: #00ffcc;
-    box-shadow: 0 0 20px #00ffcc;
+    border-color: #d746fb;
+    box-shadow: 0 0 20px #fdf040;
   }
 
   .btn-primary {
