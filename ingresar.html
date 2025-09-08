@@ -43,16 +43,16 @@
                 <a class="nav-link dropdown-toggle jersey-20-regular" href="#catalogo.html" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=juegos">Juegos de Mesa</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=accesorios">Accesorios</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=consolas">Consolas</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=computadores">Computadores Gamers</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=sillas">Sillas Gamers</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=mouse">Mouse</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=mousepad">Mousepad</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=poleras">Poleras Personalizadas</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=polerones">Polerones Gamers Personalizados</a></li>
-                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html?section=todo">Ver todo</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Juegos de Mesa</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Accesorios</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Consolas</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Computadores Gamers</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Sillas Gamers</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Mouse</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Mousepad</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Poleras Personalizadas</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="#">Polerones Gamers Personalizados</a></li>
+                  <li><a class="dropdown-item jersey-20-regular" href="catalogo.html">Ver todo</a></li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -68,13 +68,14 @@
                     <img src="img\bits-8bits.gif" class="perfil dropdown-toggle jersey-20-regular" href="#perfil.html"
                       role="button" data-bs-toggle="dropdown" aria-expanded="True">
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html?section=editar">Editar Perfil</a></li>
-                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html?section=compras">Mis compras</a></li>
-                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html?section=track">Trackear Pedido</a></li>
-                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html?section=idioma">Idioma</a></li>
-                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html?section=soporte">Soporte</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Editar Perfil</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Mis compras</a></li>
+
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Trackear Pedido</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Idioma</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Soporte</a></li>
                       <li><a class="dropdown-item jersey-20-regular" href="fidelizacion.html">Fidelización</a></li>
-                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html?section=cerrar">Cerrar Sesión</a></li>
+                      <li><a class="dropdown-item jersey-20-regular" href="perfil.html">Cerrar Sesión</a></li>
                     </ul>
                   </li>
                   <li class="nav-item ms-lg-3">
@@ -96,42 +97,42 @@
 
       <!-- formularie pa ingreser -->
       <div id="loginForm">
-        <h3 class="mb-4">Ingresar</h3>
+        <h3 class="mb-4 text-white">Ingresar</h3>
         <form>
           <div class="mb-3 text-start">
-            <label for="usuario" class="form-label">Usuario</label>
+            <label for="usuario" class="form-label text-white">Usuario</label>
             <input type="text" class="form-control custom-input" id="usuario" placeholder="Ingresa tu usuario">
           </div>
           <div class="mb-3 text-start">
-            <label for="password" class="form-label">Contraseña</label>
+            <label for="password" class="form-label text-white">Contraseña</label>
             <input type="password" class="form-control custom-input" id="password" placeholder="********">
           </div>
           <button type="submit" class="btn btn-primary w-100 mt-3">Ingresar</button>
         </form>
         <div class="mt-3">
           <a href="#" class="text-info" onclick="mostrarForgetPassword()">¿Olvidaste tu contraseña?</a><br>
-          <a href="#" class="text-warning" onclick="mostrarRegistro()">Crear cuenta nueva</a>
+          <a href="#" class="text-info" onclick="mostrarRegistro()">Crear cuenta nueva</a>
         </div>
       </div>
 
       <!-- formularie para creer -->
       <div id="registerForm" class="d-none">
-        <h3 class="mb-4">Crear Cuenta</h3>
+        <h3 class="mb-4 text-white" >Crear Cuenta</h3>
         <form>
-          <div class="mb-3 text-start">
-            <label for="nuevoUsuario" class="form-label">Usuario</label>
+          <div class="mb-3 text-start text-white">
+            <label for="nuevoUsuario" class="form-label text-white">Usuario</label>
             <input type="text" class="form-control custom-input" id="nuevoUsuario" placeholder="Elige un usuario">
           </div>
           <div class="mb-3 text-start">
-            <label for="email" class="form-label">Correo electrónico</label>
+            <label for="email" class="form-label text-white">Correo electrónico</label>
             <input type="email" class="form-control custom-input" id="email" placeholder="tu@email.com">
           </div>
           <div class="mb-3 text-start">
-            <label for="nuevoPassword" class="form-label">Contraseña</label>
+            <label for="nuevoPassword" class="form-label text-white">Contraseña</label>
             <input type="password" class="form-control custom-input" id="nuevoPassword" placeholder="********">
           </div>
           <div class="mb-3 text-start">
-            <label for="confirmarPassword" class="form-label">Confirmar Contraseña</label>
+            <label for="confirmarPassword" class="form-label text-white">Confirmar Contraseña</label>
             <input type="password" class="form-control custom-input" id="confirmarPassword" placeholder="********">
           </div>
           <button type="submit" class="btn btn-success w-100 mt-3">Crear Cuenta</button>
@@ -142,10 +143,10 @@
       </div>
       <!-- formularie para olvidar contraseña --> 
       <div id="forgetPasswordForm" class="d-none">
-        <h3 class="mb-4">Recuperar Contraseña</h3>
+        <h3 class="mb-4 text-white">Recuperar Contraseña</h3>
         <form>
           <div class="mb-3 text-start">
-            <label for="correoRecuperacion" class="form-label">Correo electrónico</label>
+            <label for="correoRecuperacion" class="form-label text-white">Correo electrónico</label>
             <input type="email" class="form-control custom-input" id="correoRecuperacion" placeholder="tu@email.com">
           </div>
           <button type="submit" class="btn btn-warning w-100 mt-3">Enviar instrucciones</button>
@@ -159,6 +160,30 @@
     </div>
   </div>
 </main>
+
+
+      <!-- Sidebar Carrito -->
+    <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+      <div class="offcanvas-header">
+        <h5 id="cartSidebarLabel">🛒 Tu Carrito</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul id="cart-items" class="list-group list-group-flush bg-dark"></ul>
+        <hr>
+        <div class="d-flex justify-content-between fw-bold mb-3">
+          <span>Total:</span>
+          <span id="cart-total">$0</span>
+        </div>
+        <button class="btn btn-success w-100" onclick="window.location.href='carrito.html'">
+          Finalizar compra
+        </button>
+      </div>
+    </div>
+
+
+
+
 
 
 <div class="footer-dark">
@@ -191,8 +216,8 @@
                           <a href="https://twitter.com" target="_blank">
                             <img src="img/Logo-Social-Media-Twitter-Circle--Streamline-Pixel.svg" alt="Twitter" width="30" height="30">
                           </a>
-                          <a href="https://web.whatsapp.com" target="_blank">
-                            <img src="img/Logo-Whatapp--Streamline-Pixel.svg" alt="WhatsApp" width="30" height="30">
+                          <a href="https://snapchat.com" target="_blank">
+                            <img src="img/Logo-Whatapp--Streamline-Pixel.svg" alt="Snapchat" width="30" height="30">
                           </a>
                           <a href="https://instagram.com" target="_blank">
                             <img src="img/Logo-Social-Media-Instagram--Streamline-Pixel.svg" alt="Instagram" width="30" height="30">
@@ -207,6 +232,7 @@
         </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
 
 
 

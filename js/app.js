@@ -262,3 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/*-------------------------
+CARRITO DE COMPRAS
+-------------------------------- */
+
