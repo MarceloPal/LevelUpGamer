@@ -136,9 +136,8 @@ body.bg-dark {
 .text-center {
  color: #000000 !important;
  font-family: "Pixelify Sans", sans-serif;
- font-size: x-large;
-
 }
+
 :root {
     --bs-blue: #d746fb;
 }

@@ -92,55 +92,30 @@
   </nav>
 
 
-<main class="container py-5 ">
-  <div class="row align-items-center">
-    <div class="col-md-5 text-center mb-4 mb-md-0">
-      <h2 class="mb-4">Bienvenido a Level-Up</h2>
-      <p>Aquí encontrarás juegos, accesorios y mucho más para gamers como tú.</p>
-  <a href="catalogo.html" type="button" class="btn2 text-decoration-none" >Explorar catálogo</a>
-    </div>
-    <div class="col-md-7">
-      <section id="destacados" aria-labelledby="destacados-title" >
-        <div id="carouselDestacados" class="carousel slide max-width" data-bs-ride="carousel" style="max-width: 100%;">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <article class="text-center">
-                <img src="img/pixel_art_large (1).png" alt="Producto destacado">
-              </article>
-            </div>
-            <div class="carousel-item">
-              <article class="text-center">
-                <h4>Xbox Series S</h4>
-                <p>La consola de última generación para los verdaderos gamers.</p>
-                <a href="catologo.html?id=ps5" class="btn2 btn-primary" type="button">Ver detalle</a>
-              </article>
-            </div>
-            <div class="carousel-item">
-              <article class="text-center">
-                <h4>Teclado mecánico RGB</h4>
-                <p>Precisión y estilo para tus partidas competitivas.</p>
-                <a href="catalogo.html?id=teclado-rgb" class="btn2 btn-primary" type="button">Ver detalle</a>
-              </article>
-            </div>
-            <div class="carousel-item">
-              <article class="text-center">
-                <h4>God of War: Ragnarok</h4>
-                <p>Vive la aventura épica de Kratos en la nueva entrega.</p>
-                <a href="catologo.html?id=gow-ragnarok" class="btn2 btn-primary" type="button">Ver detalle</a>
-              </article>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselDestacados" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselDestacados" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </button>
+
+
+
+    <!-- Sidebar Carrito -->
+    <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+      <div class="offcanvas-header">
+        <h5 id="cartSidebarLabel">🛒 Tu Carrito</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul id="cart-items" class="list-group list-group-flush bg-dark"></ul>
+        <hr>
+        <div class="d-flex justify-content-between fw-bold mb-3">
+          <span>Total:</span>
+          <span id="cart-total">$0</span>
         </div>
-      </section>
+        <button class="btn btn-success w-100" onclick="window.location.href='carrito.html'">
+          Finalizar compra
+        </button>
+      </div>
     </div>
-  </div>
-</main>
+
+
+
 
 
 <div class="footer-dark">
