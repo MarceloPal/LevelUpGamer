@@ -368,7 +368,7 @@ CARRITO DE COMPRAS
         cartSummary.innerHTML = "";
         state.cart.forEach(item => {
           const div = document.createElement("div");
-          div.className = "d-flex justify-content-between align-items-center mb-2";
+          div.className = "d-flex justify-content-between align-items-center mb-2 text-white";
           div.innerHTML = `
             <span>${item.nombre} (x${item.cantidad})</span>
             <span>${formatPrice(item.precio * item.cantidad)}</span>
