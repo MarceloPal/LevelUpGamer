@@ -466,6 +466,20 @@ CARRITO DE COMPRAS
     };
     addToCart(product);
   }
+
+  document.addEventListener("click", function(e) {
+  if (e.target.id === "btn-empty-cart") {
+    state.cart = [];
+    saveState();
+    renderCart();
+    toast("Carrito vaciado");
+  }
+
+});
+
+
+
+
 });
   // ==========================
   // Toast simple
