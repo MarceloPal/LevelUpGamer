@@ -51,8 +51,7 @@ function injectStyles(){
             left: 25px; 
             z-index: 9999;
             font-size: 0.9rem;
-             
-    
+            
             /* Apariencia del botón */
             background: var(--gradient-gaming);
             color: white; /* Texto blanco para alto contraste */
