@@ -1,33 +1,34 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 
-const CartSidebar = () => {
+const CartSidebar = ({ isOpen, onClose }) => {
   const { cart, total, removeFromCart, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const formatPrice = (num) =>
     num.toLocaleString("es-CL", { style: "currency", currency: "CLP" });
 
-  return (
-    <div
-      className="offcanvas offcanvas-end bg-dark text-white"
-      tabIndex="-1"
-      id="cartSidebar"
-      aria-labelledby="cartSidebarLabel"
-    >
-      <div className="offcanvas-header border-bottom border-secondary">
-        <h5 id="cartSidebarLabel" className="mb-0">
-          🛒 Tu Carrito
-        </h5>
-        <button
-          type="button"
-          className="btn-close btn-close-white"
-          data-bs-dismiss="offcanvas"
-          aria-label="Cerrar"
-        ></button>
-      </div>
+  const handleCheckout = () => {
+    onClose(); // cierra el sidebar
+    navigate("/carrito"); // redirige a la página del carrito (CartPage)
+  };
 
-      <div className="offcanvas-body d-flex flex-column">
-        {/* Si el carrito está vacío */}
+  return (
+    <>
+      {/* Fondo oscuro con blur */}
+      <div
+        className={`cart-overlay ${isOpen ? "show" : ""}`}
+        onClick={onClose}
+      ></div>
+
+      {/* Sidebar principal */}
+      <div className={`cart-sidebar ${isOpen ? "open" : ""}`}>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h5>🛒 Tu Carrito</h5>
+          <button type="button" className="btn-close" onClick={onClose}></button>
+        </div>
+
         {cart.length === 0 ? (
           <p className="text-center mt-5">Tu carrito está vacío.</p>
         ) : (
@@ -35,7 +36,7 @@ const CartSidebar = () => {
             {cart.map((item) => (
               <li
                 key={item.id}
-                className="list-group-item bg-transparent text-white d-flex justify-content-between align-items-center border-secondary"
+                className="list-group-item d-flex justify-content-between align-items-center"
               >
                 <div className="d-flex align-items-center">
                   <img
@@ -64,7 +65,7 @@ const CartSidebar = () => {
           </ul>
         )}
 
-        {/* Total */}
+        {/* Total y botones */}
         <div className="mt-auto">
           <hr className="border-secondary" />
           <div className="d-flex justify-content-between mb-3">
@@ -72,17 +73,17 @@ const CartSidebar = () => {
             <span className="fw-bold">{formatPrice(total)}</span>
           </div>
 
-          {/* Botones */}
-          <button
-            className="btn btn-outline-danger w-100 mb-2"
-            onClick={clearCart}
-          >
+          <button className="btn btn-outline-danger w-100 mb-2" onClick={clearCart}>
             Vaciar carrito
           </button>
-          <button className="btn btn-success w-100">Proceder al pago</button>
+
+          {/*Redirección al CartPage */}
+          <button className="btn btn-success w-100" onClick={handleCheckout}>
+            Proceder al pago
+          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

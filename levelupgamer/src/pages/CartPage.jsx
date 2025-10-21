@@ -92,7 +92,7 @@ const CartPage = () => {
             >
               Vaciar carrito
             </button>
-            <button className="btn btn-success w-100">Proceder al Pago</button>
+            <button className="btn btn-success w-100">Confirmar compra</button>
           </div>
         </div>
       </div>

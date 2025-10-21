@@ -786,3 +786,170 @@ FOOTER
 
 .nav-link:hover span {
   color: #d6ff30; /* Cambio de color tipo gamer */}
+
+  /* Fondo oscuro cuando el carrito está abierto */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1040;
+  transition: opacity 0.3s ease;
+}
+
+/* === 🛒 SIDE CART GLOW GAMER === */
+
+/* Fondo oscuro con blur al abrir */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1040;
+}
+.cart-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Panel lateral derecho */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px; /* inicia fuera de la pantalla */
+  width: 380px;
+  height: 100vh;
+  background-color: #111;
+  color: #fff;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  overflow-y: auto;
+  transition: right 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  border-left: 3px solid transparent;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+}
+
+/* Se muestra al abrir */
+.cart-sidebar.open {
+  right: 0;
+  animation-name: cartEnter;
+}
+
+/* Efecto RGB lateral */
+.cart-sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #d746fb, #fdf040, #d746fb);
+  background-size: 200% 200%;
+  animation: gradientFlow 4s linear infinite, neonPulse 2s ease-in-out infinite alternate;
+  box-shadow: 0 0 25px rgba(247, 70, 251, 0.6),
+              0 0 40px rgba(253, 240, 64, 0.5);
+  border-radius: 2px;
+}
+
+/* Animación entrada tipo rebote */
+@keyframes cartEnter {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Animación del degradado dinámico */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Pulso de brillo */
+@keyframes neonPulse {
+  from {
+    filter: brightness(0.8);
+    opacity: 0.9;
+  }
+  to {
+    filter: brightness(1.3);
+    opacity: 1;
+  }
+}
+
+/* Estilo del contenido */
+.cart-sidebar h5 {
+  font-family: "Jersey 20", sans-serif;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.cart-sidebar .btn-close {
+  filter: invert(1);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.cart-sidebar .btn-close:hover {
+  opacity: 1;
+}
+
+.cart-sidebar .list-group-item {
+  border: none;
+  background: transparent;
+  color: #ddd;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cart-sidebar .list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Botones */
+.cart-sidebar .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.cart-sidebar .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cart-sidebar .btn-success {
+  background: linear-gradient(90deg, #d746fb 0%, #fdf040 100%);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.cart-sidebar .btn-success:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(247, 70, 251, 0.6),
+              0 0 35px rgba(253, 240, 64, 0.7);
+}
+
+/* Scrollbar gamer */
+.cart-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.cart-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d746fb, #fdf040);
+  border-radius: 10px;
+}

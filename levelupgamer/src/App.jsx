@@ -4,6 +4,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import CartSidebar from "./components/CartSidebar";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";    
@@ -15,6 +16,7 @@ function App() {
       <CartProvider>
         <Router>
           <Navbar />
+           <CartSidebar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/carrito" element={<CartPage />} />
