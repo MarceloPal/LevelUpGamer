@@ -1,6 +1,18 @@
 import { AuthContext } from "../contexts/AuthContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
+
+//Los providers son componentes que usan el contexto para compartir datos y funciones
+//con todos los componentes que están dentro de ellos en la jerarquía de React.
+//Son como los enchufes que activan los contextos.
+//Envuelven tu aplicación y hacen que los datos del contexto estén disponibles para todos los componentes dentro.
+
+// Proveedor de autenticación
+// Este componente envuelve la aplicación y proporciona
+// el estado y las funciones de autenticación a través del contexto.
+// Implementa funciones de login, registro y logout
+//le da acceso a los datos de usuario y autenticación a toda la app de manera centralizada.
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("lu_user", null);
   const [users, setUsers] = useLocalStorage("lu_users", []);

@@ -1,3 +1,8 @@
+//Ui contiene componentes visuales reutilizables en varias partes de la web
+//como este carrusel de marcas
+//que puede aparecer en la pagina de inicio o en otras secciones
+//pero no son como un layout completo o una pagina entera, como el navbar o el footer.
+
 const BrandCarousel = () => {
   return (
     <div id="carouselMejoresMarcas" className="carousel slide" data-bs-ride="carousel">

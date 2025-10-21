@@ -5,6 +5,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './styles/App.css';
 
+//React funciona como un lego para formar toda la web
 
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
