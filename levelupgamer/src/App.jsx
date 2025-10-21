@@ -1,24 +1,28 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CartProvider } from "./contexts/CartProvider"; 
+import { CartProvider } from "./providers/CartProvider";
+import { AuthProvider } from "./providers/AuthProvider";
+
 import Navbar from "./components/layout/Navbar";
-import CartPage from "./pages/CartPage";
-import HomePage from "./pages/HomePage";
 import Footer from "./components/layout/Footer";
-import CartSidebar from "./components/CartSidebar";
+import HomePage from "./pages/HomePage";
+import CartPage from "./pages/CartPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <Navbar />
-        <CartSidebar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/carrito" element={<CartPage />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/carrito" element={<CartPage />} />
+            <Route path="/ingresar" element={<LoginPage />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

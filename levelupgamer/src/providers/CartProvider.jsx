@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CartContext } from "./CartContext";
+import { CartContext } from "../contexts/CartContext";
 
 export const CartProvider = ({ children }) => {
   const STORAGE_KEY = "levelup_cart_v1";
