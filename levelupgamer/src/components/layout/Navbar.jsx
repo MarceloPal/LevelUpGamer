@@ -88,6 +88,7 @@ const Navbar = () => {
                   <img
                     src="/img/bits-8bits.gif" 
                     alt="Icono usuario pixel"
+                    className="pixel-icon"
                     style={{ width: "32px", height: "32px", imageRendering: "pixelated" }}
                   />
                 </Link>
@@ -101,10 +102,11 @@ const Navbar = () => {
                   aria-expanded="false"
                   href="#"
                 >
-                  <span>Hola, {user.name}</span>
+                  <span>Hola, {user.nombre}</span>
                   <img
                     src="/img/bits-8bits.gif"  
                     alt="Icono usuario pixel"
+                    className="pixel-icon"
                     style={{ width: "32px", height: "32px", imageRendering: "pixelated" }}
                   />
                 </a>

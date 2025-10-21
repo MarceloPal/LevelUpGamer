@@ -765,3 +765,24 @@ FOOTER
 
 
 
+/* ==== ICONO PIXELADO USUARIO ==== */
+.pixel-icon {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+.pixel-icon:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px #f82bff); /* Brillo azul tipo neón */
+}
+
+/* ==== TEXTO DEL USUARIO ==== */
+.nav-link span {
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover span {
+  color: #d6ff30; /* Cambio de color tipo gamer */}
