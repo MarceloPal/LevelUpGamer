@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 //los contextos permiten compartir datos entre componentes sin tener que 
 // pasar props manualmente en cada nivel de la jerarquía de componentes.
@@ -11,4 +11,7 @@ import { createContext } from "react";
 //y compartir el estado de autenticación en toda la aplicación.
 
 // Contexto de autenticación (sin lógica)
-export const AuthContext = createContext(null);
+
+export const AuthContext = createContext();
+
+export const useAuth = () => useContext(AuthContext);

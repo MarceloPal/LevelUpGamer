@@ -6,7 +6,8 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage";    
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/carrito" element={<CartPage />} />
             <Route path="/ingresar" element={<LoginPage />} />
+            <Route path="/perfil" element={<ProfilePage />} />
           </Routes>
           <Footer />
         </Router>

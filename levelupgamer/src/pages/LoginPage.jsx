@@ -1,21 +1,33 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { login, register, user, logout } = useAuth();
   const [activeForm, setActiveForm] = useState("login"); // "login" | "register" | "forget"
   const [form, setForm] = useState({ nombre: "", email: "", password: "", confirmarPassword: "" });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+  const [setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
+    const handleLogin = (e) => {
     e.preventDefault();
-    const result = login(form.email, form.password);
-    setMessage(result.success ? "Inicio de sesión exitoso" : result.message);
-  };
+    const result = login(form.email, form.password); 
+    if (result.success) {
+        // Redirige al perfil si la autenticación es exitosa
+        navigate("/"); 
+        setMessage("Inicio de sesión exitoso");
+        setError("");
+    } else {
+        setError(result.message);
+        setError("");
+    }
+    };
+
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -24,7 +36,15 @@ const LoginPage = () => {
       return;
     }
     const result = register({ nombre: form.nombre, email: form.email, password: form.password });
-    setMessage(result.success ? "Cuenta creada con éxito" : result.message);
+        if (result.success) {
+        // Redirige al perfil si la autenticación es exitosa
+        navigate("/perfil"); 
+        setMessage("Cuenta creada exitosamente");
+        setError("");
+    } else {
+        setError(result.message);
+        setError("");
+    }
   };
 
   if (user) {
