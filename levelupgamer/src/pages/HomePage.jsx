@@ -7,6 +7,22 @@ const HomePage = () => {
       {/*SLIDER PRINCIPAL */}
       <Slider />
 
+      {/* bnanner divisorio */}
+      <div className="divider-img-wrapper mb-5">
+        <a href="/catalogo?section=mousepad">
+          <img
+            src="/img/Desktop_MainCampaignCountdown_Liquidacion_Abril_2025_4662806b.webp"
+            alt="Divisor"
+            className="divider-img d-none d-md-block"
+          />
+          <img
+            src="/img/Desktop_MainCampaignCountdown_Liquidacion_Abril_2025_22222.png"
+            alt="Divisor móvil"
+            className="divider-img-mobile d-block d-md-none"
+          />
+        </a>
+      </div>
+
       {/*Sección de bienvenida */}
       <section className="container my-5 d-flex justify-content-center align-items-center">
         <div className="col-md-6 text-center">
