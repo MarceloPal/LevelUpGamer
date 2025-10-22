@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { useAuth } from "../../contexts/AuthContext";
+import { categories } from "../../data/products";
 import CartSidebar from "../CartSidebar";
 
 const Navbar = () => {
@@ -9,10 +10,21 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleLogout = () => {
     logout();
     navigate("/");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalogo?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery(''); // Limpiar después de buscar
+    } else {
+      navigate('/catalogo');
+    }
   };
 
   return (
@@ -60,24 +72,42 @@ const Navbar = () => {
                   Categorías
                 </a>
                 <ul className="dropdown-menu">
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/juegos">Juegos de Mesa</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/accesorios">Accesorios</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/consolas">Consolas</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/computadores">Computadores Gamers</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/sillas">Sillas Gamers</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/mouse">Mouse</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/mousepad">Mousepad</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/poleras">Poleras Personalizadas</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/polerones">Polerones Gamers</Link></li>
-                  <li><Link className="dropdown-item jersey-20-regular" to="/catalogo/todo">Ver todo</Link></li>
+                  {/* Generar elementos dinámicamente desde el array de categorías */}
+                  {categories.map(category => (
+                    <li key={category.id}>
+                      <Link 
+                        className="dropdown-item jersey-20-regular" 
+                        to={`/catalogo?section=${category.id}`}
+                      >
+                        <span className="me-2">{category.icon}</span>
+                        {category.name}
+                      </Link>
+                    </li>
+                  ))}
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <Link className="dropdown-item jersey-20-regular" to="/catalogo?section=todo">
+                      <span className="me-2">🏪</span>
+                      Ver todo
+                    </Link>
+                  </li>
                 </ul>
               </li>
 
               {/* Buscador */}
               <li className="nav-item">
-                <form className="d-flex align-items-center" role="search">
-                  <input className="form-control me-2" type="search" placeholder="Buscar productos..." aria-label="Buscar" />
-                  <button className="btn btn-outline-light" type="submit">Buscar</button>
+                <form className="d-flex align-items-center" role="search" onSubmit={handleSearch}>
+                  <input 
+                    className="form-control me-2" 
+                    type="search" 
+                    placeholder="Buscar productos..." 
+                    aria-label="Buscar"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <button className="btn btn-outline-light" type="submit">
+                    <i className="bi bi-search"></i>
+                  </button>
                 </form>
               </li>
 
