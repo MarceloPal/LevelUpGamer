@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/CartContext";  
 import { useLoyalty } from "../hooks/useLoyalty";
+import "../styles/cart.css";
 
 const CartPage = () => {
   const { cart, total, updateQuantity, removeFromCart, clearCart } = useContext(CartContext);
@@ -12,23 +13,21 @@ const CartPage = () => {
   const formatPrice = (num) =>
     num.toLocaleString("es-CL", { style: "currency", currency: "CLP" });
 
-  // 🛒 Confirmar compra (suma puntos y limpia carrito)
   const handleConfirm = () => {
     if (total > 0) {
       addPoints(total - discount); // gana puntos sobre el monto final
       clearCart();
-      setMessage("✅ ¡Compra confirmada y puntos agregados!");
+      setMessage("¡Compra confirmada y puntos agregados!");
       setDiscount(0);
     }
   };
 
-  // 💰 Aplicar descuento si tiene suficientes coins
   const handleRedeem = () => {
-    const discountCost = 100; // coins requeridos
-    const discountRate = 0.1; // 10% descuento
+    const discountCost = 100;
+    const discountRate = 0.1;
 
     if (coins.total < discountCost) {
-      setMessage("❌ No tienes suficientes coins para el descuento.");
+      setMessage("No tienes suficientes coins para el descuento.");
       return;
     }
 
@@ -36,18 +35,18 @@ const CartPage = () => {
     if (success) {
       const newDiscount = total * discountRate;
       setDiscount(newDiscount);
-      setMessage(`🎉 Descuento aplicado: -${formatPrice(newDiscount)}`);
+      setMessage(`Descuento aplicado: -${formatPrice(newDiscount)}`);
     } else {
-      setMessage("❌ No se pudo aplicar el descuento.");
+      setMessage("No se pudo aplicar el descuento.");
     }
   };
 
   const totalWithDiscount = Math.max(total - discount, 0);
 
   return (
-    <main className="container my-5">
-      <div className="row">
-        {/* 🧩 Columna izquierda */}
+    <main className="container-all my-5">
+      <div className="container-cart-page row g-4">
+        {/*Columna izquierda */}
         <div className="col-md-8">
           <h2 className="text-black mb-4">🛒 Tu Carrito</h2>
           {cart.length === 0 ? (
@@ -95,15 +94,8 @@ const CartPage = () => {
           )}
         </div>
 
-        {/* 💳 Columna derecha: resumen */}
-        <div
-          className="card p-4 shadow-lg bg-white text-dark ms-auto"
-          style={{
-            maxWidth: "400px",
-            border: "2px solid #eee",
-            borderRadius: "20px",
-          }}
-        >
+        {/*Columna derecha: resumen */}
+        <div className="card p-4 shadow-lg bg-white text-dark ms-auto cart-summary-card">
           <div className="card-body text-center">
             <h4 className="card-title mb-4">Resumen de Compra</h4>
 
@@ -121,19 +113,14 @@ const CartPage = () => {
 
             <hr />
 
-            {/* 💎 Sección puntos */}
+            {/*Sección puntos */}
             <div className="text-start mb-3">
               <p className="mb-1">
                 <strong>Tus coins:</strong> {coins.total}
               </p>
               <button
-                className="btn w-100 fw-bold text-dark mb-2"
+                className="btn w-100 mb-2 btn-redeem-discount"
                 onClick={handleRedeem}
-                style={{
-                  background: "linear-gradient(90deg, #d746fb 0%, #fdf040 100%)",
-                  border: "none",
-                  borderRadius: "10px",
-                }}
               >
                 Canjear 100 coins por 10% de descuento
               </button>
@@ -165,13 +152,8 @@ const CartPage = () => {
             </button>
 
             <button
-              className="btn w-100 fw-bold text-dark"
+              className="btn w-100 btn-confirm"
               onClick={handleConfirm}
-              style={{
-                background: "linear-gradient(90deg, #d746fb 0%, #fdf040 100%)",
-                border: "none",
-                borderRadius: "10px",
-              }}
             >
               Confirmar compra
             </button>

@@ -2,6 +2,9 @@
    CATÁLOGO - ESTILOS GENERALES
    ================================= */
 
+
+
+
 .catalog-page {
   background-color: #f8f9fa;
   min-height: 100vh;
@@ -1712,3 +1715,33 @@ FOOTER
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* CartPage.css */
+
+/* Tarjeta del resumen de compra */
+.cart-summary-card {
+  max-width: 400px;
+  border: 2px solid #eee;
+  border-radius: 20px;
+}
+
+/* Botón para canjear descuento */
+.btn-redeem-discount {
+  background: linear-gradient(90deg, #d746fb 0%, #fdf040 100%);
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Botón de confirmar compra */
+.btn-confirm {
+  background: linear-gradient(90deg, #d746fb 0%, #fdf040 100%);
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #000;
+}
+
+
+
