@@ -2,6 +2,17 @@
    CATÁLOGO - ESTILOS GENERALES
    ================================= */
 
+/* Fondo blanco global y evita overflow horizontal */
+html, body, #root {
+  height: 100%;
+  background: #fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 
 
@@ -1743,5 +1754,22 @@ FOOTER
   color: #000;
 }
 
+.login-page-background {
+  min-height: 100vh;
+  background-image: url('/img/photo-1714171056042-ef93c1fd00be.jpg'); /* si está en public */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-
+.login-card {
+  backdrop-filter: blur(10px); 
+  background-color: rgba(100, 60, 60, 0.4); 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}

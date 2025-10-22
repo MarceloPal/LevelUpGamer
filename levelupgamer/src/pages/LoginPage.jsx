@@ -60,8 +60,8 @@ const LoginPage = () => {
   }
 
   return (
-    <main className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-      <div className="card p-4 shadow-lg bg-dark text-white" style={{ maxWidth: 400, width: "100%", border: "3px solid #444", borderRadius: 20 }}>
+    <main className="login-page-background d-flex justify-content-center align-items-center">
+      <div className="login-card">
         <div className="card-body text-center">
           {/* FORMULARIO LOGIN */}
           {activeForm === "login" && (
