@@ -11,7 +11,7 @@ TODO
         Gratuita: 1,500 requests/mes
         Sin registro inicial
 
-
+- Ver lo del footer que sea mas estetico
 - ¿Crear un administrador de la página? (Revisar pauta de evaluación)
 
 - Detalles
