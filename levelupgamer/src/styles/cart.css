@@ -1,0 +1,69 @@
+/* Fondo blanco global y evita overflow horizontal */
+html, body, #root {
+  height: 100%;
+  background: #fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Evita scroll horizontal causado por márgenes o elementos anchos */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #fff;
+  color: #111;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Contenedor principal centrado y con padding para que no “salgan” elementos */
+.container-all {
+  max-width: 1200px; /* ajusta según diseño */
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Grid interno: evita que la tarjeta resumen se salga en pantallas pequeñas */
+.container-cart-page {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* En móviles, pila vertical y tarjeta al 100% */
+@media (max-width: 992px) {
+  .container-cart-page {
+    grid-template-columns: 1fr;
+  }
+  .cart-summary-card {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Asegura que la tarjeta no desborde */
+.cart-summary-card {
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Imágenes contenidas dentro de su cuadro */
+#cart-page-items img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+/* Evita que texto largo desborde */
+.list-group-item {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
