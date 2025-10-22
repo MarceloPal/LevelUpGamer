@@ -12,15 +12,16 @@ import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import { AuthProvider } from "./providers/AuthProvider";
 import { CartProvider } from "./providers/CartProvider";
+import { LoyaltyProvider } from './providers/LoyaltyProvider';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AuthProvider>
-      <CartProvider>
+  <AuthProvider>
+    <CartProvider>
+      <LoyaltyProvider>
         <App />
-      </CartProvider>
-    </AuthProvider>
-  </StrictMode>
+      </LoyaltyProvider>
+    </CartProvider>
+  </AuthProvider>
 );
 
 

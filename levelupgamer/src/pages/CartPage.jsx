@@ -1,16 +1,53 @@
-import { useContext } from "react";
-import { CartContext } from "../contexts/CartContext";
+import { useContext, useState } from "react";
+import { CartContext } from "../contexts/CartContext";  
+import { useLoyalty } from "../hooks/useLoyalty";
 
 const CartPage = () => {
   const { cart, total, updateQuantity, removeFromCart, clearCart } = useContext(CartContext);
+  const { coins, redeemDiscount, addPoints } = useLoyalty();
+
+  const [discount, setDiscount] = useState(0);
+  const [message, setMessage] = useState("");
 
   const formatPrice = (num) =>
     num.toLocaleString("es-CL", { style: "currency", currency: "CLP" });
 
+  // 🛒 Confirmar compra (suma puntos y limpia carrito)
+  const handleConfirm = () => {
+    if (total > 0) {
+      addPoints(total - discount); // gana puntos sobre el monto final
+      clearCart();
+      setMessage("✅ ¡Compra confirmada y puntos agregados!");
+      setDiscount(0);
+    }
+  };
+
+  // 💰 Aplicar descuento si tiene suficientes coins
+  const handleRedeem = () => {
+    const discountCost = 100; // coins requeridos
+    const discountRate = 0.1; // 10% descuento
+
+    if (coins.total < discountCost) {
+      setMessage("❌ No tienes suficientes coins para el descuento.");
+      return;
+    }
+
+    const success = redeemDiscount(discountCost);
+    if (success) {
+      const newDiscount = total * discountRate;
+      setDiscount(newDiscount);
+      setMessage(`🎉 Descuento aplicado: -${formatPrice(newDiscount)}`);
+    } else {
+      setMessage("❌ No se pudo aplicar el descuento.");
+    }
+  };
+
+  const totalWithDiscount = Math.max(total - discount, 0);
+
   return (
     <main className="container my-5">
       <div className="row">
-        {/* Columna izquierda */}
+        {/* 🧩 Columna izquierda */}
         <div className="col-md-8">
           <h2 className="text-black mb-4">🛒 Tu Carrito</h2>
           {cart.length === 0 ? (
@@ -58,33 +95,67 @@ const CartPage = () => {
           )}
         </div>
 
-        {/* Columna derecha: resumen */}
+        {/* 💳 Columna derecha: resumen */}
         <div
-          className="card p-4 shadow-lg bg-dark text-white ms-auto"
+          className="card p-4 shadow-lg bg-white text-dark ms-auto"
           style={{
             maxWidth: "400px",
-            border: "3px solid #444",
+            border: "2px solid #eee",
             borderRadius: "20px",
           }}
         >
           <div className="card-body text-center">
-            <h4 className="card-title text-white">Resumen de Compra</h4>
-            <div id="cart-summary" className="mb-3">
+            <h4 className="card-title mb-4">Resumen de Compra</h4>
+
+            <div id="cart-summary" className="mb-3 text-start">
               {cart.map((item) => (
                 <div
                   key={item.id}
-                  className="d-flex justify-content-between text-white"
+                  className="d-flex justify-content-between mb-1"
                 >
                   <span>{item.nombre} (x{item.cantidad})</span>
                   <span>{formatPrice(item.precio * item.cantidad)}</span>
                 </div>
               ))}
             </div>
+
             <hr />
-            <div className="d-flex justify-content-between fw-bold mb-3 text-white">
-              <span>Total:</span>
-              <span id="cart-page-total">{formatPrice(total)}</span>
+
+            {/* 💎 Sección puntos */}
+            <div className="text-start mb-3">
+              <p className="mb-1">
+                <strong>Tus coins:</strong> {coins.total}
+              </p>
+              <button
+                className="btn w-100 fw-bold text-dark mb-2"
+                onClick={handleRedeem}
+                style={{
+                  background: "linear-gradient(90deg, #d746fb 0%, #fdf040 100%)",
+                  border: "none",
+                  borderRadius: "10px",
+                }}
+              >
+                Canjear 100 coins por 10% de descuento
+              </button>
             </div>
+
+            {/* Totales */}
+            {discount > 0 && (
+              <div className="d-flex justify-content-between mb-2 text-success fw-bold">
+                <span>Descuento:</span>
+                <span>-{formatPrice(discount)}</span>
+              </div>
+            )}
+            <div className="d-flex justify-content-between fw-bold mb-3">
+              <span>Total a pagar:</span>
+              <span>{formatPrice(totalWithDiscount)}</span>
+            </div>
+
+            {/* Mensajes */}
+            {message && (
+              <div className="alert alert-info py-2">{message}</div>
+            )}
+
             <button
               id="btn-empty-cart"
               className="btn btn-outline-danger w-100 mb-2"
@@ -92,7 +163,18 @@ const CartPage = () => {
             >
               Vaciar carrito
             </button>
-            <button className="btn btn-success w-100">Confirmar compra</button>
+
+            <button
+              className="btn w-100 fw-bold text-dark"
+              onClick={handleConfirm}
+              style={{
+                background: "linear-gradient(90deg, #d746fb 0%, #fdf040 100%)",
+                border: "none",
+                borderRadius: "10px",
+              }}
+            >
+              Confirmar compra
+            </button>
           </div>
         </div>
       </div>
