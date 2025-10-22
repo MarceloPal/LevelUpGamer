@@ -11,28 +11,28 @@ const BrandCarousel = () => {
           <div className="row text-center">
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel1_141c03ea.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel1_141c03ea.webp"
                 className="img-fluid px-2"
                 alt="Marca 1"
               />
             </div>
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel2_MSI_f69b11df.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel2_MSI_f69b11df.webp"
                 className="img-fluid px-2"
                 alt="Marca 2"
               />
             </div>
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel3_7fa5bf77.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel3_7fa5bf77.webp"
                 className="img-fluid px-2"
                 alt="Marca 3"
               />
             </div>
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel4_76197ebc.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel4_76197ebc.webp"
                 className="img-fluid px-2"
                 alt="Marca 4"
               />
@@ -44,28 +44,28 @@ const BrandCarousel = () => {
           <div className="row text-center">
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel5_5b9eb565.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel5_5b9eb565.webp"
                 className="img-fluid px-2"
                 alt="Marca 5"
               />
             </div>
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel6_541f8743.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel6_541f8743.webp"
                 className="img-fluid px-2"
                 alt="Marca 6"
               />
             </div>
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel7_37cfc146.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel7_37cfc146.webp"
                 className="img-fluid px-2"
                 alt="Marca 7"
               />
             </div>
             <div className="col-3">
               <img
-                src="/img/img_mejores-marcas/Desktop_BrandCarousel8_9d86c2fc.webp"
+                src="/img_mejores-marcas/Desktop_BrandCarousel8_9d86c2fc.webp"
                 className="img-fluid px-2"
                 alt="Marca 8"
               />
