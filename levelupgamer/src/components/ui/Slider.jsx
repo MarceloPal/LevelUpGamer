@@ -16,7 +16,7 @@ const Slider = () => {
         <SwiperSlide>
           <a href="/catalogo?section=accesorios">
             <img
-              src="/img/img_slide/razer.webp"
+              src="public/img_slide/razer.webp"
               alt="Slide 1"
               className="w-100"
             />
@@ -26,7 +26,7 @@ const Slider = () => {
         <SwiperSlide>
           <a href="/catalogo?section=sillas">
             <img
-              src="/img/img_slide/BANNER-COUGAR1.webp"
+              src="public/img_slide/BANNER-COUGAR1.webp"
               alt="Slide 2"
               className="w-100"
             />
@@ -36,7 +36,7 @@ const Slider = () => {
         <SwiperSlide>
           <a href="/catalogo?section=computadores">
             <img
-              src="/img/img_slide/Banner-1-1.webp"
+              src="public/img_slide/Banner-1-1.webp"
               alt="Slide 3"
               className="w-100"
             />
