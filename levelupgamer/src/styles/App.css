@@ -1689,3 +1689,26 @@ FOOTER
     padding: 0.5rem 0.75rem;
   }
 }
+
+.btn-gradient {
+  background: linear-gradient(90deg, #d746fb 0%, #fdf040 100%);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.btn-gradient:hover,
+.btn-gradient.active {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(247, 70, 251, 0.5);
+}
+
+.loyalty-page {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

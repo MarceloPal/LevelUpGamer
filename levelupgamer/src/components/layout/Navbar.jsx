@@ -147,7 +147,12 @@ const Navbar = () => {
                     <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=track">Trackear Pedido</Link></li>
                     <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=idioma">Idioma</Link></li>
                     <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=soporte">Soporte</Link></li>
-                    <li><Link className="dropdown-item jersey-20-regular" to="/fidelizacion">Fidelización</Link></li>
+                                <li className="dropdown-item jersey-20-regular">
+              <a className="dropdown-item jersey-20-regular" href="/puntos">
+                Puntos
+              </a>
+            </li>
+
                     <li><hr className="dropdown-divider" /></li>
                     <li>
                       <button onClick={handleLogout} className="dropdown-item text-danger jersey-20-regular">

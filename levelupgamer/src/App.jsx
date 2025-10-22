@@ -10,6 +10,7 @@ import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";    
 import ProfilePage from "./pages/ProfilePage";
 import CatalogPage from './pages/CatalogPage';
+import LoyaltyPage from "./pages/LoyaltyPage";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
             <Route path="/carrito" element={<CartPage />} />
             <Route path="/ingresar" element={<LoginPage />} />
             <Route path="/perfil" element={<ProfilePage />} />
-            <Route path="/catalogo" element={<CatalogPage />} />
+            <Route path="/catalogo" element={<CatalogPage />} /> 
+            <Route path="/puntos" element={<LoyaltyPage />} />
           </Routes>
           <Footer />
         </Router>
