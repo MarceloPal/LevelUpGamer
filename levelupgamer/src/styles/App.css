@@ -1525,8 +1525,8 @@ FOOTER
 }
 
 /* =================================
-   PROFILE PAGE STYLES
-   ================================= */
+  PROFILE PAGE STYLES (Light theme for Profile)
+  ================================= */
 
 .profile-container {
   gap: 2rem;
@@ -1535,35 +1535,37 @@ FOOTER
 
 .profile-sidebar {
   width: 250px;
-  background: #212529;
-  border-radius: 10px;
-  padding: 1.5rem;
+  background: #f8f9fa; /* light sidebar */
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.25rem;
   height: fit-content;
 }
 
 .profile-sidebar .nav-link {
-  color: #adb5bd;
-  background: none;
+  color: #495057;
+  background: transparent;
   border: none;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 0.9rem;
   border-radius: 8px;
   margin-bottom: 0.5rem;
   text-align: left;
   width: 100%;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   font-size: 0.95rem;
 }
 
 .profile-sidebar .nav-link:hover {
-  background: #495057;
-  color: #fff;
+  background: #f1f3f5;
+  color: #212529;
 }
 
 .profile-sidebar .nav-link.active {
-  background: #0d6efd;
-  color: #fff;
+  background: #e7f1ff; /* subtle active */
+  color: #0d6efd;
+  box-shadow: inset 0 0 0 1px #cfe2ff;
 }
 
 .profile-sidebar .nav-link i {
@@ -1573,9 +1575,11 @@ FOOTER
 
 .profile-content {
   background: #fff;
-  border-radius: 10px;
+  color: #212529; /* ensure dark text */
+  border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .profile-content h3 {
@@ -1592,17 +1596,28 @@ FOOTER
 }
 
 .profile-content .form-control,
-.profile-content .form-select {
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
+.profile-content .form-select,
+.profile-content textarea.form-control {
+  background: #ffffff; /* override previous dark */
+  color: #212529;
+  border: 1px solid #dfe3e6;
+  border-radius: 10px;
   padding: 0.75rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-content .form-control::placeholder,
+.profile-content textarea.form-control::placeholder {
+  color: #6c757d;
 }
 
 .profile-content .form-control:focus,
-.profile-content .form-select:focus {
+.profile-content .form-select:focus,
+.profile-content textarea.form-control:focus {
   border-color: #0d6efd;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+  background: #fff;
+  color: #212529;
 }
 
 .profile-content .btn-primary {
@@ -1701,6 +1716,14 @@ FOOTER
   .profile-sidebar .nav-link {
     font-size: 0.85rem;
     padding: 0.5rem 0.75rem;
+  }
+}
+
+/* Keep sidebar visible on desktop */
+@media (min-width: 992px) {
+  .profile-sidebar {
+    position: sticky;
+    top: 90px;
   }
 }
 
