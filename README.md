@@ -15,9 +15,9 @@ TODO
 - ¿Crear un administrador de la página? (Revisar pauta de evaluación)
 
 - Detalles
-  - Urgente: Revisar la navegacion de la autenticacion y el perfil
+  - (¡LISTO!) Urgente: Revisar la navegacion de la autenticacion y el perfil
   - Medio Urgente: Cambiar los path a las imagenes del catalogo
-  - Medio: Mejorar visual de la página de Perfil
+  - (¡LISTO!) Medio: Mejorar visual de la página de Perfil
   - Medio: Agregar el font a la página
 
 
