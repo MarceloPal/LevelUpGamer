@@ -1,115 +1,96 @@
-//Layout son cosas que aparecen en todas las paginas como el footer y el navbar
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="footer-dark">
-      <footer>
-        <div className="container">
-          <div className="row">
-            {/*Columna 1: Informaciones */}
-            <div className="col-sm-6 col-md-3 item mb-4">
-              <h3>Informaciones y Políticas</h3>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#" className="text-white text-decoration-none">
-                    Términos y Condiciones
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-white text-decoration-none">
-                    Bases Legales
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-white text-decoration-none">
-                    Canal de Denuncias
-                  </a>
-                </li>
-              </ul>
+    <footer className="footer-gamer">
+      <div className="footer-gradient-border"></div>
+      
+      <div className="container py-5">
+        <div className="row g-4">
+          
+          {/* Columna 1: Marca y descripción */}
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div className="footer-brand">
+              <div className="d-flex align-items-center mb-3">
+                <img src="/img/coin-cropped.png" alt="Logo" className="footer-logo me-2" />
+                <h3 className="footer-title mb-0">Level-Up Gamer</h3>
+              </div>
+              <p className="footer-description">
+                Tu tienda online dedicada a la comunidad gamer. Ofrecemos juegos, accesorios y equipos 
+                de la mejor calidad para que vivas al máximo tu experiencia de juego.
+              </p>
+              <div className="footer-tagline">
+                ¡Sube de nivel con nosotros!
+              </div>
             </div>
+          </div>
 
-            {/*Columna 2: Sobre nosotros */}
-            <div className="col-sm-6 col-md-3 item mb-4">
-              <h3>Sobre Nosotros</h3>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#" className="text-white text-decoration-none">
-                    Compañía
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-white text-decoration-none">
-                    Team
-                  </a>
-                </li>
-              </ul>
+          {/* Columna 2: Enlaces rápidos */}
+          <div className="col-lg-2 col-md-6 mb-4">
+            <h4 className="footer-heading">Navegación</h4>
+            <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/catalogo">Catálogo</Link></li>
+              <li><Link to="/puntos">Puntos</Link></li>
+              <li><Link to="/perfil">Mi Perfil</Link></li>
+            </ul>
+          </div>
+
+          {/* Columna 3: Información legal */}
+          <div className="col-lg-3 col-md-6 mb-4">
+            <h4 className="footer-heading">Información Legal</h4>
+            <ul className="footer-links">
+              <li><a href="#terminos">Términos y Condiciones</a></li>
+              <li><a href="#bases">Bases Legales</a></li>
+              <li><a href="#denuncias">Canal de Denuncias</a></li>
+              <li><a href="#privacidad">Política de Privacidad</a></li>
+            </ul>
+          </div>
+
+          {/* Columna 4: Redes sociales y contacto */}
+          <div className="col-lg-3 col-md-6 mb-4">
+            <h4 className="footer-heading">Síguenos</h4>
+            <div className="footer-social-grid">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">
+                <img src="/img/Logo-Social-Media-Facebook-Circle--Streamline-Pixel.svg" alt="Facebook" />
+                <span>Facebook</span>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
+                <img src="/img/Logo-Social-Media-Twitter-Circle--Streamline-Pixel.svg" alt="Twitter" />
+                <span>Twitter</span>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
+                <img src="/img/Logo-Social-Media-Instagram--Streamline-Pixel.svg" alt="Instagram" />
+                <span>Instagram</span>
+              </a>
+              <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer" className="social-link">
+                <img src="/img/Logo-Whatapp--Streamline-Pixel.svg" alt="WhatsApp" />
+                <span>WhatsApp</span>
+              </a>
             </div>
+          </div>
+        </div>
 
-            {/* Columna 3: Descripción */}
-            <div className="col-md-6 item text mb-4">
-              <h3>Level-Up Gamer</h3>
-              <p className="text-light">
-                Level-Up Gamer es una tienda online dedicada a la comunidad gamer.
-                Ofrecemos juegos, accesorios y equipos de la mejor calidad para que
-                vivas al máximo tu experiencia de juego. ¡Sube de nivel con nosotros!
+        {/* Divider con efecto glow */}
+        <div className="footer-divider"></div>
+
+        {/* Bottom: Award y Copyright */}
+        <div className="footer-bottom">
+          <div className="row align-items-center">
+            <div className="col-md-4 text-center text-md-start mb-3 mb-md-0">
+            </div>
+            <div className="col-md-4 text-center mb-3 mb-md-0">
+              <p className="footer-copyright mb-0">
+                <span className="copyright-icon">©</span> 2025 Level-Up Gamer
+              </p>
+              <p className="footer-made-with mb-0">
+                Hecho con <span className="heart">💜</span> para gamers
               </p>
             </div>
-
-            {/* Columna 4: Redes sociales */}
-            <div className="col item social d-flex justify-content-center gap-3 mb-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="/img/Logo-Social-Media-Facebook-Circle--Streamline-Pixel.svg"
-                  alt="Facebook"
-                  width="30"
-                  height="30"
-                />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="/img/Logo-Social-Media-Twitter-Circle--Streamline-Pixel.svg"
-                  alt="Twitter"
-                  width="30"
-                  height="30"
-                />
-              </a>
-              <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="/img/Logo-Whatapp--Streamline-Pixel.svg"
-                  alt="WhatsApp"
-                  width="30"
-                  height="30"
-                />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="/img/Logo-Social-Media-Instagram--Streamline-Pixel.svg"
-                  alt="Instagram"
-                  width="30"
-                  height="30"
-                />
-              </a>
-            </div>
           </div>
-
-          {/* Imagen de premio */}
-          <div className="text-center mb-3">
-            <img
-              src="/img/commerceAward.webp"
-              alt="Winners Commerce Awards"
-              className="footer-award mx-auto d-block mb-3"
-              style={{ maxWidth: "160px", width: "100%", height: "auto" }}
-            />
-          </div>
-
-          {/* Copyright */}
-          <p className="copyright text-center text-secondary mb-0">
-            Level-Up Gamer © 2025
-          </p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 
