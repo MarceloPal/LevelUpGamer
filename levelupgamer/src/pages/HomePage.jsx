@@ -1,11 +1,15 @@
 import Slider from "../components/ui/Slider";
 import BrandCarousel from "../components/ui/BrandCarousel";
+import CurrencyBanner from "../components/ui/CurrencyBanner";
 
 const HomePage = () => {
   return (
     <main className="container-fluid bg-light p-0">
       {/*SLIDER PRINCIPAL */}
       <Slider />
+      
+      {/* Banner de tasas de cambio */}
+      <CurrencyBanner />
 
       {/* bnanner divisorio */}
       <div className="divider-img-wrapper mb-5">
