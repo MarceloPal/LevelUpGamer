@@ -16,7 +16,7 @@ TODO
 
 - Detalles
   - (¡LISTO!) Urgente: Revisar la navegacion de la autenticacion y el perfil
-  - Medio Urgente: Cambiar los path a las imagenes del catalogo
+  - (¡LISTO!) Medio Urgente: Cambiar los path a las imagenes del catalogo
   - (¡LISTO!) Medio: Mejorar visual de la página de Perfil
   - Medio: Agregar el font a la página
 
