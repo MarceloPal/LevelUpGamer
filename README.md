@@ -11,14 +11,14 @@ TODO
         Gratuita: 1,500 requests/mes
         Sin registro inicial
 
-- Ver lo del footer que sea mas estetico
+- (¡LISTO!) Ver lo del footer que sea mas estetico
 - ¿Crear un administrador de la página? (Revisar pauta de evaluación)
 
 - Detalles
-  - Urgente: Revisar la navegacion de la autenticacion y el perfil
-  - Medio Urgente: Cambiar los path a las imagenes del catalogo
-  - Medio: Mejorar visual de la página de Perfil
-  - Medio: Agregar el font a la página
+  - (¡LISTO!) Urgente: Revisar la navegacion de la autenticacion y el perfil
+  - (¡LISTO!) Medio Urgente: Cambiar los path a las imagenes del catalogo
+  - (¡LISTO!) Medio: Mejorar visual de la página de Perfil
+  - (¡LISTO!) Medio: Agregar el font a la página
 
 
   
