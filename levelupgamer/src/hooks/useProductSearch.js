@@ -1,12 +1,18 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getAllProducts, getProductsByCategory } from '../data/products';
 
 export const useProductSearch = (initialCategory = 'todo') => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState(initialCategory);
+  
+  // Inicializar desde URL si existe, sino usar valores por defecto
+  const [searchTerm, setSearchTerm] = useState(() => searchParams.get('search') || '');
+  const [activeCategory, setActiveCategory] = useState(() => searchParams.get('section') || initialCategory);
   const [sortBy, setSortBy] = useState('name');
+  
+  // Refs para evitar loops infinitos
+  const isUpdatingFromUrl = useRef(false);
+  const isUpdatingUrl = useRef(false);
 
   // Función para ordenar productos
   const sortProducts = (products, sortType) => {
@@ -92,40 +98,52 @@ export const useProductSearch = (initialCategory = 'todo') => {
 
   // Sincronizar estado con URL parameters - ESCUCHA los cambios de URL
   useEffect(() => {
+    if (isUpdatingUrl.current) {
+      isUpdatingUrl.current = false;
+      return;
+    }
+    
+    isUpdatingFromUrl.current = true;
     const categoryFromUrl = searchParams.get('section') || 'todo';
     const searchFromUrl = searchParams.get('search') || '';
     
-    // Actualizar solo si realmente cambió para evitar loops
-    if (categoryFromUrl !== activeCategory) {
-      setActiveCategory(categoryFromUrl);
-    }
+    setActiveCategory(categoryFromUrl);
+    setSearchTerm(searchFromUrl);
     
-    if (searchFromUrl !== searchTerm) {
-      setSearchTerm(searchFromUrl);
-    }
-  }, [searchParams, activeCategory, searchTerm]); // Incluir todas las dependencias
+    setTimeout(() => {
+      isUpdatingFromUrl.current = false;
+    }, 0);
+  }, [searchParams]);
 
   // Actualizar URL cuando cambian los filtros internamente
   useEffect(() => {
+    if (isUpdatingFromUrl.current) {
+      return;
+    }
+    
     const timer = setTimeout(() => {
-      const newParams = new URLSearchParams();
+      isUpdatingUrl.current = true;
+      const newParams = new URLSearchParams(searchParams);
       
       if (activeCategory !== 'todo') {
         newParams.set('section', activeCategory);
+      } else {
+        newParams.delete('section');
       }
       
       if (searchTerm && searchTerm.trim()) {
         newParams.set('search', searchTerm.trim());
+      } else {
+        newParams.delete('search');
       }
 
-      // Solo actualizar si realmente cambió algo
       const currentParams = searchParams.toString();
       const newParamsStr = newParams.toString();
       
       if (currentParams !== newParamsStr) {
         setSearchParams(newParams, { replace: true });
       }
-    }, 300); // Debounce para evitar actualizaciones excesivas
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [activeCategory, searchTerm, searchParams, setSearchParams]);
