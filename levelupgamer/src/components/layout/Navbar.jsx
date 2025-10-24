@@ -29,13 +29,17 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <nav className="navbar navbar-expand-lg navbar-dark navbar-gamer sticky-top">
+        <div className="navbar-gradient-border"></div>
         <div className="container">
           {/* Logo */}
-          <h1 className="logo-title mb-0">
-            <Link to="/" className="text-decoration-none text-white d-flex align-items-center">
-              <img src="/img/coin-cropped.png" alt="Logo" className="logo-h1 me-2" />
-              Level-Up
+          <h1 className="navbar-brand-wrapper mb-0">
+            <Link to="/" className="navbar-brand-link text-decoration-none text-white d-flex align-items-center">
+              <div className="logo-container">
+                <div className="logo-glow"></div>
+                <img src="/img/coin-cropped.png" alt="Logo" className="navbar-logo" />
+              </div>
+              <span className="brand-text">Level-Up</span>
             </Link>
           </h1>
 
@@ -57,37 +61,37 @@ const Navbar = () => {
             <ul className="navbar-nav align-items-center gap-3">
 
               <li className="nav-item">
-                <Link className="nav-link jersey-20-regular" to="/">Home</Link>
+                <Link className="nav-link-custom" to="/"><i className="bi bi-house-fill me-2"></i>Home</Link>
               </li>
 
               {/* Categorías */}
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle jersey-20-regular"
+                  className="nav-link-custom dropdown-toggle"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Categorías
+                  <i className="bi bi-grid-fill me-2"></i>Categorías
                 </a>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-menu-custom">
                   {/* Generar elementos dinámicamente desde el array de categorías */}
                   {categories.map(category => (
                     <li key={category.id}>
                       <Link 
-                        className="dropdown-item jersey-20-regular" 
+                        className="dropdown-item-custom" 
                         to={`/catalogo?section=${category.id}`}
                       >
-                        <span className="me-2">{category.icon}</span>
+                        <span className="category-icon-dropdown me-2">{category.icon}</span>
                         {category.name}
                       </Link>
                     </li>
                   ))}
-                  <li><hr className="dropdown-divider" /></li>
+                  <li><hr className="dropdown-divider-custom" /></li>
                   <li>
-                    <Link className="dropdown-item jersey-20-regular" to="/catalogo?section=todo">
-                      <span className="me-2">🏪</span>
+                    <Link className="dropdown-item-custom all-products" to="/catalogo?section=todo">
+                      <i className="bi bi-shop me-2"></i>
                       Ver todo
                     </Link>
                   </li>
@@ -95,17 +99,29 @@ const Navbar = () => {
               </li>
 
               {/* Buscador */}
-              <li className="nav-item">
-                <form className="d-flex align-items-center" role="search" onSubmit={handleSearch}>
-                  <input 
-                    className="form-control me-2" 
-                    type="search" 
-                    placeholder="Buscar productos..." 
-                    aria-label="Buscar"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <button className="btn btn-outline-light" type="submit">
+              <li className="search-item">
+                <form className="search-form-navbar" role="search" onSubmit={handleSearch}>
+                  <div className="search-input-wrapper">
+                    <i className="bi bi-search search-icon-input"></i>
+                    <input 
+                      className="search-input-custom" 
+                      type="search" 
+                      placeholder="Buscar productos..." 
+                      aria-label="Buscar"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    {searchQuery && (
+                      <button 
+                        type="button" 
+                        className="clear-search-btn"
+                        onClick={() => setSearchQuery('')}
+                      >
+                        <i className="bi bi-x"></i>
+                      </button>
+                    )}
+                  </div>
+                  <button className="search-btn-custom" type="submit">
                     <i className="bi bi-search"></i>
                   </button>
                 </form>
@@ -113,50 +129,43 @@ const Navbar = () => {
 
               {/* Usuario */}
               {!user ? (
-                <li className="nav-item jersey-20-regular">
-                  <Link className="nav-link d-flex align-items-center gap-2" to="/ingresar">
-                    <span>Hola, ingresa!</span>
+                <li className="nav-item">
+                  <Link className="user-link" to="/ingresar">
                     <img
                       src="/img/bits-8bits.gif"
                       alt="Icono usuario pixel"
-                      className="pixel-icon"
-                      style={{ width: "32px", height: "32px", imageRendering: "pixelated" }}
+                      className="user-avatar-pixel"
                     />
+                    <span className="user-text">Hola, ingresa!</span>
                   </Link>
                 </li>
               ) : (
-                <li className="nav-item dropdown d-flex align-items-center">
+                <li className="nav-item dropdown">
                   <a
-                    className="nav-link dropdown-toggle text-white jersey-20-regular d-flex align-items-center gap-2"
+                    className="user-link dropdown-toggle"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     href="#"
                   >
-                    <span>Hola, {user.nombre}</span>
                     <img
                       src="/img/bits-8bits.gif"
                       alt="Icono usuario pixel"
-                      className="pixel-icon"
-                      style={{ width: "32px", height: "32px", imageRendering: "pixelated" }}
+                      className="user-avatar-pixel"
                     />
+                    <span className="user-text">Hola, {user.nombre}</span>
                   </a>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=editar">Editar Perfil</Link></li>
-                    <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=compras">Mis compras</Link></li>
-                    <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=track">Trackear Pedido</Link></li>
-                    <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=idioma">Idioma</Link></li>
-                    <li><Link className="dropdown-item jersey-20-regular" to="/perfil?section=soporte">Soporte</Link></li>
-                                <li className="dropdown-item jersey-20-regular">
-              <a className="dropdown-item jersey-20-regular" href="/puntos">
-                Puntos
-              </a>
-            </li>
-
-                    <li><hr className="dropdown-divider" /></li>
+                  <ul className="dropdown-menu dropdown-menu-custom dropdown-menu-end">
+                    <li><Link className="dropdown-item-custom" to="/perfil?section=editar"><i className="bi bi-pencil-fill me-2"></i>Editar Perfil</Link></li>
+                    <li><Link className="dropdown-item-custom" to="/perfil?section=compras"><i className="bi bi-bag-fill me-2"></i>Mis compras</Link></li>
+                    <li><Link className="dropdown-item-custom" to="/perfil?section=track"><i className="bi bi-truck me-2"></i>Trackear Pedido</Link></li>
+                    <li><Link className="dropdown-item-custom" to="/perfil?section=idioma"><i className="bi bi-globe me-2"></i>Idioma</Link></li>
+                    <li><Link className="dropdown-item-custom" to="/perfil?section=soporte"><i className="bi bi-question-circle-fill me-2"></i>Soporte</Link></li>
+                    <li><Link className="dropdown-item-custom" to="/puntos"><i className="bi bi-star-fill me-2"></i>Puntos</Link></li>
+                    <li><hr className="dropdown-divider-custom" /></li>
                     <li>
-                      <button onClick={handleLogout} className="dropdown-item text-danger jersey-20-regular">
-                        Cerrar Sesión
+                      <button onClick={handleLogout} className="dropdown-item-custom logout-item">
+                        <i className="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
                       </button>
                     </li>
                   </ul>
@@ -166,13 +175,16 @@ const Navbar = () => {
               {/* Carrito */}
               <li className="nav-item ms-lg-3">
                 <button
-                  className="btn nav-link position-relative border-0 bg-transparent p-0"
+                  className="cart-btn-custom"
                   onClick={() => setIsCartOpen(true)}
                 >
-                  🛒
-                  <span className="badge bg-warning text-dark rounded-pill ms-1">
-                    {cartCount || 0}
-                  </span>
+                  <div className="cart-icon-wrapper">
+                    <i className="bi bi-cart-fill"></i>
+                    <span className="cart-badge">
+                      {cartCount || 0}
+                    </span>
+                  </div>
+                  <span className="cart-text d-none d-lg-inline">Carrito</span>
                 </button>
               </li>
             </ul>

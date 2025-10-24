@@ -24,16 +24,14 @@ const HomePage = () => {
       </div>
 
       {/*Sección de bienvenida */}
-      <section className="container my-5 d-flex justify-content-center align-items-center">
-        <div className="col-md-6 text-center">
-          <h1 className="mb-4 text-dark">Bienvenido a Level-Up</h1>
-          <p className="text-dark">
-            Aquí encontrarás juegos, accesorios y mucho más <br /> para gamers
-            como tú.
-          </p>
-          <a href="/catalogo" className="btn2 text-decoration-none">
-            Explorar catálogo
-          </a>
+      <section className="welcome-section container my-4 my-md-5 px-3">
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-8 col-lg-6 text-center">
+            <h1 className="welcome-title mb-3 mb-md-4">Bienvenido a Level-Up</h1>
+            <p className="welcome-text">
+              Aquí encontrarás juegos, accesorios y mucho más para gamers como tú.
+            </p>
+          </div>
         </div>
       </section>
 

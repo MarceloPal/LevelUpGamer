@@ -248,15 +248,15 @@ export const products = {
 };
 
 export const categories = [
-  { id: "juegos", name: "Juegos de Mesa", icon: "🎲" },
-  { id: "accesorios", name: "Accesorios", icon: "🎧" },
-  { id: "consolas", name: "Consolas", icon: "🎮" },
-  { id: "computadores", name: "Computadores Gamers", icon: "💻" },
-  { id: "sillas", name: "Sillas Gamers", icon: "🪑" },
-  { id: "mouse", name: "Mouse", icon: "🖱️" },
-  { id: "mousepad", name: "Mousepad", icon: "⬜" },
-  { id: "poleras", name: "Poleras Personalizadas", icon: "👕" },
-  { id: "polerones", name: "Polerones Personalizados", icon: "🧥" }
+  { id: "juegos", name: "Juegos de Mesa"},
+  { id: "accesorios", name: "Accesorios"},
+  { id: "consolas", name: "Consolas"},
+  { id: "computadores", name: "Computadores Gamers"},
+  { id: "sillas", name: "Sillas Gamers"},
+  { id: "mouse", name: "Mouse"},
+  { id: "mousepad", name: "Mousepad"},
+  { id: "poleras", name: "Poleras Personalizadas"},
+  { id: "polerones", name: "Polerones Personalizados"}
 ];
 
 // Función para obtener todos los productos en un array plano
