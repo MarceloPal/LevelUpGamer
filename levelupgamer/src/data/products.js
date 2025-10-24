@@ -26,7 +26,7 @@ export const products = {
       name: "Juego de Mesa UNO Classic",
       price: 8990,
       oldPrice: null,
-      image: "/productos/juegos_mesa/uno1.webp",
+      image: "/productos/juegos_mesa/Juego-de-Mesa-Uno-Original.webp",
       rating: 4,
       category: "juegos"
     },
@@ -59,7 +59,7 @@ export const products = {
       name: "Webcam HD 1080p C920",
       price: 89990,
       oldPrice: null,
-      image: "productos/accesorios/webcam1.webp",
+      image: "productos/accesorios/tmpfrn8w3zz_4416e585_thumbnail_512.jpg",
       rating: 5,
       category: "accesorios"
     },
@@ -69,7 +69,7 @@ export const products = {
       name: "Auriculares Gaming Kraken V3",
       price: 159990,
       oldPrice: 189990,
-      image: "productos/accesorios/auricular1.webp",
+      image: "productos/accesorios/1_1740759158918.webp",
       rating: 5,
       category: "accesorios"
     }
@@ -82,7 +82,7 @@ export const products = {
       name: "PlayStation 5 Console",
       price: 649990,
       oldPrice: null,
-      image: "productos/consolas/ps5-1.webp",
+      image: "productos/consolas/6549e34473889022dc3db2a8-playstation-5-ps5-console-disc-version.jpg",
       rating: 5,
       category: "consolas"
     },
@@ -92,7 +92,7 @@ export const products = {
       name: "Xbox Series X",
       price: 599990,
       oldPrice: 649990,
-      image: "productos/consolas/xbox-series-x.webp",
+      image: "productos/consolas/GUEST_33ae780e-0cd5-4338-b880-9960ba8f5452.avif",
       rating: 5,
       category: "consolas"
     },
@@ -102,7 +102,7 @@ export const products = {
       name: "Nintendo Switch OLED",
       price: 399990,
       oldPrice: null,
-      image: "productos/consolas/nintendo-switch.webp",
+      image: "productos/consolas/consola_oled.png",
       rating: 4,
       category: "consolas"
     }
@@ -115,7 +115,7 @@ export const products = {
       name: "PC Gamer Omen 45L Intel Core i7",
       price: 1299990,
       oldPrice: 1599990,
-      image: "productos/computadores/hp-omen.webp",
+      image: "productos/computadores/articuno-desktop.png",
       rating: 5,
       category: "computadores"
     },
@@ -125,7 +125,7 @@ export const products = {
       name: "ROG Strix Gaming Desktop",
       price: 1799990,
       oldPrice: null,
-      image: "productos/computadores/asus-rog.webp",
+      image: "productos/computadores/52.png",
       rating: 5,
       category: "computadores"
     }
@@ -138,7 +138,7 @@ export const products = {
       name: "Silla Gaming Titan Evo 2022",
       price: 449990,
       oldPrice: 499990,
-      image: "productos/sillas/secretlab1.webp",
+      image: "productos/sillas/sillaa321.jpg",
       rating: 5,
       category: "sillas"
     },
@@ -148,7 +148,7 @@ export const products = {
       name: "Silla Gaming T3 Rush",
       price: 299990,
       oldPrice: null,
-      image: "productos/sillas/corsair-t3.webp",
+      image: "productos/sillas/1688620156833-MK0CQBWQL6-1-1.webp",
       rating: 4,
       category: "sillas"
     }
@@ -161,7 +161,7 @@ export const products = {
       name: "Mouse Gaming G502 HERO",
       price: 79990,
       oldPrice: 99990,
-      image: "productos/mouse/logitech-g502.webp",
+      image: "productos/mouse/w=1500,h=1500,fit=pad.webp",
       rating: 5,
       category: "mouse"
     },
@@ -171,7 +171,7 @@ export const products = {
       name: "Mouse Gaming DeathAdder V3",
       price: 89990,
       oldPrice: null,
-      image: "productos/mouse/razer-deathadder.webp",
+      image: "productos/mouse/v3-normal.png",
       rating: 4,
       category: "mouse"
     }
@@ -184,7 +184,7 @@ export const products = {
       name: "MousePad QcK Gaming XXL",
       price: 39990,
       oldPrice: 49990,
-      image: "productos/mousepad/steelseries-qck.webp",
+      image: "productos/mousepad/mousepad1-1.png",
       rating: 5,
       category: "mousepad"
     },
@@ -194,7 +194,7 @@ export const products = {
       name: "MousePad MM300 Extended",
       price: 34990,
       oldPrice: null,
-      image: "productos/mousepad/corsair-mm300.webp",
+      image: "productos/mousepad/2byzsw6g_ebe13edd_thumbnail_512.jpg",
       rating: 4,
       category: "mousepad"
     }
@@ -204,20 +204,20 @@ export const products = {
     {
       id: "tshirt1",
       brand: "LEVEL-UP",
-      name: "Polera Gaming Personalizada - Zelda",
+      name: "Polera Gaming Personalizada Hombre",
       price: 19990,
       oldPrice: null,
-      image: "productos/poleras/zelda-tshirt.webp",
+      image: "productos/poleras/poleraNegra2025_800x859.png",
       rating: 4,
       category: "poleras"
     },
     {
       id: "tshirt2",
       brand: "LEVEL-UP",
-      name: "Polera Gaming Personalizada - Mario",
+      name: "Polera Gaming Personalizada Mujer",
       price: 19990,
       oldPrice: 24990,
-      image: "productos/poleras/mario-tshirt.webp",
+      image: "productos/poleras/mujerNegra2025_800x943.png",
       rating: 5,
       category: "poleras"
     }
@@ -227,20 +227,20 @@ export const products = {
     {
       id: "hoodie1",
       brand: "LEVEL-UP",
-      name: "Polerón Gaming Personalizado - Cyberpunk",
+      name: "Polerón Gaming Personalizado Canguro",
       price: 39990,
       oldPrice: 49990,
-      image: "productos/polerones/cyberpunk-hoodie.webp",
+      image: "productos/polerones/poleronCanguroNinoNegro2025_800x878.png",
       rating: 5,
       category: "polerones"
     },
     {
       id: "hoodie2",
       brand: "LEVEL-UP",
-      name: "Polerón Gaming Personalizado - Apex Legends",
+      name: "Polerón Gaming Personalizado Polo",
       price: 39990,
       oldPrice: null,
-      image: "productos/polerones/apex-hoodie.webp",
+      image: "productos/polerones/poleronPoloNegro2025_800x800.png",
       rating: 4,
       category: "polerones"
     }
