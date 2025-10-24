@@ -18,7 +18,7 @@ const LoginPage = () => {
     e.preventDefault();
     const result = login(form.email, form.password); 
     if (result.success) {
-        // Redirige al perfil si la autenticación es exitosa
+        // Redirige al home si la autenticación es exitosa
         navigate("/"); 
         setMessage("Inicio de sesión exitoso");
         setError("");
@@ -37,8 +37,8 @@ const LoginPage = () => {
     }
     const result = register({ nombre: form.nombre, email: form.email, password: form.password });
         if (result.success) {
-        // Redirige al perfil si la autenticación es exitosa
-        navigate("/perfil"); 
+        // Redirige al home si la autenticación es exitosa
+        navigate("/"); 
         setMessage("Cuenta creada exitosamente");
         setError("");
     } else {

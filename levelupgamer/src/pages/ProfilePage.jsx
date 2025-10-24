@@ -90,9 +90,9 @@ const ProfilePage = () => {
 
   // Datos simulados de compras
   const userPurchases = [
-    { id: 1, product: 'Mouse Gaming G502 HERO', status: 'Entregado', statusClass: 'text-success' },
-    { id: 2, product: 'Teclado Mecánico RGB', status: 'En camino', statusClass: 'text-warning' },
-    { id: 3, product: 'Silla Gaming Titan Evo', status: 'Pendiente', statusClass: 'text-danger' }
+   // { id: 1, product: 'Mouse Gaming G502 HERO', status: 'Entregado', statusClass: 'text-success' },
+   // { id: 2, product: 'Teclado Mecánico RGB', status: 'En camino', statusClass: 'text-warning' },
+   // { id: 3, product: 'Silla Gaming Titan Evo', status: 'Pendiente', statusClass: 'text-danger' }
   ];
 
   if (!user) {
