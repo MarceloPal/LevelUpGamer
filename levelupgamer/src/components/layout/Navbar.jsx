@@ -7,13 +7,14 @@ import CartSidebar from "../CartSidebar";
 
 const Navbar = () => {
   const { cartCount } = useContext(CartContext);
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin, setIsAdmin } = useAuth();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleLogout = () => {
     logout();
+    setIsAdmin(false);
     navigate("/");
   };
 
@@ -31,9 +32,24 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark navbar-gamer sticky-top">
         <div className="navbar-gradient-border"></div>
+        {/* Admin indicator placed at top-right of the nav (outside main container) */}
+        <div className="admin-session-indicator">
+          <button
+            type="button"
+            className={`btn btn-sm ${isAdmin ? 'btn-warning' : 'btn-outline-secondary'} me-2 admin-toggle-btn`}
+            title="Alternar Modo Admin (simulado)"
+            onClick={() => setIsAdmin(!isAdmin)}
+          >
+            <span style={{fontSize: '0.95rem'}}></span>
+          </button>
+          {isAdmin && (
+            <span className="badge bg-danger text-white admin-mode-badge">MODO ADMIN</span>
+          )}
+        </div>
+
         <div className="container">
           {/* Logo */}
-          <h1 className="navbar-brand-wrapper mb-0">
+              <h1 className="navbar-brand-wrapper mb-0">
             <Link to="/" className="navbar-brand-link text-decoration-none text-white d-flex align-items-center">
               <div className="logo-container">
                 <div className="logo-glow"></div>
@@ -41,7 +57,8 @@ const Navbar = () => {
               </div>
               <span className="brand-text">Level-Up</span>
             </Link>
-          </h1>
+              </h1>
+                {/* Admin badge is rendered as a top-right indicator (positioned absolutely) */}
 
           {/* Toggle móvil */}
           <button
@@ -131,13 +148,13 @@ const Navbar = () => {
               {!user ? (
                 <li className="nav-item">
                   <Link className="user-link" to="/ingresar">
-                    <img
-                      src="/img/bits-8bits.gif"
-                      alt="Icono usuario pixel"
-                      className="user-avatar-pixel"
-                    />
+                        <img
+                          src="/img/bits-8bits.gif"
+                          alt="Icono usuario pixel"
+                          className="user-avatar-pixel"
+                        />
                     <span className="user-text">Hola, ingresa!</span>
-                  </Link>
+                      </Link>
                 </li>
               ) : (
                 <li className="nav-item dropdown">
@@ -153,9 +170,16 @@ const Navbar = () => {
                       alt="Icono usuario pixel"
                       className="user-avatar-pixel"
                     />
-                    <span className="user-text">Hola, {user.nombre}</span>
+                    <span className="user-text">Bienvenido {user.nombre} {isAdmin && <span className="ms-2 text-warning">(Administrador)</span>}</span>
                   </a>
                   <ul className="dropdown-menu dropdown-menu-custom dropdown-menu-end">
+                    {isAdmin && (
+                      <li>
+                        <button className="dropdown-item-custom" onClick={() => { setIsAdmin(true); navigate('/catalogo'); }}>
+                          <i className="bi bi-speedometer2 me-2"></i>Panel de Admin
+                        </button>
+                      </li>
+                    )}
                     <li><Link className="dropdown-item-custom" to="/perfil?section=editar"><i className="bi bi-pencil-fill me-2"></i>Editar Perfil</Link></li>
                     <li><Link className="dropdown-item-custom" to="/perfil?section=compras"><i className="bi bi-bag-fill me-2"></i>Mis compras</Link></li>
                     <li><Link className="dropdown-item-custom" to="/perfil?section=track"><i className="bi bi-truck me-2"></i>Trackear Pedido</Link></li>
@@ -174,18 +198,29 @@ const Navbar = () => {
 
               {/* Carrito */}
               <li className="nav-item ms-lg-3">
-                <button
-                  className="cart-btn-custom"
-                  onClick={() => setIsCartOpen(true)}
-                >
-                  <div className="cart-icon-wrapper">
-                    <i className="bi bi-cart-fill"></i>
-                    <span className="cart-badge">
-                      {cartCount || 0}
-                    </span>
-                  </div>
-                  <span className="cart-text d-none d-lg-inline">Carrito</span>
-                </button>
+                {!isAdmin ? (
+                  <button
+                    className="cart-btn-custom"
+                    onClick={() => setIsCartOpen(true)}
+                  >
+                    <div className="cart-icon-wrapper">
+                      <i className="bi bi-cart-fill"></i>
+                      <span className="cart-badge">
+                        {cartCount || 0}
+                      </span>
+                    </div>
+                    <span className="cart-text d-none d-lg-inline">Carrito</span>
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => { setIsAdmin(true); navigate('/catalogo'); }}
+                    title="Panel de Administración"
+                  >
+                    <i className="bi bi-tools me-2"></i>
+                    Gestión
+                  </button>
+                )}
               </li>
             </ul>
           </div>

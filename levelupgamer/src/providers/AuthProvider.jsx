@@ -16,14 +16,30 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("lu_user", null);
   const [users, setUsers] = useLocalStorage("lu_users", []);
+  const [isAdmin, setIsAdmin] = useLocalStorage('lu_isAdmin', false);
 
   // Iniciar sesión
   const login = (email, password) => {
+
+       // Verificar si es el admin
+    if (email === "admin@levelup.com" && password === "admin123") {
+      const adminUser = {
+        email,
+        name: "Administrador",
+        role: "admin",
+      };
+      setUser(adminUser);
+      setIsAdmin(true);
+      return { success: true };
+    }
+
     const existingUser = users.find(
       (u) => u.email === email && u.password === password
     );
     if (existingUser) {
       setUser(existingUser);
+      // if stored user has role attribute, respect it for admin flag
+      setIsAdmin(existingUser.role === 'admin');
       return { success: true };
     }
     return { success: false, message: "Usuario o contraseña incorrectos" };
@@ -41,10 +57,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Cerrar sesión
-  const logout = () => setUser(null);
+  const logout = () => {
+    setUser(null);
+    setIsAdmin(false);
+  };
 
   // Datos compartidos en toda la app
-  const value = { user, users, login, register, logout };
+  const value = { user, users, login, register, logout, isAdmin, setIsAdmin };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

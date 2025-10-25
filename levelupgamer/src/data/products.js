@@ -8,7 +8,8 @@ export const products = {
       oldPrice: null,
       image: "/productos/juegos_mesa/MTG1.webp",
       rating: 4,
-      category: "juegos"
+      category: "juegos",
+      stock: 5
     },
     {
       id: "mesa2",
@@ -18,7 +19,8 @@ export const products = {
       oldPrice: 14990,
       image: "/productos/juegos_mesa/pictu1.webp",
       rating: 5,
-      category: "juegos"
+      category: "juegos",
+      stock: 2
     },
     {
       id: "mesa3",
@@ -28,7 +30,8 @@ export const products = {
       oldPrice: null,
       image: "/productos/juegos_mesa/Juego-de-Mesa-Uno-Original.webp",
       rating: 4,
-      category: "juegos"
+      category: "juegos",
+      stock: 12
     },
     {
       id: "mesa4",
@@ -38,7 +41,8 @@ export const products = {
       oldPrice: 29990,
       image: "/productos/juegos_mesa/mono1-1.webp",
       rating: 5,
-      category: "juegos"
+      category: "juegos",
+      stock: 0
     }
   ],
 
@@ -51,7 +55,8 @@ export const products = {
       oldPrice: 49990,
       image: "productos/accesorios/adap1-1.jpg",
       rating: 4,
-      category: "accesorios"
+      category: "accesorios",
+      stock: 8
     },
     {
       id: "acc2",
@@ -61,7 +66,8 @@ export const products = {
       oldPrice: null,
       image: "productos/accesorios/tmpfrn8w3zz_4416e585_thumbnail_512.jpg",
       rating: 5,
-      category: "accesorios"
+      category: "accesorios",
+      stock: 2
     },
     {
       id: "acc3",
@@ -71,7 +77,8 @@ export const products = {
       oldPrice: 189990,
       image: "productos/accesorios/1_1740759158918.webp",
       rating: 5,
-      category: "accesorios"
+      category: "accesorios",
+      stock: 0
     }
   ],
 
@@ -84,7 +91,8 @@ export const products = {
       oldPrice: null,
       image: "productos/consolas/6549e34473889022dc3db2a8-playstation-5-ps5-console-disc-version.jpg",
       rating: 5,
-      category: "consolas"
+      category: "consolas",
+      stock:29
     },
     {
       id: "console2",
@@ -94,7 +102,8 @@ export const products = {
       oldPrice: 649990,
       image: "productos/consolas/GUEST_33ae780e-0cd5-4338-b880-9960ba8f5452.avif",
       rating: 5,
-      category: "consolas"
+      category: "consolas",
+      stock:5
     },
     {
       id: "console3",
@@ -104,7 +113,8 @@ export const products = {
       oldPrice: null,
       image: "productos/consolas/consola_oled.png",
       rating: 4,
-      category: "consolas"
+      category: "consolas",
+      stock:10
     }
   ],
 
@@ -117,7 +127,8 @@ export const products = {
       oldPrice: 1599990,
       image: "productos/computadores/articuno-desktop.png",
       rating: 5,
-      category: "computadores"
+      category: "computadores",
+      stock:3
     },
     {
       id: "pc2",
@@ -127,7 +138,8 @@ export const products = {
       oldPrice: null,
       image: "productos/computadores/52.png",
       rating: 5,
-      category: "computadores"
+      category: "computadores",
+      stock:7
     }
   ],
 
@@ -140,7 +152,8 @@ export const products = {
       oldPrice: 499990,
       image: "productos/sillas/sillaa321.jpg",
       rating: 5,
-      category: "sillas"
+      category: "sillas",
+      stock:10
     },
     {
       id: "chair2",
@@ -150,7 +163,8 @@ export const products = {
       oldPrice: null,
       image: "productos/sillas/1688620156833-MK0CQBWQL6-1-1.webp",
       rating: 4,
-      category: "sillas"
+      category: "sillas",
+      stock:19
     }
   ],
 
@@ -163,7 +177,8 @@ export const products = {
       oldPrice: 99990,
       image: "productos/mouse/w=1500,h=1500,fit=pad.webp",
       rating: 5,
-      category: "mouse"
+      category: "mouse",
+      stock:4
     },
     {
       id: "mouse2",
@@ -173,7 +188,8 @@ export const products = {
       oldPrice: null,
       image: "productos/mouse/v3-normal.png",
       rating: 4,
-      category: "mouse"
+      category: "mouse",
+      stock:10
     }
   ],
 
@@ -186,7 +202,8 @@ export const products = {
       oldPrice: 49990,
       image: "productos/mousepad/mousepad1-1.png",
       rating: 5,
-      category: "mousepad"
+      category: "mousepad",
+      stock:15
     },
     {
       id: "mousepad2",
@@ -196,7 +213,8 @@ export const products = {
       oldPrice: null,
       image: "productos/mousepad/2byzsw6g_ebe13edd_thumbnail_512.jpg",
       rating: 4,
-      category: "mousepad"
+      category: "mousepad",
+      stock:20
     }
   ],
 
@@ -209,7 +227,8 @@ export const products = {
       oldPrice: null,
       image: "productos/poleras/poleraNegra2025_800x859.png",
       rating: 4,
-      category: "poleras"
+      category: "poleras",
+      stock:50
     },
     {
       id: "tshirt2",
@@ -219,7 +238,8 @@ export const products = {
       oldPrice: 24990,
       image: "productos/poleras/mujerNegra2025_800x943.png",
       rating: 5,
-      category: "poleras"
+      category: "poleras",
+      stock:90
     }
   ],
 
@@ -232,7 +252,8 @@ export const products = {
       oldPrice: 49990,
       image: "productos/polerones/poleronCanguroNinoNegro2025_800x878.png",
       rating: 5,
-      category: "polerones"
+      category: "polerones",
+      stock:9
     },
     {
       id: "hoodie2",
@@ -242,7 +263,8 @@ export const products = {
       oldPrice: null,
       image: "productos/polerones/poleronPoloNegro2025_800x800.png",
       rating: 4,
-      category: "polerones"
+      category: "polerones",
+      stock:0
     }
   ]
 };

@@ -341,8 +341,9 @@ html, body, #root {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 420px;
-  padding: var(--spacing-md);
+  min-height: 400px;
+  max-height: 480px;
+  padding: 1rem 1.5rem;
   border: 1px solid rgba(var(--color-primary), 0.1);
 }
 
@@ -492,6 +493,31 @@ html, body, #root {
 
 .products-grid {
   animation: fadeIn 0.5s ease-in;
+}
+
+/* Aggressive helper to force a container to use the full available width
+   Use this on rows or containers that are being constrained by other rules.
+   It is intentionally high-specificity and uses !important so it beats
+   accidental upstream restrictions during debugging. Remove or tone down
+   once the root cause is fixed. */
+.force-full-width {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Also ensure direct children columns can expand fully when used inside
+   a constrained layout. */
+.force-full-width > .col-12,
+.force-full-width > .col-6,
+.force-full-width > .col-sm-6,
+.force-full-width > .col-md-4,
+.force-full-width > .col-lg-3 {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
 }
 
 @keyframes fadeIn {
@@ -1814,6 +1840,67 @@ body {
 /* ==========================*/
 
 /* ==========================
+   BANNER DE DIVISAS
+   ========================== */
+.currency-banner {
+  background: linear-gradient(135deg, #1a0a1f 0%, #2d1b3d 100%);
+  padding: 0.75rem 0;
+  border-top: 2px solid rgba(215, 70, 251, 0.3);
+  border-bottom: 2px solid rgba(215, 70, 251, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.currency-banner-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  color: white;
+  font-family: "Jersey 20", sans-serif;
+}
+
+.currency-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 1rem;
+  background: rgba(215, 70, 251, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.currency-item:hover {
+  transform: translateY(-2px);
+  background: rgba(215, 70, 251, 0.2);
+  box-shadow: 0 4px 15px rgba(215, 70, 251, 0.3);
+}
+
+.currency-symbol {
+  font-weight: bold;
+  color: #fdf040;
+  font-size: 0.9rem;
+}
+
+.currency-rate {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .currency-banner-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  
+  .currency-item {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.8rem;
+  }
+}
+
+/* ==========================
    SECCIÓN DE BIENVENIDA
    ========================== */
 .welcome-section {
@@ -1887,27 +1974,6 @@ body {
 /* ==========================
 PRODUCTOSSS
 ========================== */
-.product-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #fff;
-  border-radius: 16px;
-  padding: 1.2rem;
-  text-align: center;
-  color: #333;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  border: 1px solid #e0e0e0;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  width: 100%;
-  min-height: 420px;
-}
-
-.product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  border-color: #80d4ff;
-}
 
 .product-card .brand {
   font-size: 0.8rem;
@@ -1973,7 +2039,68 @@ PRODUCTOSSS
   background: #0095dd; 
 }
 
+/* Admin footer compact action buttons */
+.product-card .admin-footer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-card .admin-footer-actions .btn {
+  flex: 1 1 0;
+  padding: 0.45rem 0.6rem;
+  font-size: 1.25rem; /* slightly smaller than main buttons */
+  border-radius: 10px;
+}
+
+.product-card .admin-footer-actions .btn-edit {
+  background: linear-gradient(90deg, #6f42c1, #a020f0);
+  border: none;
+  color: #fff;
+}
+
+.product-card .admin-footer-actions .btn-delete {
+  background: linear-gradient(90deg, #ff5a5f, #ff2e2e);
+  border: none;
+  color: #fff;
+}
+
+/* Floating quick edit icon in the corner */
+.product-card .floating-quick-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #6f42c1, #d746fb);
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 14px rgba(111,66,193,0.25);
+  cursor: pointer;
+  font-size: 1.05rem;
+}
+
+.product-card .floating-quick-edit i {
+  transform: translateY(-1px);
+}
+
 /* ==========================*/
+
+/* Overrides for products-grid horizontal distribution (added per request) */
+/* These are appended here to avoid conflicts with earlier rules and ensure they take effect. */
+.products-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.5 rem !important;
+}
+
+.products-grid .product-card {
+  max-width: 100%;
+}
 
 
 
