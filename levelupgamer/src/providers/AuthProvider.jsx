@@ -20,14 +20,25 @@ export const AuthProvider = ({ children }) => {
 
   // Iniciar sesión
   const login = (email, password) => {
+    // Verificar credenciales de administrador
+    const adminCredentials = {
+      email: "admin@levelup.com",
+      password: "admin123"
+    };
 
-       // Verificar si es el admin
-    if (email === "admin@levelup.com" && password === "admin123") {
+    if (email === adminCredentials.email && password === adminCredentials.password) {
       const adminUser = {
         email,
-        name: "Administrador",
+        nombre: "Administrador",
         role: "admin",
+        isAdmin: true
       };
+      
+      // Si el admin no existe en la lista de usuarios, añadirlo
+      if (!users.some(u => u.email === adminCredentials.email)) {
+        setUsers(prevUsers => [...prevUsers, { ...adminUser, password }]);
+      }
+      
       setUser(adminUser);
       setIsAdmin(true);
       return { success: true };
@@ -36,10 +47,12 @@ export const AuthProvider = ({ children }) => {
     const existingUser = users.find(
       (u) => u.email === email && u.password === password
     );
+
     if (existingUser) {
       setUser(existingUser);
-      // if stored user has role attribute, respect it for admin flag
-      setIsAdmin(existingUser.role === 'admin');
+      // Establecer isAdmin basado en el rol guardado del usuario
+      const userIsAdmin = existingUser.role === 'admin' || existingUser.isAdmin;
+      setIsAdmin(userIsAdmin);
       return { success: true };
     }
     return { success: false, message: "Usuario o contraseña incorrectos" };
@@ -51,8 +64,16 @@ export const AuthProvider = ({ children }) => {
     if (exists)
       return { success: false, message: "El correo ya está registrado" };
 
-    setUsers([...users, newUser]);
-    setUser(newUser);
+    // Asegurar que los nuevos usuarios tengan un rol por defecto
+    const userWithRole = {
+      ...newUser,
+      role: 'user',
+      isAdmin: false
+    };
+
+    setUsers(prevUsers => [...prevUsers, userWithRole]);
+    setUser(userWithRole);
+    setIsAdmin(false); // Asegurar que nuevos usuarios no sean admin por defecto
     return { success: true };
   };
 
