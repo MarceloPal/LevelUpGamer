@@ -5,8 +5,8 @@ TODO
 - (¡LISTO!) Agregar los slides de la página principal
 - (¡LISTO!) Crear página de productos
 - (¡LISTO!) Crear página que edita el perfil
-- Implementar API
-      - 1. ExchangeRate-API (Más fácil)
+- (¡LISTO!) Implementar API
+      -  (¡LISTO!) 1. ExchangeRate-API (Más fácil)
         URL: https://exchangerate-api.com/
         Gratuita: 1,500 requests/mes
         Sin registro inicial
