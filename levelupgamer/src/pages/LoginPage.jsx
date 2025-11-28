@@ -3,47 +3,63 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { login, register, user, logout } = useAuth();
+  // Ahora useAuth devuelve las funciones asíncronas login y register
+  const { login, register, user, logout } = useAuth(); 
   const [activeForm, setActiveForm] = useState("login"); // "login" | "register" | "forget"
   const [form, setForm] = useState({ nombre: "", email: "", password: "", confirmarPassword: "" });
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const [setError] = useState("");
+  // Corregimos la declaración para usar y establecer el error
+  const [error, setError] = useState(""); 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setMessage("");
+    setError("");
   };
 
-    const handleLogin = (e) => {
+  //Ahora es ASÍNCRONA y usa await
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const result = login(form.email, form.password); 
+    setMessage("Iniciando sesión...");
+    setError("");
+
+    // La función login ahora retorna { success: bool, message: string }
+    const result = await login(form.email, form.password); 
+    
     if (result.success) {
-        // Redirige al home si la autenticación es exitosa
-        navigate("/"); 
         setMessage("Inicio de sesión exitoso");
-        setError("");
+        navigate("/"); 
     } else {
-        setError(result.message);
-        setError("");
+        setError(result.message || "Error desconocido al iniciar sesión");
+        setMessage("");
     }
-    };
+  };
 
 
-  const handleRegister = (e) => {
+  // 🔄 Ahora es ASÍNCRONA y usa await
+  const handleRegister = async (e) => {
     e.preventDefault();
+    
     if (form.password !== form.confirmarPassword) {
-      setMessage("Las contraseñas no coinciden");
+      setError("Las contraseñas no coinciden");
+      setMessage("");
       return;
     }
-    const result = register({ nombre: form.nombre, email: form.email, password: form.password });
-        if (result.success) {
-        // Redirige al home si la autenticación es exitosa
-        navigate("/"); 
+
+    setMessage("Creando cuenta...");
+    setError("");
+
+    // La función register ahora retorna { success: bool, message: string }
+    const result = await register({ nombre: form.nombre, email: form.email, password: form.password });
+    
+    if (result.success) {
         setMessage("Cuenta creada exitosamente");
-        setError("");
+        navigate("/"); 
     } else {
-        setError(result.message);
-        setError("");
+        // El error viene directamente de la API si el email ya existe, etc.
+        setError(result.message || "Error desconocido al crear la cuenta");
+        setMessage("");
     }
   };
 
@@ -51,7 +67,8 @@ const LoginPage = () => {
     return (
       <main className="d-flex flex-column align-items-center justify-content-center text-center text-white" style={{ minHeight: "80vh" }}>
         <h3>¡Bienvenido, {user.nombre}!</h3>
-        <p className="mb-3">{user.email}</p>
+        {/* Usamos user.email del estado global */}
+        <p className="mb-3">{user.email}</p> 
         <button className="btn btn-outline-light" onClick={logout}>
           Cerrar sesión
         </button>
@@ -70,11 +87,11 @@ const LoginPage = () => {
               <form onSubmit={handleLogin}>
                 <div className="mb-3 text-start">
                   <label className="form-label text-white">Correo electrónico</label>
-                  <input type="email" name="email" className="form-control" placeholder="Ingresa tu correo" onChange={handleChange} />
+                  <input type="email" name="email" className="form-control" placeholder="Ingresa tu correo" onChange={handleChange} required />
                 </div>
                 <div className="mb-3 text-start">
                   <label className="form-label text-white">Contraseña</label>
-                  <input type="password" name="password" className="form-control" placeholder="********" onChange={handleChange} />
+                  <input type="password" name="password" className="form-control" placeholder="********" onChange={handleChange} required />
                 </div>
                 <button type="submit" className="btn btn-primary w-100 mt-3">Ingresar</button>
               </form>
@@ -92,19 +109,19 @@ const LoginPage = () => {
               <form onSubmit={handleRegister}>
                 <div className="mb-3 text-start">
                   <label className="form-label text-white">Nombre</label>
-                  <input type="text" name="nombre" className="form-control" placeholder="Tu nombre" onChange={handleChange} />
+                  <input type="text" name="nombre" className="form-control" placeholder="Tu nombre" onChange={handleChange} required />
                 </div>
                 <div className="mb-3 text-start">
                   <label className="form-label text-white">Correo electrónico</label>
-                  <input type="email" name="email" className="form-control" placeholder="tu@email.com" onChange={handleChange} />
+                  <input type="email" name="email" className="form-control" placeholder="tu@email.com" onChange={handleChange} required />
                 </div>
                 <div className="mb-3 text-start">
                   <label className="form-label text-white">Contraseña</label>
-                  <input type="password" name="password" className="form-control" placeholder="********" onChange={handleChange} />
+                  <input type="password" name="password" className="form-control" placeholder="********" onChange={handleChange} required />
                 </div>
                 <div className="mb-3 text-start">
                   <label className="form-label text-white">Confirmar Contraseña</label>
-                  <input type="password" name="confirmarPassword" className="form-control" placeholder="********" onChange={handleChange} />
+                  <input type="password" name="confirmarPassword" className="form-control" placeholder="********" onChange={handleChange} required />
                 </div>
                 <button type="submit" className="btn btn-success w-100 mt-3">Crear Cuenta</button>
               </form>
@@ -131,8 +148,9 @@ const LoginPage = () => {
             </>
           )}
 
-          {/* MENSAJE */}
-          {message && <p className="mt-3 text-warning">{message}</p>}
+          {/* MENSAJES DE ESTADO */}
+          {message && <p className={`mt-3 ${error ? 'text-danger' : 'text-warning'}`}>{message}</p>}
+          {error && <p className="mt-3 text-danger">{error}</p>}
         </div>
       </div>
     </main>
