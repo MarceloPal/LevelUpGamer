@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import CatalogPage from './pages/CatalogPage';
 import LoyaltyPage from "./pages/LoyaltyPage";
 import { AdminPage } from "./pages/AdminPage";
+import TestBackendPage from "./pages/TestBackendPage";
 import { useAuth } from "./hooks/useAuth";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,6 +39,7 @@ function AppContent() {
         <Route path="/catalogo" element={<CatalogPage />} /> 
         <Route path="/puntos" element={<LoyaltyPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/test-backend" element={<TestBackendPage />} />
       </Routes>
 
       {!hideLayout && <Footer />}

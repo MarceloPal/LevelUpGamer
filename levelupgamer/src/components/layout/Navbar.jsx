@@ -1,20 +1,32 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
 import { useAuth } from "../../contexts/AuthContext";
-import { categories } from "../../data/products";
+import { getAllCategories } from "../../data/products";
 import CartSidebar from "../CartSidebar";
 
 const Navbar = () => {
   const { cartCount } = useContext(CartContext);
-  const { user, logout, isAdmin, setIsAdmin } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [categories, setCategories] = useState([]);
+
+  // Verificar si el usuario es admin basado en el rol del backend
+  const isAdmin = user?.role === 'admin';
+
+  // Cargar categorías desde el backend
+  useEffect(() => {
+    const loadCategories = async () => {
+      const cats = await getAllCategories();
+      setCategories(cats);
+    };
+    loadCategories();
+  }, []);
 
   const handleLogout = () => {
     logout();
-    setIsAdmin(false);
     navigate("/");
   };
 
@@ -32,24 +44,17 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark navbar-gamer sticky-top">
         <div className="navbar-gradient-border"></div>
-        {/* Admin indicator placed at top-right of the nav (outside main container) */}
-        <div className="admin-session-indicator">
-          <button
-            type="button"
-            className={`btn btn-sm ${isAdmin ? 'btn-warning' : 'btn-outline-secondary'} me-2 admin-toggle-btn`}
-            title="Alternar Modo Admin (simulado)"
-            onClick={() => setIsAdmin(!isAdmin)}
-          >
-            <span style={{fontSize: '0.95rem'}}></span>
-          </button>
-          {isAdmin && (
+        
+        {/* Indicador de modo admin solo si el usuario es admin */}
+        {isAdmin && (
+          <div className="admin-session-indicator">
             <span className="badge bg-danger text-white admin-mode-badge">MODO ADMIN</span>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="container">
           {/* Logo */}
-              <h1 className="navbar-brand-wrapper mb-0">
+          <h1 className="navbar-brand-wrapper mb-0">
             <Link to="/" className="navbar-brand-link text-decoration-none text-white d-flex align-items-center">
               <div className="logo-container">
                 <div className="logo-glow"></div>
@@ -57,8 +62,7 @@ const Navbar = () => {
               </div>
               <span className="brand-text">Level-Up</span>
             </Link>
-              </h1>
-                {/* Admin badge is rendered as a top-right indicator (positioned absolutely) */}
+          </h1>
 
           {/* Toggle móvil */}
           <button
@@ -175,9 +179,9 @@ const Navbar = () => {
                   <ul className="dropdown-menu dropdown-menu-custom dropdown-menu-end">
                     {isAdmin && (
                       <li>
-                        <button className="dropdown-item-custom" onClick={() => { setIsAdmin(true); navigate('/catalogo'); }}>
+                        <Link className="dropdown-item-custom" to="/admin">
                           <i className="bi bi-speedometer2 me-2"></i>Panel de Admin
-                        </button>
+                        </Link>
                       </li>
                     )}
                     <li><Link className="dropdown-item-custom" to="/perfil?section=editar"><i className="bi bi-pencil-fill me-2"></i>Editar Perfil</Link></li>
@@ -196,7 +200,7 @@ const Navbar = () => {
                 </li>
               )}
 
-              {/* Carrito */}
+              {/* Carrito o Gestión (para admin) */}
               <li className="nav-item ms-lg-3">
                 {!isAdmin ? (
                   <button
@@ -214,7 +218,7 @@ const Navbar = () => {
                 ) : (
                   <button
                     className="btn btn-outline-light"
-                    onClick={() => { setIsAdmin(true); navigate('/catalogo'); }}
+                    onClick={() => navigate('/admin')}
                     title="Panel de Administración"
                   >
                     <i className="bi bi-tools me-2"></i>

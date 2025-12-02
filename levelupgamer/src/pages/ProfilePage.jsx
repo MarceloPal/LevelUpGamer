@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import userService from '../services/userService';
+import { toast } from 'react-toastify';
 
 const ProfilePage = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, updateUserData } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   
@@ -14,15 +16,14 @@ const ProfilePage = () => {
 
   // Estados para los formularios
   const [profileForm, setProfileForm] = useState({
-    nombre: user?.nombre || '',
-    apellidos: '',
+    name: user?.name || '',
     email: user?.email || '',
-    telefono: '',
-    direccion: '',
-    comuna: '',
-    region: ''
+    phone: user?.phone || '',
+    addresses: user?.addresses || []
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [trackingCode, setTrackingCode] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [supportMessage, setSupportMessage] = useState('');
@@ -43,14 +44,32 @@ const ProfilePage = () => {
     }
   }, [user, navigate]);
 
-  // Cargar datos del perfil desde localStorage
+  // Cargar datos del perfil desde el backend
   useEffect(() => {
-    if (user) {
-      const savedProfile = localStorage.getItem(`profile_${user.email}`);
-      if (savedProfile) {
-        const profileData = JSON.parse(savedProfile);
-        setProfileForm(prev => ({ ...prev, ...profileData }));
+    const loadUserProfile = async () => {
+      setIsLoading(true);
+      try {
+        const result = await userService.getProfile();
+        if (result.success) {
+          const userData = result.user;
+          setProfileForm({
+            name: userData.nombre || userData.name || '',
+            email: userData.email || '',
+            phone: userData.phone || '',
+            addresses: userData.addresses || []
+          });
+        } else {
+          console.error('Error al cargar perfil:', result.message);
+        }
+      } catch (error) {
+        console.error('Error al cargar perfil:', error);
+      } finally {
+        setIsLoading(false);
       }
+    };
+
+    if (user) {
+      loadUserProfile();
     }
   }, [user]);
 
@@ -59,13 +78,87 @@ const ProfilePage = () => {
     navigate(`/perfil?section=${section}`, { replace: true });
   };
 
-  const handleProfileSubmit = (e) => {
+  const handleProfileSubmit = async (e) => {
     e.preventDefault();
-    if (user) {
-      localStorage.setItem(`profile_${user.email}`, JSON.stringify(profileForm));
-      setShowSavedMessage('perfil');
-      setTimeout(() => setShowSavedMessage(''), 3000);
+
+    setIsSaving(true);
+    try {
+      const result = await userService.updateProfile({
+        name: profileForm.name,
+        email: profileForm.email,
+        phone: profileForm.phone,
+        addresses: profileForm.addresses
+      });
+
+      if (result.success) {
+        toast.success('Perfil actualizado exitosamente');
+        
+        // Actualizar el usuario en el contexto de autenticación
+        updateUserData({
+          name: result.user.nombre || result.user.name,
+          email: result.user.email,
+          phone: result.user.phone,
+          addresses: result.user.addresses
+        });
+        
+        setShowSavedMessage('perfil');
+        setTimeout(() => setShowSavedMessage(''), 3000);
+      } else {
+        toast.error(`❌ ${result.message}`);
+      }
+    } catch (error) {
+      toast.error('Error al actualizar el perfil');
+      console.error('Error:', error);
+    } finally {
+      setIsSaving(false);
     }
+  };
+
+  const handleAddAddress = () => {
+    setProfileForm({
+      ...profileForm,
+      addresses: [
+        ...profileForm.addresses,
+        {
+          alias: '',
+          direccion: '',
+          comuna: '',
+          region: '',
+          isDefault: profileForm.addresses.length === 0
+        }
+      ]
+    });
+  };
+
+  const handleRemoveAddress = (index) => {
+    const newAddresses = profileForm.addresses.filter((_, i) => i !== index);
+    setProfileForm({
+      ...profileForm,
+      addresses: newAddresses
+    });
+  };
+
+  const handleAddressChange = (index, field, value) => {
+    const newAddresses = [...profileForm.addresses];
+    newAddresses[index] = {
+      ...newAddresses[index],
+      [field]: value
+    };
+    setProfileForm({
+      ...profileForm,
+      addresses: newAddresses
+    });
+  };
+
+  const handleSetDefaultAddress = (index) => {
+    const newAddresses = profileForm.addresses.map((addr, i) => ({
+      ...addr,
+      isDefault: i === index
+    }));
+    setProfileForm({
+      ...profileForm,
+      addresses: newAddresses
+    });
   };
 
   const handleLanguageSubmit = (e) => {
@@ -176,82 +269,181 @@ const ProfilePage = () => {
           {activeSection === 'editar' && (
             <div className="section">
               <h3>Editar Perfil</h3>
-              <form onSubmit={handleProfileSubmit}>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label">Nombre</label>
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      value={profileForm.nombre}
-                      onChange={(e) => setProfileForm({...profileForm, nombre: e.target.value})}
-                      required 
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Apellidos</label>
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      value={profileForm.apellidos}
-                      onChange={(e) => setProfileForm({...profileForm, apellidos: e.target.value})}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Email</label>
-                    <input 
-                      type="email" 
-                      className="form-control" 
-                      value={profileForm.email}
-                      onChange={(e) => setProfileForm({...profileForm, email: e.target.value})}
-                      required 
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Teléfono</label>
-                    <input 
-                      type="tel" 
-                      className="form-control" 
-                      value={profileForm.telefono}
-                      onChange={(e) => setProfileForm({...profileForm, telefono: e.target.value})}
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">Dirección</label>
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      value={profileForm.direccion}
-                      onChange={(e) => setProfileForm({...profileForm, direccion: e.target.value})}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Comuna</label>
-                    <input 
-                      type="text" 
-                      className="form-control" 
-                      value={profileForm.comuna}
-                      onChange={(e) => setProfileForm({...profileForm, comuna: e.target.value})}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Región</label>
-                    <select 
-                      className="form-select"
-                      value={profileForm.region}
-                      onChange={(e) => setProfileForm({...profileForm, region: e.target.value})}
-                    >
-                      <option value="">Seleccionar región</option>
-                      <option value="metropolitana">Región Metropolitana</option>
-                      <option value="valparaiso">Región de Valparaíso</option>
-                      <option value="biobio">Región del Bío Bío</option>
-                      <option value="araucania">Región de La Araucanía</option>
-                      <option value="los-lagos">Región de Los Lagos</option>
-                    </select>
+              
+              {isLoading ? (
+                <div className="text-center py-4">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Cargando...</span>
                   </div>
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">Guardar Cambios</button>
-              </form>
+              ) : (
+                <form onSubmit={handleProfileSubmit}>
+                  <div className="row g-3">
+                    <div className="col-md-6">
+                      <label className="form-label">Nombre Completo</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        value={profileForm.name}
+                        onChange={(e) => setProfileForm({...profileForm, name: e.target.value})}
+                        required 
+                        disabled={isSaving}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Email</label>
+                      <input 
+                        type="email" 
+                        className="form-control" 
+                        value={profileForm.email}
+                        onChange={(e) => setProfileForm({...profileForm, email: e.target.value})}
+                        required
+                        disabled={isSaving}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Teléfono</label>
+                      <input 
+                        type="tel" 
+                        className="form-control" 
+                        value={profileForm.phone}
+                        onChange={(e) => setProfileForm({...profileForm, phone: e.target.value})}
+                        placeholder="+56 9 1234 5678"
+                        disabled={isSaving}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Rol</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        value={user?.role || 'customer'}
+                        disabled
+                        readOnly
+                      />
+                      <small className="text-muted">El rol no puede ser modificado</small>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                      <h5>Direcciones</h5>
+                      <button 
+                        type="button" 
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={handleAddAddress}
+                        disabled={isSaving}
+                      >
+                        <i className="bi bi-plus-circle me-1"></i>
+                        Agregar Dirección
+                      </button>
+                    </div>
+                    
+                    {profileForm.addresses && profileForm.addresses.length > 0 ? (
+                      <div className="addresses-list">
+                        {profileForm.addresses.map((address, index) => (
+                          <div key={index} className="card mb-3">
+                            <div className="card-body">
+                              <div className="row g-3">
+                                <div className="col-md-6">
+                                  <label className="form-label">Alias</label>
+                                  <input 
+                                    type="text" 
+                                    className="form-control form-control-sm" 
+                                    value={address.alias || ''}
+                                    onChange={(e) => handleAddressChange(index, 'alias', e.target.value)}
+                                    placeholder="Casa, Trabajo, etc."
+                                    disabled={isSaving}
+                                  />
+                                </div>
+                                <div className="col-md-6">
+                                  <label className="form-label">Dirección</label>
+                                  <input 
+                                    type="text" 
+                                    className="form-control form-control-sm" 
+                                    value={address.direccion || ''}
+                                    onChange={(e) => handleAddressChange(index, 'direccion', e.target.value)}
+                                    placeholder="Calle y número"
+                                    disabled={isSaving}
+                                  />
+                                </div>
+                                <div className="col-md-6">
+                                  <label className="form-label">Comuna</label>
+                                  <input 
+                                    type="text" 
+                                    className="form-control form-control-sm" 
+                                    value={address.comuna || ''}
+                                    onChange={(e) => handleAddressChange(index, 'comuna', e.target.value)}
+                                    placeholder="Santiago"
+                                    disabled={isSaving}
+                                  />
+                                </div>
+                                <div className="col-md-6">
+                                  <label className="form-label">Región</label>
+                                  <input 
+                                    type="text" 
+                                    className="form-control form-control-sm" 
+                                    value={address.region || ''}
+                                    onChange={(e) => handleAddressChange(index, 'region', e.target.value)}
+                                    placeholder="Región Metropolitana"
+                                    disabled={isSaving}
+                                  />
+                                </div>
+                                <div className="col-12">
+                                  <div className="d-flex justify-content-between align-items-center">
+                                    <div className="form-check">
+                                      <input 
+                                        className="form-check-input" 
+                                        type="checkbox" 
+                                        checked={address.isDefault || false}
+                                        onChange={() => handleSetDefaultAddress(index)}
+                                        id={`defaultAddress${index}`}
+                                        disabled={isSaving}
+                                      />
+                                      <label className="form-check-label" htmlFor={`defaultAddress${index}`}>
+                                        Dirección principal
+                                      </label>
+                                    </div>
+                                    <button 
+                                      type="button" 
+                                      className="btn btn-sm btn-outline-danger"
+                                      onClick={() => handleRemoveAddress(index)}
+                                      disabled={isSaving}
+                                    >
+                                      <i className="bi bi-trash"></i> Eliminar
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="alert alert-info">
+                        <i className="bi bi-info-circle me-2"></i>
+                        No tienes direcciones guardadas. Haz clic en "Agregar Dirección" para añadir una.
+                      </div>
+                    )}
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary mt-3"
+                    disabled={isSaving}
+                  >
+                    {isSaving ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Guardando...
+                      </>
+                    ) : (
+                      'Guardar Cambios'
+                    )}
+                  </button>
+                </form>
+              )}
+              
               {showSavedMessage === 'perfil' && (
                 <div className="mt-3 text-success">
                   <i className="bi bi-check-circle me-2"></i>

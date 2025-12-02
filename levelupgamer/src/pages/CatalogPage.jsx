@@ -3,7 +3,7 @@ import ProductCard from '../components/ui/ProductCard';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/ui/SearchBar';
 import { useProductSearch } from '../hooks/useProductSearch';
-import { categories } from '../data/products';
+import { getAllCategories } from '../data/products';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/App.css';
 import { toast } from 'react-toastify';
@@ -15,15 +15,30 @@ const CatalogPage = () => {
     sortBy,
     filteredProducts,
     searchStats,
+    isLoading: productsLoading,
     updateSearchTerm,
     updateActiveCategory,
     updateSortBy,
     clearAllFilters
   } = useProductSearch('todo');
 
-  const [isLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
+
+  // Cargar categorías desde el backend
+  useEffect(() => {
+    const loadCategories = async () => {
+      const cats = await getAllCategories();
+      setCategories(cats);
+      setIsLoading(false);
+    };
+    loadCategories();
+  }, []);
+
+  // Mostrar loading mientras cargan productos o categorías
+  const showLoading = isLoading || productsLoading;
 
   // Admin-specific local state
   const [createdProducts, setCreatedProducts] = useState([]);
@@ -167,7 +182,7 @@ const CatalogPage = () => {
           <div className="catalog-content p-4">
             
             {/* Estado de carga */}
-            {isLoading && (
+            {showLoading && (
               <div className="loading-container text-center py-5">
                 <div className="spinner-border text-primary" role="status">
                   <span className="visually-hidden">Cargando...</span>
@@ -177,7 +192,7 @@ const CatalogPage = () => {
             )}
 
             {/* Sin resultados */}
-            {!isLoading && !searchStats.hasResults && (
+            {!showLoading && !searchStats.hasResults && (
               <div className="no-results-container text-center py-5">
                 <div className="no-results-icon mb-3">
                   <i className="bi bi-search display-1 text-muted"></i>
@@ -202,7 +217,7 @@ const CatalogPage = () => {
             )}
 
             {/* Grid de productos */}
-            {!isLoading && searchStats.hasResults && (
+            {!showLoading && searchStats.hasResults && (
               <div className="products-section">
                 {/* Admin title centered */}
                 {isAdmin && (

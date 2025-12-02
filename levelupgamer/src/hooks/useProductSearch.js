@@ -9,10 +9,35 @@ export const useProductSearch = (initialCategory = 'todo') => {
   const [searchTerm, setSearchTerm] = useState(() => searchParams.get('search') || '');
   const [activeCategory, setActiveCategory] = useState(() => searchParams.get('section') || initialCategory);
   const [sortBy, setSortBy] = useState('name');
+  const [allProducts, setAllProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   
   // Refs para evitar loops infinitos
   const isUpdatingFromUrl = useRef(false);
   const isUpdatingUrl = useRef(false);
+
+  // Cargar productos desde el backend
+  useEffect(() => {
+    const loadProducts = async () => {
+      setIsLoading(true);
+      try {
+        let products;
+        if (activeCategory === 'todo') {
+          products = await getAllProducts();
+        } else {
+          products = await getProductsByCategory(activeCategory);
+        }
+        setAllProducts(products);
+      } catch (error) {
+        console.error('Error al cargar productos:', error);
+        setAllProducts([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, [activeCategory]);
 
   // Función para ordenar productos
   const sortProducts = (products, sortType) => {
@@ -32,7 +57,7 @@ export const useProductSearch = (initialCategory = 'todo') => {
         return productsArray.sort((a, b) => b.price - a.price);
       
       case 'rating':
-        return productsArray.sort((a, b) => b.rating - a.rating);
+        return productsArray.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       
       default:
         return productsArray;
@@ -41,14 +66,7 @@ export const useProductSearch = (initialCategory = 'todo') => {
 
   // Productos filtrados y ordenados
   const filteredProducts = useMemo(() => {
-    let products;
-    
-    // Obtener productos según la categoría
-    if (activeCategory === 'todo') {
-      products = getAllProducts();
-    } else {
-      products = getProductsByCategory(activeCategory);
-    }
+    let products = allProducts;
 
     // Aplicar búsqueda por término si existe
     if (searchTerm && searchTerm.trim()) {
@@ -61,7 +79,7 @@ export const useProductSearch = (initialCategory = 'todo') => {
 
     // Ordenar productos
     return sortProducts(products, sortBy);
-  }, [searchTerm, activeCategory, sortBy]);
+  }, [allProducts, searchTerm, sortBy]);
 
   // Estadísticas de búsqueda
   const searchStats = useMemo(() => ({
@@ -153,6 +171,7 @@ export const useProductSearch = (initialCategory = 'todo') => {
     searchTerm,
     activeCategory,
     sortBy,
+    isLoading,
     
     // Datos
     filteredProducts,

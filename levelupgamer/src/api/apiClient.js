@@ -1,13 +1,11 @@
 import axios from 'axios';
 
-// La URL base (ej: http://localhost:3000/api) y el Tenant ID se leen de las variables de entorno
+// La URL base (ej: http://localhost:3000/api) se lee de las variables de entorno
 const api = axios.create({
     // VITE_API_URL debe ser, por ejemplo, http://localhost:3000/api
     baseURL: import.meta.env.VITE_API_URL, 
     headers: {
         'Content-Type': 'application/json',
-        // Aseguramos que el x-tenant-id se envíe en todas las solicitudes
-        'x-tenant-id': import.meta.env.VITE_TENANT_ID, 
     },
 });
 
@@ -35,6 +33,21 @@ api.interceptors.response.use(
         return response.data; 
     },
     (error) => {
+        // Log del error para debugging
+        console.error('API Error:', error);
+        
+        // Error de red o CORS
+        if (!error.response) {
+            console.error('Network Error - Posibles causas:');
+            console.error('1. Backend no está corriendo en', import.meta.env.VITE_API_URL);
+            console.error('2. CORS no está configurado en el backend');
+            console.error('3. Problema de conexión de red');
+            return Promise.reject({
+                message: 'Error de conexión con el servidor. Verifica que el backend esté corriendo.',
+                statusCode: 0
+            });
+        }
+        
         // Cuando hay un error (status 4xx o 5xx), devolvemos el cuerpo del error 
         // { message, statusCode, ...} para que el proveedor lo maneje.
         if (error.response) {

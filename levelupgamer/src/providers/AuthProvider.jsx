@@ -33,9 +33,17 @@ export const AuthProvider = ({ children }) => {
       // Usamos api.post. La ruta del backend es /auth/login
       const response = await api.post("/auth/login", { email, password });
       
+      // El backend devuelve: { data: { user: {...}, token: "..." } }
+      const backendUser = response.data.data?.user || response.data.user;
+      const backendToken = response.data.data?.token || response.data.token;
+      
       const userData = { 
-        ...response.data.user,
-        token: response.data.token // Guardamos el token
+        id: backendUser.id,
+        name: backendUser.name,
+        email: backendUser.email,
+        role: backendUser.role, // ✅ IMPORTANTE: Guardamos el rol
+        isActive: backendUser.isActive,
+        token: backendToken
       };
       
       setUser(userData);
@@ -54,9 +62,17 @@ export const AuthProvider = ({ children }) => {
         // Usamos api.post para llamar a /auth/register
         const response = await api.post("/auth/register", { name: nombre, email, password });
         
+        // El backend devuelve: { data: { user: {...}, token: "..." } }
+        const backendUser = response.data.data?.user || response.data.user;
+        const backendToken = response.data.data?.token || response.data.token;
+        
         const userData = { 
-            ...response.data.user,
-            token: response.data.token // Guardamos el token
+            id: backendUser.id,
+            name: backendUser.name,
+            email: backendUser.email,
+            role: backendUser.role, // ✅ IMPORTANTE: Guardamos el rol
+            isActive: backendUser.isActive,
+            token: backendToken
         };
 
         setUser(userData);
@@ -76,8 +92,15 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("lu_user");
   }
 
+  // Actualizar usuario (útil después de editar perfil)
+  const updateUserData = (updatedData) => {
+    const updatedUser = { ...user, ...updatedData };
+    setUser(updatedUser);
+    localStorage.setItem("lu_user", JSON.stringify(updatedUser));
+  }
+
   // Datos compartidos en toda la app
-  const value = { user, login, register, logout }; // Eliminamos TENANT_ID y authApiCall
+  const value = { user, login, register, logout, updateUserData };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

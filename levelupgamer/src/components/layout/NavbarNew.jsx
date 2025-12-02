@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { CartContext } from "../../../../../../../../../../workspace/levelupgamer-react/LevelUpGamer/levelupgamer/src/contexts/CartContext";
-import { useAuth } from "../../../../../../../../../../workspace/levelupgamer-react/LevelUpGamer/levelupgamer/src/contexts/AuthContext";
-import { categories } from "../../../../../../../../../../workspace/levelupgamer-react/LevelUpGamer/levelupgamer/src/data/products";
-import CartSidebar from "../../../../../../../../../../workspace/levelupgamer-react/LevelUpGamer/levelupgamer/src/components/CartSidebar";
+import { CartContext } from "../../contexts/CartContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { getAllCategories } from "../../data/products";
+import CartSidebar from "../CartSidebar";
 import '../../styles/navbar-admin.css';
 
 const Navbar = () => {
@@ -12,6 +12,16 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [categories, setCategories] = useState([]);
+
+  // Cargar categorías desde el backend
+  useEffect(() => {
+    const loadCategories = async () => {
+      const cats = await getAllCategories();
+      setCategories(cats);
+    };
+    loadCategories();
+  }, []);
 
   const handleLogout = () => {
     logout();
