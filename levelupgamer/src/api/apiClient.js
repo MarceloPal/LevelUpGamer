@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 // La URL base (ej: http://localhost:3000/api) se lee de las variables de entorno
+// Si no se proporciona, usamos un fallback al backend desplegado para evitar errores en producción
+const DEFAULT_API = 'https://ecommerce-backend-749990022458.us-central1.run.app/api';
 const api = axios.create({
-    // VITE_API_URL debe ser, por ejemplo, http://localhost:3000/api
-    baseURL: import.meta.env.VITE_API_URL, 
+    // VITE_API_URL debe ser, por ejemplo, https://mi-backend/api
+    baseURL: import.meta.env.VITE_API_URL || DEFAULT_API,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -29,8 +31,9 @@ api.interceptors.request.use(
 // Interceptor para manejar las respuestas y los errores
 api.interceptors.response.use(
     (response) => {
-        // Devolvemos response.data, que contiene el objeto { message, statusCode, data: {...} } de tu backend
-        return response.data; 
+        // Devolvemos la respuesta completa de Axios aquí (response)
+        // Muchas partes del código existente (services/providers) esperan acceder a response.data
+        return response;
     },
     (error) => {
         // Log del error para debugging
@@ -39,20 +42,14 @@ api.interceptors.response.use(
         // Error de red o CORS
         if (!error.response) {
             console.error('Network Error - Posibles causas:');
-            console.error('1. Backend no está corriendo en', import.meta.env.VITE_API_URL);
+            console.error('1. Backend no está corriendo en', import.meta.env.VITE_API_URL || DEFAULT_API);
             console.error('2. CORS no está configurado en el backend');
             console.error('3. Problema de conexión de red');
-            return Promise.reject({
-                message: 'Error de conexión con el servidor. Verifica que el backend esté corriendo.',
-                statusCode: 0
-            });
+            // Rechazamos con el error original para que los handlers puedan inspeccionarlo
+            return Promise.reject(error);
         }
-        
-        // Cuando hay un error (status 4xx o 5xx), devolvemos el cuerpo del error 
-        // { message, statusCode, ...} para que el proveedor lo maneje.
-        if (error.response) {
-            return Promise.reject(error.response.data);
-        }
+
+        // Para errores HTTP (4xx/5xx) propagamos el error Axios completo.
         return Promise.reject(error);
     }
 );
