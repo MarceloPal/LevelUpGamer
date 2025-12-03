@@ -64,9 +64,10 @@ const TestBackendPage = () => {
           <hr />
           <p><strong>Verificar:</strong></p>
           <ul>
-            <li>Backend corriendo en http://localhost:3000</li>
-            <li>CORS habilitado</li>
-            <li>Variables de entorno (.env) correctas</li>
+            <li>Backend funcionando correctamente</li>
+            <li>CORS habilitado para tu dominio</li>
+            <li>Variable VITE_API_URL configurada en Vercel</li>
+            <li>URL del backend accesible desde internet</li>
           </ul>
         </div>
       )}

@@ -50,8 +50,8 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: userData };
 
     } catch (error) {
-      // Axios interceptor devuelve directamente el objeto de error del backend
-      return { success: false, message: error.message || "Error de conexión" };
+      // Axios interceptor devuelve el error completo
+      return { success: false, message: error.response?.data?.message || error.message || "Error de conexión" };
     }
   };
 
@@ -79,8 +79,8 @@ export const AuthProvider = ({ children }) => {
         return { success: true, user: userData };
 
     } catch (error) {
-        // Axios interceptor devuelve directamente el objeto de error del backend
-        return { success: false, message: error.message || "Error de conexión" };
+        // Axios interceptor devuelve el error completo
+        return { success: false, message: error.response?.data?.message || error.message || "Error de conexión" };
     }
   };
 

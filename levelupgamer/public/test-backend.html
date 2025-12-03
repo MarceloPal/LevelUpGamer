@@ -51,7 +51,10 @@
     <div id="result"></div>
 
     <script>
-        const API_URL = 'http://localhost:3000/api';
+        // Usar la misma lógica que el apiClient - fallback a la URL de producción
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+            ? 'http://localhost:3000/api'
+            : 'https://ecommerce-backend-749990022458.us-central1.run.app/api';
 
         async function testProducts() {
             const statusDiv = document.getElementById('status');
@@ -75,7 +78,7 @@
                 statusDiv.innerHTML = `<div class="status error">❌ Error de conexión: ${error.message}</div>`;
                 resultDiv.innerHTML = `<p><strong>Posibles causas:</strong></p>
                     <ul>
-                        <li>El backend no está corriendo en http://localhost:3000</li>
+                        <li>El backend no está corriendo en ${API_URL.replace('/api', '')}</li>
                         <li>CORS no está configurado</li>
                         <li>El servidor está caído</li>
                     </ul>`;
@@ -104,7 +107,7 @@
                 statusDiv.innerHTML = `<div class="status error">❌ Error de conexión: ${error.message}</div>`;
                 resultDiv.innerHTML = `<p><strong>Posibles causas:</strong></p>
                     <ul>
-                        <li>El backend no está corriendo en http://localhost:3000</li>
+                        <li>El backend no está corriendo en ${API_URL.replace('/api', '')}</li>
                         <li>CORS no está configurado</li>
                         <li>El servidor está caído</li>
                     </ul>`;

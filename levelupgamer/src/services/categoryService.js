@@ -13,12 +13,12 @@ const categoryService = {
       const response = await api.get('/categories');
       return {
         success: true,
-        categories: response.data.categories
+        categories: response.data.data?.categories || response.data.categories || []
       };
     } catch (error) {
       return {
         success: false,
-        message: error.message || 'Error al obtener categorías'
+        message: error.response?.data?.message || error.message || 'Error al obtener categorías'
       };
     }
   },
@@ -33,12 +33,12 @@ const categoryService = {
       const response = await api.get(`/categories/${identifier}`);
       return {
         success: true,
-        category: response.data.category
+        category: response.data.data?.category || response.data.category
       };
     } catch (error) {
       return {
         success: false,
-        message: error.message || 'Error al obtener la categoría'
+        message: error.response?.data?.message || error.message || 'Error al obtener la categoría'
       };
     }
   },

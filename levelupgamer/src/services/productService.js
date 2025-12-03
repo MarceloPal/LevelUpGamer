@@ -14,13 +14,13 @@ const productService = {
       const response = await api.get('/products', { params });
       return {
         success: true,
-        products: response.data.products,
-        pagination: response.data.pagination
+        products: response.data.data?.products || response.data.products || [],
+        pagination: response.data.data?.pagination || response.data.pagination
       };
     } catch (error) {
       return {
         success: false,
-        message: error.message || 'Error al obtener productos'
+        message: error.response?.data?.message || error.message || 'Error al obtener productos'
       };
     }
   },
@@ -35,12 +35,12 @@ const productService = {
       const response = await api.get(`/products/${identifier}`);
       return {
         success: true,
-        product: response.data.product
+        product: response.data.data?.product || response.data.product
       };
     } catch (error) {
       return {
         success: false,
-        message: error.message || 'Error al obtener el producto'
+        message: error.response?.data?.message || error.message || 'Error al obtener el producto'
       };
     }
   },
