@@ -11,11 +11,21 @@ const categoryService = {
   getAllCategories: async () => {
     try {
       const response = await api.get('/categories');
+      console.log('🔍 Response completo del backend (categories):', response);
+      console.log('📦 response.data:', response.data);
+      
+      const responseData = response.data.data || response.data;
+      console.log('📊 responseData:', responseData);
+      
+      const categories = responseData.categories || responseData || [];
+      console.log(`✅ Total categorías obtenidas: ${categories.length}`);
+      
       return {
         success: true,
-        categories: response.data.data?.categories || response.data.categories || []
+        categories: categories
       };
     } catch (error) {
+      console.error('❌ Error al obtener categorías:', error);
       return {
         success: false,
         message: error.response?.data?.message || error.message || 'Error al obtener categorías'
@@ -31,9 +41,10 @@ const categoryService = {
   getCategoryById: async (identifier) => {
     try {
       const response = await api.get(`/categories/${identifier}`);
+      const responseData = response.data.data || response.data;
       return {
         success: true,
-        category: response.data.data?.category || response.data.category
+        category: responseData.category || responseData
       };
     } catch (error) {
       return {
@@ -51,10 +62,11 @@ const categoryService = {
   createCategory: async (categoryData) => {
     try {
       const response = await api.post('/categories', categoryData);
+      const responseData = response.data.data || response.data;
       return {
         success: true,
-        category: response.data.category,
-        message: response.message
+        category: responseData.category || responseData,
+        message: response.data.message || 'Categoría creada exitosamente'
       };
     } catch (error) {
       return {
@@ -73,10 +85,11 @@ const categoryService = {
   updateCategory: async (id, categoryData) => {
     try {
       const response = await api.put(`/categories/${id}`, categoryData);
+      const responseData = response.data.data || response.data;
       return {
         success: true,
-        category: response.data.category,
-        message: response.message
+        category: responseData.category || responseData,
+        message: response.data.message || 'Categoría actualizada exitosamente'
       };
     } catch (error) {
       return {
@@ -96,7 +109,7 @@ const categoryService = {
       const response = await api.delete(`/categories/${id}`);
       return {
         success: true,
-        message: response.message
+        message: response.data.message || 'Categoría eliminada exitosamente'
       };
     } catch (error) {
       return {

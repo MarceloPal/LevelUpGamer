@@ -41,17 +41,22 @@ const mapCategoryFromBackend = (category) => {
 export const getAllProducts = async () => {
   // Si ya tenemos productos en cache, retornarlos
   if (productsCache) {
+    console.log('📋 Retornando productos desde cache:', productsCache.length);
     return productsCache;
   }
 
+  console.log('🔄 Obteniendo productos del backend con limit: 1000');
   const result = await productService.getAllProducts({ limit: 1000 });
+  console.log('📥 Resultado del servicio:', result);
   
   if (result.success) {
+    console.log(`📦 Productos recibidos antes de mapear: ${result.products.length}`);
     productsCache = result.products.map(mapProductFromBackend);
+    console.log(`✅ Productos mapeados en cache: ${productsCache.length}`);
     return productsCache;
   }
   
-  console.error('Error al obtener productos:', result.message);
+  console.error('❌ Error al obtener productos:', result.message);
   return [];
 };
 
@@ -71,17 +76,22 @@ export const getProductsByCategory = async (categorySlug) => {
 export const getAllCategories = async () => {
   // Si ya tenemos categorías en cache, retornarlas
   if (categoriesCache) {
+    console.log('📋 Retornando categorías desde cache:', categoriesCache.length);
     return categoriesCache;
   }
 
+  console.log('🔄 Obteniendo categorías del backend');
   const result = await categoryService.getAllCategories();
+  console.log('📥 Resultado del servicio de categorías:', result);
   
   if (result.success) {
+    console.log(`📦 Categorías recibidas antes de mapear: ${result.categories.length}`);
     categoriesCache = result.categories.map(mapCategoryFromBackend);
+    console.log(`✅ Categorías mapeadas en cache: ${categoriesCache.length}`);
     return categoriesCache;
   }
   
-  console.error('Error al obtener categorías:', result.message);
+  console.error('❌ Error al obtener categorías:', result.message);
   return [];
 };
 
