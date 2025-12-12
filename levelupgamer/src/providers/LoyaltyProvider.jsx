@@ -1,75 +1,88 @@
-import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "../hooks/useAuth";
 import { LoyaltyContext } from "../contexts/LoyaltyContext";
+import api from "../api/apiClient"; 
 
 export const LoyaltyProvider = ({ children }) => {
   const { user } = useAuth();
-  const STORAGE_KEY = "levelup_loyalty_v1";
-
-  const [coins, setCoins] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : { total: 0, level: "Bronce", history: [] };
+  
+  // Estado inicial
+  const [coins, setCoins] = useState({ 
+    total: 0, 
+    level: "Bronce", 
+    history: [] 
   });
 
-  // 🧠 Niveles automáticos
-  const getLevel = (points) => {
-    if (points >= 1000) return "Platino";
-    if (points >= 600) return "Oro";
-    if (points >= 300) return "Plata";
-    return "Bronce";
+  const [loading, setLoading] = useState(false);
+
+ 
+  const fetchLoyaltyAccount = useCallback(async () => {
+    if (!user) {
+      setCoins({ total: 0, level: "Bronce", history: [] });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await api.get('/loyalty/account');
+      
+
+      const data = response.data.data || response.data;
+      const account = data.account;
+
+      if (account) {
+
+        const tierMap = {
+          bronze: "Bronce",
+          silver: "Plata",
+          gold: "Oro",
+          platinum: "Platino"
+        };
+
+        setCoins({
+          total: account.points,
+          level: tierMap[account.tier] || "Bronce",
+          history: [] 
+        });
+      }
+    } catch (error) {
+      console.error("Error cargando puntos:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
+
+  
+  useEffect(() => {
+    fetchLoyaltyAccount();
+  }, [fetchLoyaltyAccount]);
+
+
+  const addPoints = () => {
+    fetchLoyaltyAccount();
   };
 
-  // 💰 Agregar puntos tras cada compra
-  const addPoints = (purchaseTotal) => {
-    const earned = Math.floor(purchaseTotal / 1000) * 20;
-    const newTotal = coins.total + earned;
-    const newLevel = getLevel(newTotal);
-
-    const updated = {
-      total: newTotal,
-      level: newLevel,
-      history: [
-        ...coins.history,
-        {
-          date: new Date().toISOString(),
-          description: `Compra en Level-Up por $${purchaseTotal.toLocaleString()}`,
-          earned,
-        },
-      ],
-    };
-
-    setCoins(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  };
-
-  // 🏷️ Canjear puntos
-  const redeemDiscount = (cost) => {
+ const redeemDiscount = async (cost) => {
     if (coins.total < cost) return false;
 
-    const updated = {
-      ...coins,
-      total: coins.total - cost,
-      history: [
-        ...coins.history,
-        {
-          date: new Date().toISOString(),
-          description: `Canje de descuento (-${cost} coins)`,
-          earned: -cost,
-        },
-      ],
-    };
-
-    setCoins(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+   
+    setCoins(prev => ({
+      ...prev,
+      total: prev.total - cost
+    }));
     return true;
   };
 
-  useEffect(() => {
-    if (user) localStorage.setItem(STORAGE_KEY, JSON.stringify(coins));
-  }, [coins, user]);
-
   return (
-    <LoyaltyContext.Provider value={{ coins, addPoints, redeemDiscount }}>
+    <LoyaltyContext.Provider 
+      value={{ 
+        coins, 
+        loading,        
+        addPoints, 
+        redeemDiscount, 
+        refreshPoints: fetchLoyaltyAccount 
+      }}
+    >
       {children}
     </LoyaltyContext.Provider>
   );
