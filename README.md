@@ -2,8 +2,8 @@
 
 Una moderna plataforma de e-commerce dedicada a productos gaming, desarrollada con React y Vite. 
 
-![JavaScript](https://img.shields.io/badge/JavaScript-71. 6%25-yellow)
-![CSS](https://img.shields.io/badge/CSS-26. 3%25-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-71.6%25-yellow)
+![CSS](https://img.shields.io/badge/CSS-26.3%25-blue)
 ![HTML](https://img.shields.io/badge/HTML-2.1%25-orange)
 
 ## 🌐 Demo en Vivo
