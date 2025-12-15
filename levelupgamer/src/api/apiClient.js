@@ -68,7 +68,7 @@ api.interceptors.response.use(
             return Promise.reject(error);
         }
 
-        // Para errores HTTP (4xx/5xx) propagamos el error Axios completo.
+      
         return Promise.reject(error);
     }
 );

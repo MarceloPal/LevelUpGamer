@@ -174,7 +174,7 @@ const Navbar = () => {
                       alt="Icono usuario pixel"
                       className="user-avatar-pixel"
                     />
-                    <span className="user-text">Bienvenido {user.nombre} {isAdmin && <span className="ms-2 text-warning">(Administrador)</span>}</span>
+                    <span className="user-text">Bienvenido, {user.name}! {isAdmin && <span className="ms-2 text-warning">(Administrador)</span>}</span>
                   </a>
                   <ul className="dropdown-menu dropdown-menu-custom dropdown-menu-end">
                     {isAdmin && (
