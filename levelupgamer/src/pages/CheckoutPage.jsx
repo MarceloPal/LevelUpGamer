@@ -183,8 +183,8 @@ const CheckoutPage = () => {
         shipping: {
           address: {
             nombre: shippingForm.fullName,
-            direccion: shippingForm.address,
-            comuna: shippingForm.city,
+            calle: shippingForm.address,
+            ciudad: shippingForm.city,
             region: shippingForm.region,
             codigoPostal: shippingForm.postalCode,
             telefono: shippingForm.phone,
