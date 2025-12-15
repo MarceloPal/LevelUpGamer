@@ -382,8 +382,8 @@ const OrderManagement = () => {
                   </div>
                   <div className="col-md-6">
                     <h6>Dirección de Envío</h6>
-                    <p className="mb-1">{selectedOrder.shipping?.address?.calle || selectedOrder.shipping?.address?.direccion || selectedOrder.shippingAddress?.direccion || 'N/A'}</p>
-                    <p className="mb-1">{selectedOrder.shipping?.address?.ciudad || selectedOrder.shipping?.address?.comuna || selectedOrder.shippingAddress?.comuna || ''}, {selectedOrder.shipping?.address?.region || selectedOrder.shippingAddress?.region || ''}</p>
+                    <p className="mb-1">{selectedOrder.shipping?.address?.direccion || selectedOrder.shippingAddress?.direccion || 'N/A'}</p>
+                    <p className="mb-1">{selectedOrder.shipping?.address?.comuna || selectedOrder.shippingAddress?.comuna || ''}, {selectedOrder.shipping?.address?.region || selectedOrder.shippingAddress?.region || ''}</p>
                     <p className="mb-1">CP: {selectedOrder.shipping?.address?.codigoPostal || selectedOrder.shippingAddress?.codigoPostal || ''}</p>
                     {(selectedOrder.shipping?.address?.additionalInfo || selectedOrder.shippingAddress?.additionalInfo) && (
                       <p className="mb-1 text-muted"><small>{selectedOrder.shipping?.address?.additionalInfo || selectedOrder.shippingAddress?.additionalInfo}</small></p>

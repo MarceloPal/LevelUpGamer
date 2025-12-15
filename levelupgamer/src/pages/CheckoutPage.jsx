@@ -178,22 +178,18 @@ const CheckoutPage = () => {
       }
 
       // PASO 2: Preparar datos de la orden según el backend espera
-      // El backend espera shipping.address y payment.method
       const orderData = {
-        shipping: {
-          address: {
-            nombre: shippingForm.fullName,
-            calle: shippingForm.address,
-            ciudad: shippingForm.city,
-            region: shippingForm.region,
-            codigoPostal: shippingForm.postalCode,
-            telefono: shippingForm.phone,
-            additionalInfo: shippingForm.additionalInfo
-          }
+        shippingAddress: {
+          nombre: shippingForm.fullName,
+          direccion: shippingForm.address,
+          comuna: shippingForm.city,
+          region: shippingForm.region,
+          codigoPostal: shippingForm.postalCode,
+          telefono: shippingForm.phone,
+          instrucciones: shippingForm.additionalInfo
         },
-        payment: {
-          method: paymentMethod
-        }
+        paymentMethod: paymentMethod,
+        notes: shippingForm.additionalInfo || ''
       };
 
       console.log('=== Creando orden ===');
