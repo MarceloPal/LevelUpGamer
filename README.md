@@ -2,13 +2,13 @@
 
 Una moderna plataforma de e-commerce dedicada a productos gaming, desarrollada con React y Vite. 
 
-![JavaScript](https://img.shields.io/badge/JavaScript-71.6%25-yellow)
-![CSS](https://img.shields.io/badge/CSS-26.3%25-blue)
-![HTML](https://img.shields.io/badge/HTML-2.1%25-orange)
+![JavaScript](https://img.shields.io/badge/JavaScript-80.0%25-yellow)
+![CSS](https://img.shields.io/badge/CSS-18.6%25-blue)
+![HTML](https://img.shields.io/badge/HTML-1.4%25-orange)
 
 ## 🌐 Demo en Vivo
 
-Visita la aplicación desplegada:  [https://level-up-gamer-i5lm.vercel.app](https://level-up-gamer-i5lm.vercel.app)
+Visita la aplicación desplegada:  [level-up-gamer-xut7.vercel.app](level-up-gamer-xut7.vercel.app)
 
 ## ✨ Características
 
