@@ -64,17 +64,35 @@ export const useProductSearch = (initialCategory = 'todo') => {
     }
   };
 
+  // Función para normalizar texto eliminando tildes y caracteres especiales
+  const normalizeText = (text) => {
+    return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  };
+
   // Productos filtrados y ordenados
   const filteredProducts = useMemo(() => {
     let products = allProducts;
 
     // Aplicar búsqueda por término si existe
     if (searchTerm && searchTerm.trim()) {
-      products = products.filter(product => 
-        product && product.name && product.brand &&
-        (product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-         product.brand.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
+      const normalizedSearchTerm = normalizeText(searchTerm);
+      
+      products = products.filter(product => {
+        if (!product || !product.name) return false;
+        
+        const normalizedName = normalizeText(product.name);
+        const normalizedBrand = product.brand ? normalizeText(product.brand) : '';
+        const normalizedDescription = product.description ? normalizeText(product.description) : '';
+        
+        return (
+          normalizedName.includes(normalizedSearchTerm) ||
+          normalizedBrand.includes(normalizedSearchTerm) ||
+          normalizedDescription.includes(normalizedSearchTerm)
+        );
+      });
     }
 
     // Ordenar productos

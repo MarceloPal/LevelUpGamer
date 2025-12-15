@@ -9,6 +9,10 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    // Configuración para archivos grandes
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    timeout: 120000 // 2 minutos de timeout
 });
 
 // Interceptor para inyectar el Token JWT en las solicitudes
@@ -23,6 +27,21 @@ api.interceptors.request.use(
                 config.headers.Authorization = `Bearer ${user.token}`;
             }
         }
+        
+        // Para FormData, dejar que el navegador establezca el Content-Type
+        // (incluye el boundary necesario para multipart/form-data)
+        if (config.data instanceof FormData) {
+            delete config.headers['Content-Type'];
+        }
+        
+        console.log('Request config:', {
+            url: config.url,
+            method: config.method,
+            baseURL: config.baseURL,
+            headers: config.headers,
+            isFormData: config.data instanceof FormData
+        });
+        
         return config;
     },
     (error) => Promise.reject(error)

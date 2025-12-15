@@ -11,7 +11,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
   const handleCheckout = () => {
     onClose(); // cierra el sidebar
-    navigate("/carrito"); // redirige a la página del carrito (CartPage)
+    navigate("/checkout"); // redirige a la página de checkout
   };
 
   return (

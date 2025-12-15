@@ -1,17 +1,56 @@
 import { useState, useEffect } from "react";
 import { CartContext } from "../contexts/CartContext";
+import { useAuth } from "../hooks/useAuth";
 
 export const CartProvider = ({ children }) => {
   const STORAGE_KEY = "levelup_cart_v1";
+  const GUEST_CART_KEY = "levelup_guest_cart";
+  
+  const { user } = useAuth();
+
+  // Función para obtener la key correcta según el usuario
+  const getStorageKey = () => {
+    return user ? `${STORAGE_KEY}_${user.id}` : GUEST_CART_KEY;
+  };
 
   const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const storageKey = user ? `${STORAGE_KEY}_${user.id}` : GUEST_CART_KEY;
+    const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [];
   });
 
+  // Sincronizar carrito cuando cambia el usuario (login/logout)
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-  }, [cart]);
+    const newStorageKey = getStorageKey();
+    const savedCart = localStorage.getItem(newStorageKey);
+    
+    if (savedCart) {
+      // Si hay un carrito guardado para este usuario, cargarlo
+      setCart(JSON.parse(savedCart));
+    } else if (user && cart.length > 0) {
+      // Si el usuario acaba de hacer login y tiene items en el carrito de invitado,
+      // transferir esos items al carrito del usuario
+      const guestCart = localStorage.getItem(GUEST_CART_KEY);
+      if (guestCart) {
+        const guestItems = JSON.parse(guestCart);
+        if (guestItems.length > 0) {
+          setCart(guestItems);
+          // Limpiar el carrito de invitado
+          localStorage.removeItem(GUEST_CART_KEY);
+        }
+      }
+    } else if (!user) {
+      // Si se hace logout, cargar el carrito de invitado si existe
+      const guestCart = localStorage.getItem(GUEST_CART_KEY);
+      setCart(guestCart ? JSON.parse(guestCart) : []);
+    }
+  }, [user]);
+
+  // Guardar carrito en localStorage cada vez que cambie
+  useEffect(() => {
+    const storageKey = getStorageKey();
+    localStorage.setItem(storageKey, JSON.stringify(cart));
+  }, [cart, user]);
 
   const cartCount = cart.reduce((acc, item) => acc + item.cantidad, 0);
   const total = cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);

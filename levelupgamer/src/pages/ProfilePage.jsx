@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import userService from '../services/userService';
+import orderService from '../services/orderService';
 import { toast } from 'react-toastify';
 
 const ProfilePage = () => {
@@ -25,6 +26,10 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [trackingCode, setTrackingCode] = useState('');
+  const [trackingResult, setTrackingResult] = useState(null);
+  const [trackingLoading, setTrackingLoading] = useState(false);
+  const [userOrders, setUserOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [supportMessage, setSupportMessage] = useState('');
   const [showSavedMessage, setShowSavedMessage] = useState('');
@@ -72,6 +77,29 @@ const ProfilePage = () => {
       loadUserProfile();
     }
   }, [user]);
+
+  // Cargar órdenes del usuario
+  useEffect(() => {
+    const loadUserOrders = async () => {
+      if (activeSection === 'compras' && user) {
+        setOrdersLoading(true);
+        try {
+          const result = await orderService.getUserOrders();
+          if (result.success) {
+            setUserOrders(result.orders);
+          } else {
+            console.error('Error al cargar órdenes:', result.message);
+          }
+        } catch (error) {
+          console.error('Error al cargar órdenes:', error);
+        } finally {
+          setOrdersLoading(false);
+        }
+      }
+    };
+
+    loadUserOrders();
+  }, [activeSection, user]);
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
@@ -181,12 +209,74 @@ const ProfilePage = () => {
     navigate('/');
   };
 
-  // Datos simulados de compras
-  const userPurchases = [
-   // { id: 1, product: 'Mouse Gaming G502 HERO', status: 'Entregado', statusClass: 'text-success' },
-   // { id: 2, product: 'Teclado Mecánico RGB', status: 'En camino', statusClass: 'text-warning' },
-   // { id: 3, product: 'Silla Gaming Titan Evo', status: 'Pendiente', statusClass: 'text-danger' }
-  ];
+  const handleTrackOrder = async (e) => {
+    e.preventDefault();
+    
+    if (!trackingCode.trim()) {
+      toast.error('Por favor ingresa un código de seguimiento');
+      return;
+    }
+
+    setTrackingLoading(true);
+    setTrackingResult(null);
+    
+    try {
+      const result = await orderService.trackOrder(trackingCode.trim());
+      if (result.success) {
+        setTrackingResult(result.order);
+        toast.success('Orden encontrada');
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error('Error al buscar la orden');
+      console.error(error);
+    } finally {
+      setTrackingLoading(false);
+    }
+  };
+
+  const getStatusBadgeClass = (status) => {
+    const statusClasses = {
+      'pending': 'bg-warning text-dark',
+      'confirmed': 'bg-success text-white',
+      'processing': 'bg-info text-white',
+      'shipped': 'bg-primary text-white',
+      'delivered': 'bg-success text-white',
+      'cancelled': 'bg-danger text-white'
+    };
+    return statusClasses[status] || 'bg-secondary text-white';
+  };
+
+  const getStatusText = (status) => {
+    const statusTexts = {
+      'pending': 'Pendiente',
+      'confirmed': 'Confirmado',
+      'processing': 'Procesando',
+      'shipped': 'Enviado',
+      'delivered': 'Entregado',
+      'cancelled': 'Cancelado'
+    };
+    return statusTexts[status] || status;
+  };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('es-CL', {
+      style: 'currency',
+      currency: 'CLP'
+    }).format(amount);
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('es-CL', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  // Datos simulados de compras - ELIMINADO, ahora usamos userOrders del backend
+  const userPurchases = [];
 
   if (!user) {
     return (
@@ -456,48 +546,240 @@ const ProfilePage = () => {
           {/* Sección Mis Compras */}
           {activeSection === 'compras' && (
             <div className="section">
-              <h3>Mis Compras</h3>
-              <div className="list-group">
-                {userPurchases.map(purchase => (
-                  <div key={purchase.id} className="list-group-item">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>
-                        <h6 className="mb-1">{purchase.product}</h6>
-                        <small className="text-muted">Pedido #{1000 + purchase.id}</small>
-                      </div>
-                      <span className={`badge ${purchase.statusClass}`}>
-                        {purchase.status}
-                      </span>
-                    </div>
+              <h3 className="mb-4">Mis Compras</h3>
+              
+              {ordersLoading ? (
+                <div className="text-center py-5">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Cargando...</span>
                   </div>
-                ))}
-              </div>
+                  <p className="mt-3">Cargando tus compras...</p>
+                </div>
+              ) : userOrders.length === 0 ? (
+                <div className="alert alert-info">
+                  <i className="bi bi-info-circle me-2"></i>
+                  Aún no tienes compras registradas.
+                </div>
+              ) : (
+                <div className="row">
+                  {userOrders.map(order => (
+                    <div key={order._id || order.id} className="col-12 mb-3">
+                      <div className="card">
+                        <div className="card-body">
+                          <div className="row align-items-center">
+                            <div className="col-md-8">
+                              <h6 className="card-title mb-2">
+                                Orden #{(order._id || order.id).slice(-8).toUpperCase()}
+                              </h6>
+                              <p className="card-text text-muted small mb-2">
+                                <i className="bi bi-calendar me-2"></i>
+                                {formatDate(order.createdAt)}
+                              </p>
+                              <p className="card-text mb-2">
+                                <strong>{order.items?.length || 0}</strong> producto(s) - Total: <strong>{formatCurrency(order.total)}</strong>
+                              </p>
+                              {/* Mostrar tracking number o order number */}
+                              {(order.trackingNumber || order.orderNumber) && (
+                                <p className="card-text small text-muted mb-0">
+                                  <i className="bi bi-box me-2"></i>
+                                  {order.trackingNumber ? 'Código de seguimiento' : 'Número de orden'}: <code>{order.trackingNumber || order.orderNumber}</code>
+                                </p>
+                              )}
+                            </div>
+                            <div className="col-md-4 text-md-end">
+                              <span className={`badge ${getStatusBadgeClass(order.status)} mb-2`}>
+                                {getStatusText(order.status)}
+                              </span>
+                              <div>
+                                {/* Mostrar botón de rastrear si hay tracking o orderNumber */}
+                                {(order.trackingNumber || order.orderNumber) && (
+                                  <button
+                                    className="btn btn-sm btn-outline-primary"
+                                    onClick={() => {
+                                      setTrackingCode(order.trackingNumber || order.orderNumber);
+                                      handleSectionChange('track');
+                                    }}
+                                  >
+                                    <i className="bi bi-geo-alt me-1"></i>
+                                    Rastrear
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Detalles de productos */}
+                          <div className="mt-3">
+                            <small className="text-muted d-block mb-2">Productos:</small>
+                            <ul className="list-unstyled mb-0">
+                              {order.items?.slice(0, 3).map((item, idx) => (
+                                <li key={idx} className="small">
+                                  • {item.productName || item.name} x{item.quantity}
+                                </li>
+                              ))}
+                              {order.items?.length > 3 && (
+                                <li className="small text-muted">
+                                  • Y {order.items.length - 3} producto(s) más...
+                                </li>
+                              )}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
           {/* Sección Trackear Pedido */}
           {activeSection === 'track' && (
             <div className="section">
-              <h3>Trackear Pedido</h3>
-              <form onSubmit={(e) => e.preventDefault()}>
+              <h3 className="mb-4">Trackear Pedido</h3>
+              <form onSubmit={handleTrackOrder}>
                 <div className="mb-3">
                   <label className="form-label">Código de seguimiento</label>
-                  <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder="Ingresa tu código de seguimiento"
-                    value={trackingCode}
-                    onChange={(e) => setTrackingCode(e.target.value)}
-                  />
+                  <div className="input-group">
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      placeholder="Ingresa tu código de seguimiento"
+                      value={trackingCode}
+                      onChange={(e) => setTrackingCode(e.target.value)}
+                      disabled={trackingLoading}
+                    />
+                    <button 
+                      type="submit" 
+                      className="btn btn-primary"
+                      disabled={trackingLoading || !trackingCode.trim()}
+                    >
+                      {trackingLoading ? (
+                        <>
+                          <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          Buscando...
+                        </>
+                      ) : (
+                        <>
+                          <i className="bi bi-search me-2"></i>
+                          Buscar
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <small className="form-text text-muted">
+                    Puedes encontrar tu código de seguimiento en el email de confirmación o en la sección "Mis Compras"
+                  </small>
                 </div>
-                <button type="submit" className="btn btn-primary">Buscar</button>
               </form>
-              {trackingCode && (
-                <div className="mt-3">
-                  <p>Estado actual: <span className="text-warning">En tránsito</span></p>
-                  <div className="progress">
-                    <div className="progress-bar" role="progressbar" style={{width: '70%'}}>
-                      70%
+              
+              {trackingResult && (
+                <div className="mt-4">
+                  <div className="card">
+                    <div className="card-header bg-primary text-white">
+                      <h5 className="mb-0">
+                        <i className="bi bi-box-seam me-2"></i>
+                        Orden #{(trackingResult._id || trackingResult.id).slice(-8).toUpperCase()}
+                      </h5>
+                    </div>
+                    <div className="card-body">
+                      <div className="row mb-3">
+                        <div className="col-md-6">
+                          <p className="mb-2">
+                            <strong>Fecha de compra:</strong> {formatDate(trackingResult.createdAt)}
+                          </p>
+                          <p className="mb-2">
+                            <strong>Total:</strong> {formatCurrency(trackingResult.total)}
+                          </p>
+                        </div>
+                        <div className="col-md-6 text-md-end">
+                          <span className={`badge ${getStatusBadgeClass(trackingResult.status)} fs-6`}>
+                            {getStatusText(trackingResult.status)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Barra de progreso del pedido */}
+                      <div className="tracking-progress mb-4">
+                        <h6 className="mb-3">Estado del pedido</h6>
+                        <div className="progress" style={{ height: '25px' }}>
+                          <div 
+                            className={`progress-bar ${
+                              trackingResult.status === 'delivered' ? 'bg-success' :
+                              trackingResult.status === 'cancelled' ? 'bg-danger' :
+                              'bg-primary progress-bar-striped progress-bar-animated'
+                            }`}
+                            role="progressbar" 
+                            style={{
+                              width: 
+                                trackingResult.status === 'delivered' ? '100%' :
+                                trackingResult.status === 'shipped' ? '75%' :
+                                trackingResult.status === 'processing' ? '50%' :
+                                trackingResult.status === 'pending' ? '25%' :
+                                trackingResult.status === 'cancelled' ? '100%' : '0%'
+                            }}
+                          >
+                            {getStatusText(trackingResult.status)}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Timeline del pedido */}
+                      <div className="tracking-timeline">
+                        <h6 className="mb-3">Historial</h6>
+                        <div className="timeline">
+                          <div className={`timeline-item ${['pending', 'processing', 'shipped', 'delivered'].includes(trackingResult.status) ? 'completed' : ''}`}>
+                            <div className="timeline-marker">
+                              <i className="bi bi-check-circle-fill"></i>
+                            </div>
+                            <div className="timeline-content">
+                              <strong>Pedido recibido</strong>
+                              <p className="text-muted small mb-0">{formatDate(trackingResult.createdAt)}</p>
+                            </div>
+                          </div>
+                          
+                          <div className={`timeline-item ${['processing', 'shipped', 'delivered'].includes(trackingResult.status) ? 'completed' : ''}`}>
+                            <div className="timeline-marker">
+                              <i className="bi bi-gear-fill"></i>
+                            </div>
+                            <div className="timeline-content">
+                              <strong>En preparación</strong>
+                              <p className="text-muted small mb-0">Tu pedido está siendo procesado</p>
+                            </div>
+                          </div>
+                          
+                          <div className={`timeline-item ${['shipped', 'delivered'].includes(trackingResult.status) ? 'completed' : ''}`}>
+                            <div className="timeline-marker">
+                              <i className="bi bi-truck"></i>
+                            </div>
+                            <div className="timeline-content">
+                              <strong>En camino</strong>
+                              <p className="text-muted small mb-0">Tu pedido ha sido enviado</p>
+                            </div>
+                          </div>
+                          
+                          <div className={`timeline-item ${trackingResult.status === 'delivered' ? 'completed' : ''}`}>
+                            <div className="timeline-marker">
+                              <i className="bi bi-house-door-fill"></i>
+                            </div>
+                            <div className="timeline-content">
+                              <strong>Entregado</strong>
+                              <p className="text-muted small mb-0">Pedido completado</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Dirección de envío */}
+                      {trackingResult.shippingAddress && (
+                        <div className="mt-4">
+                          <h6>Dirección de envío</h6>
+                          <p className="mb-1">{trackingResult.shippingAddress.street}</p>
+                          <p className="mb-0 text-muted">
+                            {trackingResult.shippingAddress.city}, {trackingResult.shippingAddress.region} - {trackingResult.shippingAddress.postalCode}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -4,11 +4,13 @@ import { useAuth } from '../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { getAllProducts } from '../data/products';
 import productService from '../services/productService';
+import OrderManagement from '../components/OrderManagement';
 import '../styles/admin.css';
 
 export const AdminPage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('products'); // 'products' o 'orders'
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -224,20 +226,27 @@ export const AdminPage = () => {
     const file = event.target.files[0];
     if (!file) return;
 
+    console.log('=== INICIANDO SUBIDA DE IMAGEN ===');
+    console.log('Archivo:', file.name);
+    console.log('Tamaño:', (file.size / 1024 / 1024).toFixed(2), 'MB');
+    console.log('Tipo:', file.type);
+
     // Validar tipo de archivo
-    if (!file.type.startsWith('image/')) {
-      toast.error('❌ Por favor selecciona un archivo de imagen válido', {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error('❌ Solo se permiten imágenes JPG, PNG, WEBP o AVIF', {
         position: "top-right",
         autoClose: 3000,
       });
       return;
     }
 
-    // Validar tamaño (máximo 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('❌ La imagen no debe superar los 5MB', {
+    // Validar tamaño (máximo 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      toast.error(`❌ La imagen no debe superar los ${(maxSize / 1024 / 1024).toFixed(0)}MB. Tu imagen pesa ${(file.size / 1024 / 1024).toFixed(2)}MB`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 4000,
       });
       return;
     }
@@ -260,7 +269,10 @@ export const AdminPage = () => {
 
       const result = await productService.uploadImage(file);
 
+      console.log('Resultado de subida:', result);
+
       if (result.success) {
+        console.log('URL de Cloudinary:', result.url);
         toast.success('✅ Imagen subida exitosamente', {
           position: "top-right",
           autoClose: 2000,
@@ -269,20 +281,31 @@ export const AdminPage = () => {
         // Guardar la URL de Cloudinary
         setImagePreview(result.url);
       } else {
+        console.error('Error en resultado:', result.message);
         toast.error(`❌ ${result.message}`, {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 4000,
         });
         setImagePreview(null);
       }
     } catch (error) {
-      console.error('Error al subir imagen:', error);
-      toast.error('❌ Error al subir la imagen', {
+      console.error('=== ERROR AL SUBIR IMAGEN ===');
+      console.error('Error completo:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      
+      let errorMsg = 'Error al subir la imagen';
+      if (error.code === 'ERR_NETWORK') {
+        errorMsg = 'Error de red. Verifica que el backend esté funcionando y que tengas conexión a internet.';
+      }
+      
+      toast.error(`❌ ${errorMsg}`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 4000,
       });
       setImagePreview(null);
     } finally {
+      console.log('=== FIN SUBIDA DE IMAGEN ===');
       setUploadingImage(false);
     }
   };
@@ -292,20 +315,27 @@ export const AdminPage = () => {
     const file = event.target.files[0];
     if (!file) return;
 
+    console.log('=== INICIANDO SUBIDA DE IMAGEN (NUEVO PRODUCTO) ===');
+    console.log('Archivo:', file.name);
+    console.log('Tamaño:', (file.size / 1024 / 1024).toFixed(2), 'MB');
+    console.log('Tipo:', file.type);
+
     // Validar tipo de archivo
-    if (!file.type.startsWith('image/')) {
-      toast.error('❌ Por favor selecciona un archivo de imagen válido', {
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/avif'];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error('❌ Solo se permiten imágenes JPG, PNG, WEBP o AVIF', {
         position: "top-right",
         autoClose: 3000,
       });
       return;
     }
 
-    // Validar tamaño (máximo 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('❌ La imagen no debe superar los 5MB', {
+    // Validar tamaño (máximo 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      toast.error(`❌ La imagen no debe superar los ${(maxSize / 1024 / 1024).toFixed(0)}MB. Tu imagen pesa ${(file.size / 1024 / 1024).toFixed(2)}MB`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 4000,
       });
       return;
     }
@@ -328,7 +358,10 @@ export const AdminPage = () => {
 
       const result = await productService.uploadImage(file);
 
+      console.log('Resultado de subida:', result);
+
       if (result.success) {
+        console.log('URL de Cloudinary:', result.url);
         toast.success('✅ Imagen subida exitosamente', {
           position: "top-right",
           autoClose: 2000,
@@ -341,20 +374,31 @@ export const AdminPage = () => {
           image: result.url
         });
       } else {
+        console.error('Error en resultado:', result.message);
         toast.error(`❌ ${result.message}`, {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 4000,
         });
         setImagePreview(null);
       }
     } catch (error) {
-      console.error('Error al subir imagen:', error);
-      toast.error('❌ Error al subir la imagen', {
+      console.error('=== ERROR AL SUBIR IMAGEN (NUEVO PRODUCTO) ===');
+      console.error('Error completo:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      
+      let errorMsg = 'Error al subir la imagen';
+      if (error.code === 'ERR_NETWORK') {
+        errorMsg = 'Error de red. Verifica que el backend esté funcionando y que tengas conexión a internet.';
+      }
+      
+      toast.error(`❌ ${errorMsg}`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 4000,
       });
       setImagePreview(null);
     } finally {
+      console.log('=== FIN SUBIDA DE IMAGEN (NUEVO PRODUCTO) ===');
       setUploadingImage(false);
     }
   };
@@ -536,38 +580,67 @@ export const AdminPage = () => {
         </button>
       </div>
       
-      {/* Header minimalista */}
-      <div className="admin-header">
-        <h1 className="admin-main-title">Gestor de Catálogo de Productos</h1>
-        <button onClick={handleCreate} className="create-button">
-          <i className="bi bi-plus-circle"></i> Agregar Nuevo Producto
-        </button>
+      {/* Navegación por pestañas */}
+      <div className="admin-tabs mb-4">
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === 'products' ? 'active' : ''}`}
+              onClick={() => setActiveTab('products')}
+            >
+              <i className="bi bi-box-seam me-2"></i>
+              Gestión de Productos
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === 'orders' ? 'active' : ''}`}
+              onClick={() => setActiveTab('orders')}
+            >
+              <i className="bi bi-receipt me-2"></i>
+              Gestión de Órdenes
+            </button>
+          </li>
+        </ul>
       </div>
 
-      {/* Filtros y acciones masivas */}
-      <div className="admin-controls">
-        <div className="filters-section">
-          <label>Ordenar por:</label>
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-            <option value="name">Nombre</option>
-            <option value="price">Precio</option>
-            <option value="stock">Stock</option>
-            <option value="date">Fecha de Creación</option>
-          </select>
+      {/* Contenido según la pestaña activa */}
+      {activeTab === 'orders' ? (
+        <OrderManagement />
+      ) : (
+        <>
+          {/* Header minimalista */}
+          <div className="admin-header">
+            <h1 className="admin-main-title">Gestor de Catálogo de Productos</h1>
+            <button onClick={handleCreate} className="create-button">
+              <i className="bi bi-plus-circle"></i> Agregar Nuevo Producto
+            </button>
+          </div>
 
-          <label>Filtrar por:</label>
-          <select value={filterStock} onChange={(e) => setFilterStock(e.target.value)}>
-            <option value="all">Todos</option>
-            <option value="available">Disponibles</option>
-            <option value="outofstock">Agotados</option>
-          </select>
-        </div>
+          {/* Filtros y acciones masivas */}
+          <div className="admin-controls">
+            <div className="filters-section">
+              <label>Ordenar por:</label>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                <option value="name">Nombre</option>
+                <option value="price">Precio</option>
+                <option value="stock">Stock</option>
+                <option value="date">Fecha de Creación</option>
+              </select>
 
-        <div className="bulk-actions">
-          <label>
-            <input 
-              type="checkbox" 
-              checked={selectedProducts.length === products.length && products.length > 0}
+              <label>Filtrar por:</label>
+              <select value={filterStock} onChange={(e) => setFilterStock(e.target.value)}>
+                <option value="all">Todos</option>
+                <option value="available">Disponibles</option>
+                <option value="outofstock">Agotados</option>
+              </select>
+            </div>
+
+            <div className="bulk-actions">
+              <label>
+                <input 
+                  type="checkbox" 
+                  checked={selectedProducts.length === products.length && products.length > 0}
               onChange={selectAllProducts}
             />
             Seleccionar todos
@@ -646,6 +719,8 @@ export const AdminPage = () => {
           </div>
         )})}
       </div>
+        </>
+      )}
 
       {/* Modal de creación */}
       {showCreateModal && (

@@ -40,10 +40,10 @@ const Footer = () => {
           <div className="col-lg-3 col-md-6 mb-4">
             <h4 className="footer-heading">Información Legal</h4>
             <ul className="footer-links">
-              <li><a href="#terminos">Términos y Condiciones</a></li>
-              <li><a href="#bases">Bases Legales</a></li>
-              <li><a href="#denuncias">Canal de Denuncias</a></li>
-              <li><a href="#privacidad">Política de Privacidad</a></li>
+              <li><Link to="/terminos-condiciones">Términos y Condiciones</Link></li>
+              <li><Link to="/bases-legales">Bases Legales</Link></li>
+              <li><Link to="/canal-denuncias">Canal de Denuncias</Link></li>
+              <li><Link to="/politica-privacidad">Política de Privacidad</Link></li>
             </ul>
           </div>
 

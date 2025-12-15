@@ -2913,3 +2913,92 @@ FOOTER GAMER
   color: white;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
+
+/* ==========================
+   ORDER TRACKING TIMELINE
+   ========================== */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, #d746fb 0%, #6c757d 100%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.timeline-item.completed .timeline-marker {
+  background: linear-gradient(135deg, #d746fb, #bd00ff);
+  box-shadow: 0 0 10px rgba(215, 70, 251, 0.5);
+}
+
+.timeline-content {
+  background: #f8f9fa;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border-left: 3px solid #6c757d;
+}
+
+.timeline-item.completed .timeline-content {
+  border-left-color: #d746fb;
+}
+
+.tracking-progress {
+  margin: 2rem 0;
+}
+
+/* Admin tabs */
+.admin-tabs .nav-tabs {
+  border-bottom: 2px solid #d746fb;
+}
+
+.admin-tabs .nav-link {
+  color: #6c757d;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.admin-tabs .nav-link:hover {
+  color: #d746fb;
+  border-bottom-color: rgba(215, 70, 251, 0.3);
+}
+
+.admin-tabs .nav-link.active {
+  color: #d746fb;
+  background: transparent;
+  border-bottom-color: #d746fb;
+}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Slider from "../components/ui/Slider";
 import BrandCarousel from "../components/ui/BrandCarousel";
 import CurrencyBanner from "../components/ui/CurrencyBanner";
@@ -13,7 +14,7 @@ const HomePage = () => {
 
       {/* bnanner divisorio */}
       <div className="divider-img-wrapper mb-5">
-        <a href="/catalogo?section=mousepad">
+        <Link to="/catalogo?section=mousepad">
           <img
             src="/img/Desktop_MainCampaignCountdown_Liquidacion_Abril_2025_4662806b.webp"
             alt="Divisor"
@@ -24,7 +25,7 @@ const HomePage = () => {
             alt="Divisor móvil"
             className="divider-img-mobile d-block d-md-none"
           />
-        </a>
+        </Link>
       </div>
 
       {/*Sección de bienvenida */}
@@ -41,7 +42,7 @@ const HomePage = () => {
 
       {/* bnanner divisorio */}
       <div className="divider-img-wrapper mb-5">
-        <a href="/catalogo?section=computadores">
+        <Link to="/catalogo?section=computadores">
           <img
             src="/img/Desktop_MainCampaign_Nvidia_RTX-Serie-50_v2_Marzo_25_cc0c723a.webp"
             alt="Divisor"
@@ -52,7 +53,7 @@ const HomePage = () => {
             alt="Divisor móvil"
             className="divider-img-mobile d-block d-md-none"
           />
-        </a>
+        </Link>
       </div>
 
       {/*Sección: Descubre nuevas categorías */}
@@ -65,38 +66,40 @@ const HomePage = () => {
 
         <div className="row h-img-container align-items-stretch" style={{ minHeight: "320px" }}>
           <div className="col-3 d-none d-md-flex justify-content-center align-items-stretch">
-            <a href="/catalogo?section=computadores">
+            <Link to="/catalogo?section=computadores">
               <img
                 src="/img/Desktop_QuadBannerSectionLeft_0dd197a7.webp"
                 className="img-fluid h-img-side h-100"
                 alt="Izquierda"
               />
-            </a>
+            </Link>
           </div>
 
           <div className="col-12 col-md-6 d-flex flex-column justify-content-between align-items-center">
-            <a href="/catalogo?section=computadores">
+            <Link to="/catalogo?section=accesorios" className="w-100">
               <img
                 src="/img/Desktop_QuadBannerSectionTop_e3cf4d67.webp"
                 className="img-fluid h-img-center mb-1"
                 alt="Centro Arriba"
               />
+            </Link>
+            <Link to="/catalogo?section=mouse" className="w-100">
               <img
                 src="/img/Desktop_QuadBannerSectionBotton_106a1e9b.webp"
                 className="img-fluid h-img-center mt-1"
                 alt="Centro Abajo"
               />
-            </a>
+            </Link>
           </div>
 
           <div className="col-3 d-none d-md-flex justify-content-center align-items-stretch">
-            <a href="/catalogo?section=consolas">
+            <Link to="/catalogo?section=consolas">
               <img
                 src="/img/Desktop_QuadBannerSectionRight_b24d4dd5.webp"
                 className="img-fluid h-img-side h-100"
                 alt="Derecha"
               />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

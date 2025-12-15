@@ -28,7 +28,7 @@ const productService = {
         pagination: responseData.pagination || null
       };
     } catch (error) {
-      console.error('❌ Error al obtener productos:', error);
+      console.error('Error al obtener productos:', error);
       return {
         success: false,
         message: error.response?.data?.message || error.message || 'Error al obtener productos'
@@ -198,24 +198,65 @@ const productService = {
    */
   uploadImage: async (imageFile) => {
     try {
+      console.log('Uploading image:', imageFile.name, 'Size:', imageFile.size, 'Type:', imageFile.type);
+      
       const formData = new FormData();
       formData.append('image', imageFile);
 
+      console.log('FormData preparado. Enviando a:', '/products/upload-image');
+
+      // No establecer Content-Type manualmente, dejar que axios/navegador lo haga
+      // Esto es importante para que incluya el boundary correcto
       const response = await api.post('/products/upload-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+        timeout: 120000, // 2 minutos de timeout para archivos grandes
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        // No incluir headers aquí, el interceptor se encargará
       });
 
+      console.log('Upload response:', response.data);
       const responseData = response.data.data || response.data;
+      
+      const imageUrl = responseData.url || responseData.imageUrl || responseData.secure_url || responseData;
+      console.log('Extracted image URL:', imageUrl);
+      
       return {
         success: true,
-        url: responseData.url || responseData // response.data puede ser { url: "..." }
+        url: imageUrl
       };
     } catch (error) {
+      console.error('Upload error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        code: error.code,
+        config: {
+          url: error.config?.url,
+          baseURL: error.config?.baseURL,
+          method: error.config?.method
+        }
+      });
+      
+      let errorMessage = 'Error al subir la imagen';
+      
+      if (error.code === 'ECONNABORTED') {
+        errorMessage = 'Timeout: La imagen tardó demasiado en subirse. Intenta con una imagen más pequeña.';
+      } else if (error.code === 'ERR_NETWORK') {
+        errorMessage = `Error de red al conectar con: ${error.config?.baseURL}${error.config?.url}. Verifica tu conexión a internet y que el backend esté accesible.`;
+      } else if (error.response?.status === 413) {
+        errorMessage = 'La imagen es demasiado grande. Intenta con una imagen más pequeña.';
+      } else if (error.response?.status === 401) {
+        errorMessage = 'No autorizado. Por favor inicia sesión nuevamente.';
+      } else if (error.response?.status === 500) {
+        errorMessage = 'Error en el servidor. Intenta nuevamente más tarde.';
+      } else if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+      
       return {
         success: false,
-        message: error.message || 'Error al subir la imagen'
+        message: errorMessage,
+        error: error.message
       };
     }
   }

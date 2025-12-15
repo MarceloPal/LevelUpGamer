@@ -388,28 +388,6 @@ const CatalogPage = () => {
               </div>
             )}
 
-            {/* Paginación (para futuras implementaciones) */}
-            {searchStats.hasResults && searchStats.totalProducts > 20 && (
-              <div className="pagination-container d-flex justify-content-center mt-5">
-                <nav aria-label="Navegación de productos">
-                  <ul className="pagination">
-                    <li className="page-item disabled">
-                      <span className="page-link">Anterior</span>
-                    </li>
-                    <li className="page-item active">
-                      <span className="page-link">1</span>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#" onClick={(e) => e.preventDefault()}>2</a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#" onClick={(e) => e.preventDefault()}>Siguiente</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            )}
-
             {/* Información adicional */}
             <div className="catalog-footer mt-5 pt-4 border-top">
               <div className="row">
