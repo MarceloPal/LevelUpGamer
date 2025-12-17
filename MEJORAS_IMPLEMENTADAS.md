@@ -172,41 +172,43 @@ Se han implementado **8 mejoras principales** al proyecto Level Up Gamer, mejora
 
 ---
 
-### 8. 🧪 Configuración de Testing con Jest
+### 8. 🧪Configuración de Testing con Vitest
 
 **Archivos de configuración creados:**
-- `jest.config.js` - Configuración principal de Jest
-- `.babelrc` - Transpilación de JSX
-- `src/setupTests.js` - Setup global de tests
+- `vite.config.js` - Configuración de tests integrada en el build tool.
+- `src/setupTests.js` - Setup global adaptado (uso de vi.stubGlobal).
 - `__mocks__/fileMock.js` - Mock para archivos estáticos
 - `TESTING.md` - Documentación completa de testing
 
 **Tests de ejemplo creados:**
-- `src/services/__tests__/orderService.test.js` - 8 tests del servicio
-- `src/hooks/__tests__/useProductSearch.test.js` - 7 tests del hook
-- `src/components/ui/__tests__/ProductCard.test.jsx` - 10 tests del componente
+- `src/services/__tests__/orderService.test.js` - - 7 tests de lógica de negocio y mocks de API.
+- `src/hooks/__tests__/useProductSearch.test.js` - 7 tests de hooks y asincronía (waitFor).
+- `src/components/ui/__tests__/ProductCard.test.jsx` - 2 tests de renderizado e interacción UI.
 
 **Dependencias agregadas:**
-- `jest` - Framework de testing
+- `vitest` - Framework de testing de alta velocidad.
 - `@testing-library/react` - Testing de componentes
 - `@testing-library/jest-dom` - Matchers personalizados
-- `@testing-library/user-event` - Simulación de eventos
 - `jest-environment-jsdom` - Entorno DOM
-- `babel-jest` - Transpilación
-- `@babel/preset-env` y `@babel/preset-react` - Presets de Babel
 - `identity-obj-proxy` - Mock de CSS
 
 **Scripts npm agregados:**
 ```json
 {
-  "test": "jest",
-  "test:watch": "jest --watch",
-  "test:coverage": "jest --coverage"
+  "test": "vitest",
+  "test:watch": "vitest",
+  "test:coverage": "vitest run --coverage"
 }
+
+** Ventajas Implementadas:**
+- Velocidad: Ejecución instantánea gracias al motor de Vite.
+- Simplicidad: Manejo nativo de importaciones de CSS e imágenes (sin identity-obj-proxy).
+- Sintaxis Moderna: Uso de vi.fn(), vi.mock() y vi.spyOn()
+
+
 ```
 
 **Cobertura configurada:**
-- Umbral mínimo: 50% en branches, functions, lines, statements
 - Reportes en carpeta `coverage/`
 
 ---
@@ -220,7 +222,7 @@ Se han implementado **8 mejoras principales** al proyecto Level Up Gamer, mejora
 | Páginas nuevas | 4 |
 | Servicios nuevos | 1 |
 | Componentes nuevos | 1 |
-| Tests creados | 3 archivos (25 tests) |
+| Tests funcionales | 3 archivos (16 tests pasando) |
 | Rutas agregadas | 4 |
 | Funciones de servicio | 7 |
 
@@ -242,12 +244,15 @@ npm run dev
 ### Testing
 ```bash
 # Ejecutar todos los tests
-npm test
+npm run test
+
+# Ejecutar tests silenciando logs (Clean Output)
+npm run test -- --silent
 
 # Modo watch
 npm run test:watch
 
-# Con cobertura
+# Generar reporte de cobertura
 npm run test:coverage
 ```
 
