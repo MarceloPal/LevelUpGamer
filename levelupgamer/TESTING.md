@@ -2,7 +2,7 @@
 
 ## Configuración de Testing
 
-Este proyecto utiliza **Jest** junto con **React Testing Library** para las pruebas unitarias y de integración.
+Este proyecto utiliza **Vitest** junto con **React Testing Library** para las pruebas unitarias y de integración.
 
 ## Instalación de Dependencias
 
@@ -13,11 +13,11 @@ npm install
 ```
 
 Las dependencias de testing incluidas son:
-- `jest` - Framework de testing
+- `vitest` - Framework de testing ultrarrápido
 - `@testing-library/react` - Utilidades para testing de componentes React
 - `@testing-library/jest-dom` - Matchers personalizados para DOM
 - `@testing-library/user-event` - Simulación de eventos de usuario
-- `jest-environment-jsdom` - Entorno DOM para Jest
+- `jsdom` - Entorno DOM para Vitest
 
 ## Comandos Disponibles
 
@@ -91,8 +91,9 @@ Prueba el componente de tarjeta de producto:
 ```javascript
 import myService from '../myService';
 import api from '../../api/apiClient';
+import { describe, it, expect, vi } from 'vitest';
 
-jest.mock('../../api/apiClient');
+vi.mock('../../api/apiClient');
 
 describe('myService', () => {
   it('debe hacer algo correctamente', async () => {
@@ -110,6 +111,7 @@ describe('myService', () => {
 ```javascript
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 import MyComponent from '../MyComponent';
 
 describe('MyComponent', () => {
@@ -120,7 +122,7 @@ describe('MyComponent', () => {
   });
   
   it('debe manejar clicks', () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<MyComponent onClick={handleClick} />);
     
     const button = screen.getByRole('button');
@@ -172,7 +174,7 @@ El setup ya incluye un mock de localStorage en `src/setupTests.js`
 
 ## Recursos Adicionales
 
-- [Jest Documentation](https://jestjs.io/)
+- [Vitest Documentation](https://vitest.dev/)
 - [React Testing Library](https://testing-library.com/react)
 - [Testing Library User Events](https://testing-library.com/docs/user-event/intro)
 - [Jest DOM Matchers](https://github.com/testing-library/jest-dom)

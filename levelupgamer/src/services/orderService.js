@@ -1,7 +1,7 @@
 import api from '../api/apiClient';
 
 const orderService = {
-  // Obtener todas las órdenes (admin) - Endpoint exclusivo para administradores
+  // Obtener todas las órdenes
   getAllOrders: async (filters = {}) => {
     try {
       // Construir parámetros de query
@@ -13,9 +13,9 @@ const orderService = {
       if (filters.limit) params.append('limit', filters.limit);
       
       const queryString = params.toString();
-      const url = queryString ? `/orders/admin/all?${queryString}` : '/orders/admin/all';
+      const url = queryString ? `/orders?${queryString}` : '/orders';
       
-      console.log('=== getAllOrders (Admin) ===');
+      console.log('=== getAllOrders ===');
       console.log('URL:', url);
       console.log('Filters:', filters);
       
@@ -26,10 +26,10 @@ const orderService = {
       // Intentar diferentes estructuras de respuesta posibles
       let ordersData = [];
       
-      if (response.data.data?.orders) {
+      if (response.data?.data?.orders) {
         // Caso 1: { data: { orders: [] } }
         ordersData = response.data.data.orders;
-      } else if (Array.isArray(response.data.data)) {
+      } else if (Array.isArray(response.data?.data)) {
         // Caso 2: { data: [] }
         ordersData = response.data.data;
       } else if (Array.isArray(response.data)) {
@@ -42,10 +42,10 @@ const orderService = {
       return {
         success: true,
         orders: ordersData,
-        pagination: response.data.data?.pagination
+        pagination: response.data?.data?.pagination
       };
     } catch (error) {
-      console.error('=== Error al obtener órdenes (Admin) ===');
+      console.error('=== Error al obtener órdenes ===');
       console.error('Error:', error.response?.data?.message || error.message);
       return {
         success: false,
@@ -55,18 +55,18 @@ const orderService = {
     }
   },
 
-  // Obtener órdenes de un usuario (usa el mismo endpoint que admin pero sin privilegios)
+  // Obtener órdenes de un usuario
   getUserOrders: async () => {
     try {
-      const response = await api.get('/orders');
+      const response = await api.get('/orders/my-orders');
       console.log('My Orders Response:', response.data);
-      // La API devuelve: { data: { orders: [], pagination: {} } }
-      const ordersData = response.data.data?.orders || [];
+      // La API puede devolver: { data: { orders: [], pagination: {} } } o { data: [] }
+      const ordersData = response.data?.data?.orders || response.data?.data || response.data || [];
       console.log('User orders extracted:', ordersData);
       return {
         success: true,
         orders: ordersData,
-        pagination: response.data.data?.pagination
+        pagination: response.data?.data?.pagination
       };
     } catch (error) {
       console.error('Error al obtener mis órdenes:', error);
@@ -164,39 +164,16 @@ const orderService = {
   // Trackear orden por código de tracking (busca en las órdenes del usuario)
   trackOrder: async (trackingCode) => {
     try {
-      // Obtener todas las órdenes del usuario
-      const ordersResult = await orderService.getUserOrders();
-      
-      if (!ordersResult.success) {
-        return {
-          success: false,
-          message: 'Error al buscar la orden'
-        };
-      }
-
-      // Buscar la orden con ese tracking number
-      const order = ordersResult.orders.find(
-        o => o.trackingNumber === trackingCode || 
-             o.orderNumber === trackingCode ||
-             (o._id || o.id) === trackingCode
-      );
-
-      if (order) {
-        return {
-          success: true,
-          order: order
-        };
-      } else {
-        return {
-          success: false,
-          message: 'No se encontró ninguna orden con ese código de seguimiento'
-        };
-      }
+      const response = await api.get(`/orders/track/${trackingCode}`);
+      return {
+        success: true,
+        order: response.data?.data || response.data
+      };
     } catch (error) {
       console.error('Error al trackear orden:', error);
       return {
         success: false,
-        message: 'Error al buscar la orden'
+        message: error.response?.data?.message || 'Error al buscar la orden'
       };
     }
   }

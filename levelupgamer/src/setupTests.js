@@ -1,25 +1,27 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
-// Mock para localStorage
+// --- MOCK DE LOCALSTORAGE (Vital para Auth) ---
+// Simulamos la memoria del navegador usando funciones espía de Vitest (vi.fn)
 const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
 };
-global.localStorage = localStorageMock;
-
-// Mock para matchMedia
+vi.stubGlobal('localStorage', localStorageMock);
+// --- MOCK DE MATCHMEDIA (Vital para UI/Bootstrap) ---
+// Evita errores cuando componentes intentan detectar el tamaño de pantalla
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: vi.fn(), // Deprecado
+    removeListener: vi.fn(), // Deprecado
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   })),
 });
