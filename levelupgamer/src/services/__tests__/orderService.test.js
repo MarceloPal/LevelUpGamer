@@ -1,12 +1,14 @@
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import orderService from '../orderService';
 import api from '../../api/apiClient';
 
-// Mock del apiClient
-jest.mock('../../api/apiClient');
+// 1. CAMBIO: Usamos vi.mock en lugar de jest.mock
+vi.mock('../../api/apiClient');
 
 describe('orderService', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    // 2. CAMBIO: Limpiamos los mocks con vi
+    vi.clearAllMocks();
   });
 
   describe('getAllOrders', () => {
@@ -16,6 +18,7 @@ describe('orderService', () => {
         { id: '2', total: 75000, status: 'delivered' }
       ];
 
+      // Vitest maneja mockResolvedValue igual que Jest
       api.get.mockResolvedValue({
         data: { data: mockOrders }
       });

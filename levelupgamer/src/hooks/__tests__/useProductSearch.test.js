@@ -1,11 +1,16 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { useProductSearch } from '../useProductSearch';
 import { getAllProducts, getProductsByCategory } from '../../data/products';
 
-// Mock de los módulos
-jest.mock('../../data/products');
-jest.mock('react-router-dom', () => ({
-  useSearchParams: () => [new URLSearchParams(), jest.fn()]
+// 1. Mocks con sintaxis Vitest
+vi.mock('../../data/products');
+// Usar instancias estables para evitar que el efecto de sincronización con URL
+// sobreescriba `searchTerm` en cada render
+const stableParams = new URLSearchParams();
+const setStableParams = vi.fn();
+vi.mock('react-router-dom', () => ({
+  useSearchParams: () => [stableParams, setStableParams]
 }));
 
 describe('useProductSearch', () => {
@@ -16,43 +21,45 @@ describe('useProductSearch', () => {
   ];
 
   beforeEach(() => {
-    getAllProducts.mockResolvedValue(mockProducts);
-    getProductsByCategory.mockResolvedValue(mockProducts.filter(p => p.category === 'mouse'));
+    // Configurar los mocks antes de cada test
+    vi.mocked(getAllProducts).mockResolvedValue(mockProducts);
+    vi.mocked(getProductsByCategory).mockResolvedValue(mockProducts.filter(p => p.category === 'mouse'));
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('debe cargar productos al inicializar', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
+    // Estado inicial de carga
     expect(result.current.isLoading).toBe(true);
 
-    await act(async () => {
-      await waitForNextUpdate();
+    // 2. REEMPLAZO DE waitForNextUpdate: Usamos waitFor para esperar el cambio de estado
+    await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.isLoading).toBe(false);
     expect(result.current.filteredProducts.length).toBeGreaterThan(0);
   });
 
   it('debe filtrar productos por término de búsqueda', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     act(() => {
       result.current.updateSearchTerm('Mouse');
     });
 
-    const filteredProducts = result.current.filteredProducts;
-    expect(filteredProducts.length).toBeGreaterThan(0);
-    expect(filteredProducts.every(p => 
-      p.name.toLowerCase().includes('mouse') || p.brand.toLowerCase().includes('mouse')
-    )).toBe(true);
+    await waitFor(() => {
+      const filteredProducts = result.current.filteredProducts;
+      expect(filteredProducts.length).toBeGreaterThan(0);
+      expect(filteredProducts.every(p => 
+        p.name.toLowerCase().includes('mouse') || p.brand.toLowerCase().includes('mouse')
+      )).toBe(true);
+    });
   });
 
   it('debe normalizar búsqueda ignorando tildes', async () => {
@@ -61,15 +68,12 @@ describe('useProductSearch', () => {
       { id: '5', name: 'Teclado Mecánico', brand: 'Corsair', price: 80000 }
     ];
 
-    getAllProducts.mockResolvedValue(productsWithAccents);
+    vi.mocked(getAllProducts).mockResolvedValue(productsWithAccents);
 
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
-    // Buscar "raton" (sin tilde) debe encontrar "Ratón" (con tilde)
     act(() => {
       result.current.updateSearchTerm('raton');
     });
@@ -80,11 +84,9 @@ describe('useProductSearch', () => {
   });
 
   it('debe ordenar productos por nombre', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     act(() => {
       result.current.updateSortBy('name');
@@ -97,11 +99,9 @@ describe('useProductSearch', () => {
   });
 
   it('debe ordenar productos por precio ascendente', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     act(() => {
       result.current.updateSortBy('price-asc');
@@ -114,11 +114,9 @@ describe('useProductSearch', () => {
   });
 
   it('debe limpiar todos los filtros', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     act(() => {
       result.current.updateSearchTerm('Mouse');
@@ -136,11 +134,9 @@ describe('useProductSearch', () => {
   });
 
   it('debe proporcionar estadísticas de búsqueda correctas', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useProductSearch());
+    const { result } = renderHook(() => useProductSearch());
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     const stats = result.current.searchStats;
     expect(stats).toHaveProperty('totalProducts');
